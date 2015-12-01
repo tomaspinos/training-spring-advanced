@@ -1,23 +1,24 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>spring-advanced</groupId>
         <artifactId>spring-advanced-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../spring-advanced-parent</relativePath>
     </parent>
+
     <artifactId>servlet-api</artifactId>
     <packaging>war</packaging>
-    <name>servlet-api</name>
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -26,16 +27,18 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
-
     </dependencies>
+
     <build>
         <plugins>
-            <!-- Maven Tomcat Plugin -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/servletapi</path>
+                </configuration>
             </plugin>
         </plugins>
-        <finalName>servletapi</finalName>
     </build>
+
 </project>

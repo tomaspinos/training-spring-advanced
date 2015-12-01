@@ -1,16 +1,18 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>spring-advanced</groupId>
         <artifactId>spring-advanced-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../spring-advanced-parent</relativePath>
     </parent>
+
     <artifactId>spring-security</artifactId>
     <packaging>war</packaging>
-    <name>spring-security</name>
-    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>spring-advanced</groupId>
