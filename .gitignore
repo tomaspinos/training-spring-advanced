@@ -1,0 +1,16 @@
+target
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse ide files #
+*.prefs
+*.project
+*.classpath
+
+.idea
+*.iml
+atlassian-ide-plugin.xml

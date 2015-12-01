@@ -1,0 +1,90 @@
+2015-11-05 22:12:09 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2015-11-05 22:12:09 INFO  XmlWebApplicationContext:515 - Refreshing Root WebApplicationContext: startup date [Thu Nov 05 22:12:09 CET 2015]; root of context hierarchy
+2015-11-05 22:12:09 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-service-context.xml]
+2015-11-05 22:12:09 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-services.xml]
+2015-11-05 22:12:09 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-dao.xml]
+2015-11-05 22:12:09 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/dataSource.xml]
+2015-11-05 22:12:10 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'dataSource'
+2015-11-05 22:12:10 INFO  ScriptUtils:431 - Executing SQL script from class path resource [db/schema.hsql.sql]
+2015-11-05 22:12:10 INFO  ScriptUtils:490 - Executed SQL script from class path resource [db/schema.hsql.sql] in 4 ms.
+2015-11-05 22:12:10 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 835 ms
+2015-11-05 22:14:36 INFO  DispatcherServlet:479 - FrameworkServlet 'restservlet': initialization started
+2015-11-05 22:14:36 INFO  XmlWebApplicationContext:515 - Refreshing WebApplicationContext for namespace 'restservlet-servlet': startup date [Thu Nov 05 22:14:36 CET 2015]; parent: Root WebApplicationContext
+2015-11-05 22:14:36 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-rest-context.xml]
+2015-11-05 22:14:36 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.util.List<cz.profinit.training.springadvanced.rest.model.MagnificentList> cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getLists()
+2015-11-05 22:14:36 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto cz.profinit.training.springadvanced.rest.model.MagnificentList cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getList(java.lang.Integer)
+2015-11-05 22:14:36 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.createNewList(cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:14:36 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.updateList(java.lang.Integer,cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:14:36 INFO  DispatcherServlet:498 - FrameworkServlet 'restservlet': initialization completed in 638 ms
+2015-11-05 22:27:03 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2015-11-05 22:27:03 INFO  XmlWebApplicationContext:515 - Refreshing Root WebApplicationContext: startup date [Thu Nov 05 22:27:03 CET 2015]; root of context hierarchy
+2015-11-05 22:27:03 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-service-context.xml]
+2015-11-05 22:27:03 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-services.xml]
+2015-11-05 22:27:03 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-dao.xml]
+2015-11-05 22:27:03 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/dataSource.xml]
+2015-11-05 22:27:03 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'dataSource'
+2015-11-05 22:27:04 INFO  ScriptUtils:431 - Executing SQL script from class path resource [db/schema.hsql.sql]
+2015-11-05 22:27:04 INFO  ScriptUtils:490 - Executed SQL script from class path resource [db/schema.hsql.sql] in 3 ms.
+2015-11-05 22:27:04 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 843 ms
+2015-11-05 22:27:07 INFO  DispatcherServlet:479 - FrameworkServlet 'restservlet': initialization started
+2015-11-05 22:27:07 INFO  XmlWebApplicationContext:515 - Refreshing WebApplicationContext for namespace 'restservlet-servlet': startup date [Thu Nov 05 22:27:07 CET 2015]; parent: Root WebApplicationContext
+2015-11-05 22:27:07 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-rest-context.xml]
+2015-11-05 22:27:08 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto cz.profinit.training.springadvanced.rest.model.MagnificentList cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getList(java.lang.Integer)
+2015-11-05 22:27:08 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.util.List<cz.profinit.training.springadvanced.rest.model.MagnificentList> cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getLists()
+2015-11-05 22:27:08 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.createNewList(cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:27:08 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.updateList(java.lang.Integer,cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:27:08 INFO  DispatcherServlet:498 - FrameworkServlet 'restservlet': initialization completed in 581 ms
+2015-11-05 22:29:02 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2015-11-05 22:29:02 INFO  XmlWebApplicationContext:515 - Refreshing Root WebApplicationContext: startup date [Thu Nov 05 22:29:02 CET 2015]; root of context hierarchy
+2015-11-05 22:29:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-service-context.xml]
+2015-11-05 22:29:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-services.xml]
+2015-11-05 22:29:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-dao.xml]
+2015-11-05 22:29:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/dataSource.xml]
+2015-11-05 22:29:02 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'dataSource'
+2015-11-05 22:29:03 INFO  ScriptUtils:431 - Executing SQL script from class path resource [db/schema.hsql.sql]
+2015-11-05 22:29:03 INFO  ScriptUtils:490 - Executed SQL script from class path resource [db/schema.hsql.sql] in 5 ms.
+2015-11-05 22:29:03 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 885 ms
+2015-11-05 22:29:05 INFO  DispatcherServlet:479 - FrameworkServlet 'restservlet': initialization started
+2015-11-05 22:29:05 INFO  XmlWebApplicationContext:515 - Refreshing WebApplicationContext for namespace 'restservlet-servlet': startup date [Thu Nov 05 22:29:05 CET 2015]; parent: Root WebApplicationContext
+2015-11-05 22:29:05 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-rest-context.xml]
+2015-11-05 22:29:06 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.createNewList(cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:29:06 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.updateList(java.lang.Integer,cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:29:06 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.util.List<cz.profinit.training.springadvanced.rest.model.MagnificentList> cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getLists()
+2015-11-05 22:29:06 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto cz.profinit.training.springadvanced.rest.model.MagnificentList cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getList(java.lang.Integer)
+2015-11-05 22:29:06 INFO  DispatcherServlet:498 - FrameworkServlet 'restservlet': initialization completed in 637 ms
+2015-11-05 22:31:53 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2015-11-05 22:31:53 INFO  XmlWebApplicationContext:515 - Refreshing Root WebApplicationContext: startup date [Thu Nov 05 22:31:53 CET 2015]; root of context hierarchy
+2015-11-05 22:31:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-service-context.xml]
+2015-11-05 22:31:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-services.xml]
+2015-11-05 22:31:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-dao.xml]
+2015-11-05 22:31:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/dataSource.xml]
+2015-11-05 22:31:54 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'dataSource'
+2015-11-05 22:31:54 INFO  ScriptUtils:431 - Executing SQL script from class path resource [db/schema.hsql.sql]
+2015-11-05 22:31:54 INFO  ScriptUtils:490 - Executed SQL script from class path resource [db/schema.hsql.sql] in 3 ms.
+2015-11-05 22:31:54 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 914 ms
+2015-11-05 22:32:14 INFO  DispatcherServlet:479 - FrameworkServlet 'restservlet': initialization started
+2015-11-05 22:32:14 INFO  XmlWebApplicationContext:515 - Refreshing WebApplicationContext for namespace 'restservlet-servlet': startup date [Thu Nov 05 22:32:14 CET 2015]; parent: Root WebApplicationContext
+2015-11-05 22:32:14 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-rest-context.xml]
+2015-11-05 22:32:15 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.createNewList(cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:32:15 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.updateList(java.lang.Integer,cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:32:15 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto cz.profinit.training.springadvanced.rest.model.MagnificentList cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getList(java.lang.Integer)
+2015-11-05 22:32:15 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.util.List<cz.profinit.training.springadvanced.rest.model.MagnificentList> cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getLists()
+2015-11-05 22:32:15 INFO  DispatcherServlet:498 - FrameworkServlet 'restservlet': initialization completed in 863 ms
+2015-11-05 22:34:18 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2015-11-05 22:34:18 INFO  XmlWebApplicationContext:515 - Refreshing Root WebApplicationContext: startup date [Thu Nov 05 22:34:18 CET 2015]; root of context hierarchy
+2015-11-05 22:34:18 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-service-context.xml]
+2015-11-05 22:34:18 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-services.xml]
+2015-11-05 22:34:18 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/listman-dao.xml]
+2015-11-05 22:34:18 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/dataSource.xml]
+2015-11-05 22:34:19 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'dataSource'
+2015-11-05 22:34:19 INFO  ScriptUtils:431 - Executing SQL script from class path resource [db/schema.hsql.sql]
+2015-11-05 22:34:19 INFO  ScriptUtils:490 - Executed SQL script from class path resource [db/schema.hsql.sql] in 4 ms.
+2015-11-05 22:34:19 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 929 ms
+2015-11-05 22:34:31 INFO  DispatcherServlet:479 - FrameworkServlet 'restservlet': initialization started
+2015-11-05 22:34:31 INFO  XmlWebApplicationContext:515 - Refreshing WebApplicationContext for namespace 'restservlet-servlet': startup date [Thu Nov 05 22:34:31 CET 2015]; parent: Root WebApplicationContext
+2015-11-05 22:34:31 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring/spring-rest-context.xml]
+2015-11-05 22:34:32 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.createNewList(cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:34:32 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.lang.Integer cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.updateList(java.lang.Integer,cz.profinit.training.springadvanced.rest.model.MagnificentList)
+2015-11-05 22:34:32 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto java.util.List<cz.profinit.training.springadvanced.rest.model.MagnificentList> cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getLists()
+2015-11-05 22:34:32 INFO  RequestMappingHandlerMapping:197 - Mapped "{[/lists/{listId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto cz.profinit.training.springadvanced.rest.model.MagnificentList cz.profinit.training.springadvanced.rest.controller.MagnificentListRestController.getList(java.lang.Integer)
+2015-11-05 22:34:32 INFO  DispatcherServlet:498 - FrameworkServlet 'restservlet': initialization completed in 781 ms

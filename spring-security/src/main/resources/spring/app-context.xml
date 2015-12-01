@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <import resource="listman-services.xml"/>
+    <import resource="listman-dao.xml"/>
+    <import resource="dataSource.xml"/>
+    <import resource="i18n.xml"/>
+    <import resource="security.xml"/>
+
+    <bean id="listModelService"
+          class="cz.profinit.training.springadvanced.security.service.impl.MagnificentListModelServiceImpl">
+        <constructor-arg name="magnificentListService" ref="listService"/>
+    </bean>
+
+    <bean id="securityService" class="cz.profinit.training.springadvanced.security.service.SecurityService"/>
+
+</beans>

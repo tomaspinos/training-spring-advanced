@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <input name="itemId"/>
+    <input name="listId"/>
+
+    <view-state id="edit-item">
+        <on-entry>
+            <evaluate result="viewScope.item"
+                      expression="itemId != null ? modelService.readItem(itemId) : modelService.createItem()"/>
+        </on-entry>
+        <transition on="save" to="end">
+            <evaluate expression="modelService.saveItem(item, listId)"/>
+        </transition>
+        <transition on="cancel" to="end"/>
+    </view-state>
+
+    <end-state id="end"/>
+
+</flow>

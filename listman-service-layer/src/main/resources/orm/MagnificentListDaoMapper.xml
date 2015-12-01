@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cz.profinit.training.springadvanced.dao.MagnificentListDao">
+    <resultMap id="BaseResultMap" type="cz.profinit.training.springadvanced.domain.MagnificentList">
+        <constructor>
+            <idArg column="id" javaType="int"/>
+            <arg column="name" javaType="String"/>
+            <arg column="description" javaType="String"/>
+            <arg column="principal" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        l.id, l.name, l.description, l.principal
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from MAGNIFICENT_LIST l where id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from MAGNIFICENT_LIST l
+    </select>
+
+    <select id="selectAllPg" parameterType="org.apache.ibatis.session.RowBounds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from MAGNIFICENT_LIST l
+    </select>
+
+    <select id="countAll" resultType="long">
+        SELECT count(*) from MAGNIFICENT_LIST
+    </select>
+
+    <insert id="insert" parameterType="cz.profinit.training.springadvanced.domain.MagnificentList">
+        INSERT INTO MAGNIFICENT_LIST (id, name, description, principal) VALUES (DEFAULT, #{name}, #{description},
+        #{principal} )
+        <selectKey order="AFTER" keyProperty="id" resultType="int">
+            CALL IDENTITY();
+        </selectKey>
+    </insert>
+
+    <insert id="update" parameterType="cz.profinit.training.springadvanced.domain.MagnificentList">
+        UPDATE MAGNIFICENT_LIST set name = #{name}, description = #{description}, principal = #{principal} where id =
+        #{id}
+    </insert>
+
+</mapper>

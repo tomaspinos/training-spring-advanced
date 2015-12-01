@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <input name="listId"/>
+
+    <decision-state id="start">
+        <if test="listId==null" then="createNewListModel" else="loadModelFromDb"/>
+    </decision-state>
+
+    <action-state id="createNewListModel">
+        <set name="flowScope.mlist"
+             value="new cz.profinit.training.springadvanced.security.model.MagnificentListModel(securityService.getPrincipalName())"/>
+        <transition to="edit-list"/>
+    </action-state>
+
+    <action-state id="loadModelFromDb">
+        <set name="flowScope.mlist" value="listModelService.getModel(listId)"/>
+        <transition to="edit-list"/>
+    </action-state>
+
+    <view-state id="edit-list">
+        <on-entry>
+            <set name="viewScope.editMode" value="securityService.canEdit(mlist)"/>
+        </on-entry>
+
+        <transition on="add-item" to="add-item"/>
+        <transition on="edit-item" to="edit-item"/>
+        <transition on="save" to="end">
+            <evaluate expression="listModelService.saveModel(mlist)"/>
+        </transition>
+        <transition on="cancel" to="end"/>
+    </view-state>
+
+    <subflow-state id="add-item" subflow="edit-item">
+        <input name="item" value="new cz.profinit.training.springadvanced.security.model.ItemModel()"/>
+        <transition on="save" to="edit-list">
+            <evaluate expression="mlist.addItem(currentEvent.attributes.savedItem)"/>
+        </transition>
+        <transition on="cancel" to="edit-list"/>
+    </subflow-state>
+
+    <subflow-state id="edit-item" subflow="edit-item">
+        <input name="item" value="mlist.selectedRow"/>
+        <transition to="edit-list"/>
+    </subflow-state>
+
+
+    <end-state id="end"/>
+
+</flow>

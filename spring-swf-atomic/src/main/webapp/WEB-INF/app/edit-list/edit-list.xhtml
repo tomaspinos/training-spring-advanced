@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<ui:composition template="/WEB-INF/layout/default.xhtml">
+
+    <ui:define name="top"/>
+
+    <!-- uvodni stranka nema mit menu - prekryjeme tuto oblast z sablony -->
+    <ui:define name="menu">
+
+    </ui:define>
+
+    <!-- vlastni obsah stranky prekryjeme login.xhtml -->
+    <ui:define name="content">
+
+        <h1>LIST DETAILS</h1>
+
+        <h:panelGrid id="pageContent" layout="block" columns="2">
+            <h:outputLabel>Name</h:outputLabel>
+            <h:inputText id="name" value="#{mlist.name}"/>
+            <h:outputLabel>Description</h:outputLabel>
+            <h:inputText id="description" value="#{mlist.description}"/>
+        </h:panelGrid>
+
+        <h2>List items:</h2>
+        <h:dataTable value="#{items}" var="item" styleClass="itemstable" columnClasses="colMid, colLarge, colSmall">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{item.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                #{item.description}
+            </h:column>
+            <h:column>
+                <h:commandLink action="edit-item">Detail</h:commandLink>
+            </h:column>
+        </h:dataTable>
+
+        <h:commandButton action="add-item" value="Add item"/>
+
+        <h:panelGrid columns="2" styleClass="pgButtons">
+            <h:commandButton action="save" value="Save"/>
+            <h:commandButton action="cancel" value="Cancel"/>
+        </h:panelGrid>
+    </ui:define>
+
+</ui:composition>
+
+</html>

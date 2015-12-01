@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cz.profinit.training.springadvanced.dao.ItemDao">
+    <resultMap id="BaseResultMap" type="cz.profinit.training.springadvanced.domain.Item">
+        <constructor>
+            <idArg column="id" javaType="int"/>
+            <arg column="listId" javaType="int"/>
+            <arg column="name" javaType="String"/>
+            <arg column="description" javaType="String"/>
+            <arg column="principal" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        it.id, it.listid, it.name, it.description, it.principal
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from LIST_ITEM it where id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from LIST_ITEM it
+    </select>
+
+    <select id="selectListItems" resultMap="BaseResultMap" parameterType="int">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from LIST_ITEM it where listId = #{id}
+    </select>
+
+    <select id="selectAllPg" parameterType="org.apache.ibatis.session.RowBounds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from LIST_ITEM it
+    </select>
+
+    <select id="countAll" resultType="long">
+        SELECT count(*) from LIST_ITEM
+    </select>
+
+    <insert id="insert" parameterType="cz.profinit.training.springadvanced.domain.Item">
+        INSERT INTO LIST_ITEM (id, listid, name, description, principal) VALUES (DEFAULT, #{listId}, #{name},
+        #{description}, #{principal} )
+        <selectKey order="AFTER" keyProperty="id" resultType="int">
+            CALL IDENTITY();
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="cz.profinit.training.springadvanced.domain.MagnificentList">
+        UPDATE LIST_ITEM set name=#{name}, description = #{description}, principal = #{principal} where id = #{id}
+    </update>
+
+</mapper>
