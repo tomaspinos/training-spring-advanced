@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -12,8 +13,6 @@
 
     <artifactId>spring-ws</artifactId>
     <packaging>war</packaging>
-    <name>spring-ws</name>
-    <url>http://www.springframework.org/spring-ws</url>
 
     <dependencies>
         <dependency>
@@ -47,7 +46,6 @@
     </dependencies>
 
     <build>
-        <finalName>spring-ws</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -69,6 +67,9 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/ws</path>
+                </configuration>
             </plugin>
         </plugins>
     </build>

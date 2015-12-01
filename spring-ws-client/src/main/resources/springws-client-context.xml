@@ -6,10 +6,9 @@
     <beans xmlns="http://www.springframework.org/schema/beans">
 
         <bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
-            <property name="defaultUri" value="http://localhost:8080/spring-ws/ws"/>
+            <property name="defaultUri" value="http://localhost:8080/ws/ws"/>
         </bean>
 
     </beans>
-
 
 </beans>
