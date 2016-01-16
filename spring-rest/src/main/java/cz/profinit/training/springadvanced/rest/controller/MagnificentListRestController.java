@@ -5,18 +5,12 @@ import cz.profinit.training.springadvanced.service.MagnificentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/lists")
 public class MagnificentListRestController {
 
@@ -26,8 +20,7 @@ public class MagnificentListRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)  // 200
-    @ResponseBody
-    List<MagnificentList> getLists() {
+    public List<MagnificentList> getLists() {
         List<cz.profinit.training.springadvanced.domain.MagnificentList> lists = listService.getLists();
         List<MagnificentList> ret = new ArrayList<MagnificentList>();
         for (cz.profinit.training.springadvanced.domain.MagnificentList list : lists) {
@@ -39,8 +32,7 @@ public class MagnificentListRestController {
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)  // 200
-    @ResponseBody
-    MagnificentList getList(@PathVariable Integer listId) {
+    public MagnificentList getList(@PathVariable Integer listId) {
         cz.profinit.training.springadvanced.domain.MagnificentList domain = listService.getList(listId);
         return domain2model(domain);
     }
@@ -48,8 +40,7 @@ public class MagnificentListRestController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    Integer createNewList(@RequestBody MagnificentList newListModel) {
+    public Integer createNewList(@RequestBody MagnificentList newListModel) {
         newListModel.setId(null);
         cz.profinit.training.springadvanced.domain.MagnificentList domain = model2domain(newListModel);
         listService.saveList(domain);
@@ -58,8 +49,7 @@ public class MagnificentListRestController {
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @ResponseBody
-    Integer updateList(@PathVariable Integer listId, @RequestBody MagnificentList newListModel) {
+    public Integer updateList(@PathVariable Integer listId, @RequestBody MagnificentList newListModel) {
         if (!listId.equals(newListModel.getId())) {
             throw new IllegalArgumentException("List ids do not match");
         }
@@ -79,6 +69,4 @@ public class MagnificentListRestController {
         model.setDescription(list.getDescription());
         return model;
     }
-
-
 }
