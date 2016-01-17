@@ -1,12 +1,10 @@
 package cz.profinit.training.springadvanced.rest.model;
 
-
-public class Item {
+public class MagnificentListModel {
 
     private Integer id;
     private String name;
     private String description;
-    private Integer listId;
 
     public Integer getId() {
         return id;
@@ -30,13 +28,5 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getListId() {
-        return listId;
-    }
-
-    public void setListId(Integer listId) {
-        this.listId = listId;
     }
 }

@@ -1,10 +1,12 @@
 package cz.profinit.training.springadvanced.rest.controller;
 
-import cz.profinit.training.springadvanced.rest.model.MagnificentList;
+import cz.profinit.training.springadvanced.domain.MagnificentList;
+import cz.profinit.training.springadvanced.rest.model.MagnificentListModel;
 import cz.profinit.training.springadvanced.service.MagnificentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,50 +22,46 @@ public class MagnificentListRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)  // 200
-    public List<MagnificentList> getLists() {
-        List<cz.profinit.training.springadvanced.domain.MagnificentList> lists = listService.getLists();
-        List<MagnificentList> ret = new ArrayList<MagnificentList>();
-        for (cz.profinit.training.springadvanced.domain.MagnificentList list : lists) {
-            MagnificentList model = domain2model(list);
-            ret.add(model);
+    public List<MagnificentListModel> getLists() {
+        List<MagnificentListModel> ret = new ArrayList<>();
+        for (MagnificentList list : listService.getLists()) {
+            ret.add(domain2model(list));
         }
         return ret;
     }
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)  // 200
-    public MagnificentList getList(@PathVariable Integer listId) {
-        cz.profinit.training.springadvanced.domain.MagnificentList domain = listService.getList(listId);
-        return domain2model(domain);
+    public MagnificentListModel getList(@PathVariable Integer listId) {
+        return domain2model(listService.getList(listId));
     }
 
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer createNewList(@RequestBody MagnificentList newListModel) {
+    public Integer createNewList(@RequestBody MagnificentListModel newListModel) {
         newListModel.setId(null);
-        cz.profinit.training.springadvanced.domain.MagnificentList domain = model2domain(newListModel);
+        MagnificentList domain = model2domain(newListModel);
         listService.saveList(domain);
         return domain.getId();
     }
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Integer updateList(@PathVariable Integer listId, @RequestBody MagnificentList newListModel) {
-        if (!listId.equals(newListModel.getId())) {
-            throw new IllegalArgumentException("List ids do not match");
-        }
-        cz.profinit.training.springadvanced.domain.MagnificentList domain = model2domain(newListModel);
+    public Integer updateList(@PathVariable Integer listId, @RequestBody MagnificentListModel newListModel) {
+        Assert.isTrue(listId.equals(newListModel.getId()), "List ids do not match");
+
+        MagnificentList domain = model2domain(newListModel);
         listService.saveList(domain);
         return domain.getId();
     }
 
-    private cz.profinit.training.springadvanced.domain.MagnificentList model2domain(MagnificentList model) {
-        return new cz.profinit.training.springadvanced.domain.MagnificentList(model.getId(), model.getName(), model.getDescription(), "none");
+    private MagnificentList model2domain(MagnificentListModel model) {
+        return new MagnificentList(model.getId(), model.getName(), model.getDescription(), "none");
     }
 
-    private MagnificentList domain2model(cz.profinit.training.springadvanced.domain.MagnificentList list) {
-        MagnificentList model = new MagnificentList();
+    private MagnificentListModel domain2model(MagnificentList list) {
+        MagnificentListModel model = new MagnificentListModel();
         model.setId(list.getId());
         model.setName(list.getName());
         model.setDescription(list.getDescription());
