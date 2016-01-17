@@ -18,7 +18,7 @@
 
     <sws:dynamic-wsdl id="mlistws"
                       portTypeName="MagnificentListWebService"
-                      locationUri="/ws/"
+                      locationUri="/"
                       targetNamespace="http://profinit.cz/springadvanced/schemas">
         <sws:xsd location="classpath:springadvanced-ws.xsd"/>
     </sws:dynamic-wsdl>
