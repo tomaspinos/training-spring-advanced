@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="b6bbcc46-ef89-43d0-a0a4-6099ec070e87" activeEnvironment="Default" name="checkVatService" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="47defbe0-11c9-45d3-9990-d837fdb42c6c" wsaVersion="NONE" name="checkVatBinding" type="wsdl" bindingName="{urn:ec.europa.eu:taxud:vies:services:checkVat}checkVatBinding" soapVersion="1_1" anonymous="optional" definition="file:/D:/Google%20Drive/Profinit/Spring_Advanced/checkVatService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\D:\Google%20Drive\Profinit\Spring_Advanced\checkVatService.wsdl"><con:part><con:url>file:\D:\Google%20Drive\Profinit\Spring_Advanced\checkVatService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="urn:ec.europa.eu:taxud:vies:services:checkVat" xmlns:tns1="urn:ec.europa.eu:taxud:vies:services:checkVat:types" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:impl="urn:ec.europa.eu:taxud:vies:services:checkVat" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <xsd:documentation>Specific disclaimer for this service ----------------------------------------- The
+	    objective of this Internet site is to allow persons involved in the intra-Community supply of
+	    goods or of services to obtain confirmation of the validity of the VAT identification number of
+	    any specified person, in accordance to article 27 of Council Regulation (EC) No. 1798/2003 of 7
+	    October 2003. Any other use and any extraction and use of the data which is not in conformity
+	    with the objective of this site is strictly forbidden. Any retransmission of the contents of
+	    this site, whether for a commercial purpose or otherwise, as well as any more general use other
+	    than as far as is necessary to support the activity of a legitimate user (for example: to draw
+	    up their own invoices) is expressly forbidden. In addition, any copying or reproduction of the
+	    contents of this site is strictly forbidden. The European Commission maintains this website to
+	    enhance the access by taxable persons making intra-Community supplies to verification of their
+	    customers VAT identification numbers. Our goal is to supply instantaneous and accurate
+	    information. However the Commission accepts no responsibility or liability whatsoever with
+	    regard to the information obtained using this site. This information: - is obtained from Member
+	    States databases over which the Commission services have no control and for which the Commission
+	    assumes no responsibility; it is the responsibility of the Member States to keep their databases
+	    complete, accurate and up to date; - is not professional or legal advice (if you need specific
+	    advice, you should always consult a suitably qualified professional); - does not in itself give
+	    a right to exempt intra-Community supplies from Value Added Tax; - does not change any
+	    obligations imposed on taxable persons in relation to intra-Community supplies. It is our goal
+	    to minimise disruption caused by technical errors. However some data or information on our site
+	    may have been created or structured in files or formats which are not error-free and we cannot
+	    guarantee that our service will not be interrupted or otherwise affected by such problems. The
+	    Commission accepts no responsibility with regard to such problems incurred as a result of using
+	    this site or any linked external sites. This disclaimer is not intended to limit the liability
+	    of the Commission in contravention of any requirements laid down in applicable national law nor
+	    to exclude its liability for matters which may not be excluded under that law. Usage: The
+	    countryCode input parameter must follow the pattern [A-Z]{2} The vatNumber input parameter must
+	    follow the [0-9A-Za-z\+\*\.]{2,12} In case of problem, the returned FaultString can take the
+	    following specific values: - INVALID_INPUT: The provided CountryCode is invalid or the VAT
+	    number is empty; - SERVICE_UNAVAILABLE: The SOAP service is unavailable, try again later; -
+	    MS_UNAVAILABLE: The Member State service is unavailable, try again later or with another Member
+	    State; - TIMEOUT: The Member State service could not be reach in time, try again later or with
+	    another Member State; - SERVER_BUSY: The service can't process your request. Try again latter.</xsd:documentation>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:ec.europa.eu:taxud:vies:services:checkVat:types" xmlns="urn:ec.europa.eu:taxud:vies:services:checkVat:types">
+      <xsd:element name="checkVat">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="countryCode" type="xsd:string"/>
+            <xsd:element name="vatNumber" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkVatResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="countryCode" type="xsd:string"/>
+            <xsd:element name="vatNumber" type="xsd:string"/>
+            <xsd:element name="requestDate" type="xsd:date"/>
+            <xsd:element name="valid" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="address" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkVatApprox">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="countryCode" type="xsd:string"/>
+            <xsd:element name="vatNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" type="tns1:companyTypeCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderStreet" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderPostcode" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCity" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="requesterCountryCode" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="requesterVatNumber" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkVatApproxResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="countryCode" type="xsd:string"/>
+            <xsd:element name="vatNumber" type="xsd:string"/>
+            <xsd:element name="requestDate" type="xsd:date"/>
+            <xsd:element name="valid" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderName" nillable="true" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" nillable="true" type="tns1:companyTypeCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderAddress" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderStreet" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderPostcode" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCity" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderNameMatch" type="tns1:matchCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyTypeMatch" type="tns1:matchCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderStreetMatch" type="tns1:matchCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderPostcodeMatch" type="tns1:matchCode"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="traderCityMatch" type="tns1:matchCode"/>
+            <xsd:element name="requestIdentifier" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:simpleType name="companyTypeCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[A-Z]{2}\-[1-9][0-9]?"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="matchCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="1">
+            <xsd:annotation>
+              <xsd:documentation>VALID</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="2">
+            <xsd:annotation>
+              <xsd:documentation>INVALID</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="3">
+            <xsd:annotation>
+              <xsd:documentation>NOT_PROCESSED</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="checkVatRequest">
+    <wsdl:part name="parameters" element="tns1:checkVat"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkVatApproxResponse">
+    <wsdl:part name="parameters" element="tns1:checkVatApproxResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkVatApproxRequest">
+    <wsdl:part name="parameters" element="tns1:checkVatApprox"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkVatResponse">
+    <wsdl:part name="parameters" element="tns1:checkVatResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="checkVatPortType">
+    <wsdl:operation name="checkVat">
+      <wsdl:input name="checkVatRequest" message="impl:checkVatRequest"></wsdl:input>
+      <wsdl:output name="checkVatResponse" message="impl:checkVatResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkVatApprox">
+      <wsdl:input name="checkVatApproxRequest" message="impl:checkVatApproxRequest"></wsdl:input>
+      <wsdl:output name="checkVatApproxResponse" message="impl:checkVatApproxResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="checkVatBinding" type="impl:checkVatPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="checkVat">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="checkVatRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkVatResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkVatApprox">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="checkVatApproxRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkVatApproxResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="checkVatService">
+    <wsdl:port name="checkVatPort" binding="impl:checkVatBinding">
+      <wsdlsoap:address location="http://ec.europa.eu/taxation_customs/vies/services/checkVatService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ec.europa.eu/taxation_customs/vies/services/checkVatService</con:endpoint></con:endpoints><con:operation id="8b0f801e-7b05-44db-9c46-e05b523b3666" isOneWay="false" action="" name="checkVat" bindingOperationName="checkVat" type="Request-Response" outputName="checkVatResponse" inputName="checkVatRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="76960c19-f32d-4d0c-a245-17e360963b6c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ec.europa.eu:taxud:vies:services:checkVat:types">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:checkVat>\r
+         <urn:countryCode>CZ</urn:countryCode>\r
+         <urn:vatNumber>CZ25650203</urn:vatNumber>\r
+      </urn:checkVat>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:ec.europa.eu:taxud:vies:services:checkVat/checkVatPortType/checkVatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="128e8c75-96c0-48ee-bfc7-e09f5e18537f" isOneWay="false" action="" name="checkVatApprox" bindingOperationName="checkVatApprox" type="Request-Response" outputName="checkVatApproxResponse" inputName="checkVatApproxRequest" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation></con:interface><con:mockService id="4dfd04bd-d598-426c-8fe3-2dc1be943b61" port="8080" path="/" host="tomas-PC" name="MockService 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="checkVat" id="3bb0abe4-49df-4a28-869f-9141f7ed2a26" interface="checkVatBinding" operation="checkVat"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="b645ee50-1b9e-4205-a4c0-f2f5e2a8ab02" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ec.europa.eu:taxud:vies:services:checkVat:types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:checkVatResponse>
+         <urn:countryCode>CZ</urn:countryCode>
+         <urn:vatNumber>CZ25650203</urn:vatNumber>
+         <urn:requestDate>2016-03-22</urn:requestDate>
+         <urn:valid>true</urn:valid>
+         <urn:name>Profinit, s.r.o.</urn:name>
+         <urn:address>Tychonova 2, 160 00 Praha 6</urn:address>
+      </urn:checkVatResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:ec.europa.eu:taxud:vies:services:checkVat/checkVatPortType/checkVatResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="checkVatApprox" id="d68492b4-8fe6-4689-a408-32d6cef111af" interface="checkVatBinding" operation="checkVatApprox"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="79e7160e-7bbc-46a0-8d25-cf0770fa1d1e" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ec.europa.eu:taxud:vies:services:checkVat:types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:checkVatApproxResponse>
+         <urn:countryCode>?</urn:countryCode>
+         <urn:vatNumber>?</urn:vatNumber>
+         <urn:requestDate>?</urn:requestDate>
+         <urn:valid>?</urn:valid>
+         <!--Optional:-->
+         <urn:traderName>?</urn:traderName>
+         <!--Optional:-->
+         <urn:traderCompanyType>?</urn:traderCompanyType>
+         <!--Optional:-->
+         <urn:traderAddress>?</urn:traderAddress>
+         <!--Optional:-->
+         <urn:traderStreet>?</urn:traderStreet>
+         <!--Optional:-->
+         <urn:traderPostcode>?</urn:traderPostcode>
+         <!--Optional:-->
+         <urn:traderCity>?</urn:traderCity>
+         <!--Optional:-->
+         <urn:traderNameMatch>?</urn:traderNameMatch>
+         <!--Optional:-->
+         <urn:traderCompanyTypeMatch>?</urn:traderCompanyTypeMatch>
+         <!--Optional:-->
+         <urn:traderStreetMatch>?</urn:traderStreetMatch>
+         <!--Optional:-->
+         <urn:traderPostcodeMatch>?</urn:traderPostcodeMatch>
+         <!--Optional:-->
+         <urn:traderCityMatch>?</urn:traderCityMatch>
+         <urn:requestIdentifier>?</urn:requestIdentifier>
+      </urn:checkVatApproxResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:ec.europa.eu:taxud:vies:services:checkVat/checkVatPortType/checkVatApproxResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
