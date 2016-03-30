@@ -25,9 +25,7 @@ public class MagnificentListEndpoint {
     }
 
     @PayloadRoot(namespace = SPRING_ADVANCED_NAMESPACE, localPart = "GetListIdsRequest")
-    public
-    @ResponsePayload
-    GetListIdsResponse getListIds(@RequestPayload GetListIdsRequest request) {
+    public @ResponsePayload GetListIdsResponse getListIds(@RequestPayload GetListIdsRequest request) {
         GetListIdsResponse getListIdsResponse = new GetListIdsResponse();
         for (MagnificentList magnificentList : service.getLists()) {
             GetListIdsResponse.ListId listId = new GetListIdsResponse.ListId();
