@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>client-xml-configuration</artifactId>
+    <artifactId>spring-ws-vat-client-xml-configuration</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

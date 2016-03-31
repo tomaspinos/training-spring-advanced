@@ -16,8 +16,8 @@
 
     <modules>
         <module>client-xml-configuration</module>
-        <module>client-boot</module>
-        <module>service</module>
+        <module>client-jaxb-boot</module>
+        <module>service-jaxb-boot</module>
     </modules>
 
 </project>
