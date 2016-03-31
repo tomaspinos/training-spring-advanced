@@ -32,6 +32,7 @@
     </pluginRepositories>
 
     <modules>
+        <module>model</module>
         <module>service</module>
         <module>client</module>
     </modules>

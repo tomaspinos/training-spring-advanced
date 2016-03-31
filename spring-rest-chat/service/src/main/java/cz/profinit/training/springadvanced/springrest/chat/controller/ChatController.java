@@ -36,7 +36,7 @@ public class ChatController {
         return lifecycle.start();
     }
 
-    @RequestMapping(value = "/send/{sessionId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/send/{sessionId}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ChatUpdate send(@PathVariable String sessionId, @RequestParam String text) {
         return lifecycle.send(sessionId, text);
