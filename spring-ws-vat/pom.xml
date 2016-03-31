@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>spring-advanced</groupId>
-    <artifactId>spring-ws-checkVatService</artifactId>
+    <artifactId>spring-ws-vat</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 

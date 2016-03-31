@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.springws.service;
+package cz.profinit.training.springadvanced.springws.vat.endpoint;
 
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;

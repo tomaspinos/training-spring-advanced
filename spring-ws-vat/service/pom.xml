@@ -5,9 +5,8 @@
 
     <parent>
         <groupId>spring-advanced</groupId>
-        <artifactId>spring-ws-checkVatService</artifactId>
+        <artifactId>spring-ws-vat</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <!--<relativePath>../pom.xml</relativePath>-->
     </parent>
 
     <artifactId>service</artifactId>
@@ -43,29 +42,6 @@
                     <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
-                <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
-                <!--<version>0.12.3</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<schemaLanguage>WSDL</schemaLanguage>-->
-                    <!--<generatePackage>eu.europa.ec.services.checkVat</generatePackage>-->
-                    <!--<schemas>-->
-                        <!--<schema>-->
-                            <!--<fileset>-->
-                                <!--<directory>${basedir}/src/main/resource</directory>-->
-                            <!--</fileset>-->
-                        <!--</schema>-->
-                    <!--</schemas>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 
