@@ -22,14 +22,12 @@ public class CsvToMapTransformer extends AbstractPayloadTransformer<String, Map<
 
         Map<String, Object> ret = new HashMap<String, Object>();
 
-        int idx = 0;
         for (String fieldName : fieldNames) {
             if (fieldName != null) {
                 ret.put(fieldName, fields[0]);
             } else {
                 //skip the field
             }
-            idx++;
         }
 
         return ret;
