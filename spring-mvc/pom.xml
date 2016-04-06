@@ -7,19 +7,17 @@
         <groupId>spring-advanced</groupId>
         <artifactId>spring-advanced-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../spring-advanced-parent</relativePath>
+        <relativePath>../spring-advanced-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>spring-mvc</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
-
         <dependency>
             <groupId>spring-advanced</groupId>
             <artifactId>listman-service-layer</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -28,20 +26,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
-        <!-- JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-
-        <!--
-              <dependency>
-                  <groupId>taglibs</groupId>
-                  <artifactId>standard</artifactId>
-              </dependency>
-        -->
-
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -53,4 +43,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
