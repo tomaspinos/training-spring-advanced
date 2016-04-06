@@ -41,7 +41,6 @@ public class MagnificentListServiceImpl implements MagnificentListService {
         }
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<Item> getListItems(MagnificentList magnificentList) {
@@ -74,5 +73,4 @@ public class MagnificentListServiceImpl implements MagnificentListService {
     public void deleteItem(Item item) {
         itemDao.delete(item.getId());
     }
-
 }

@@ -16,6 +16,15 @@ public class MagnificentListModel implements Serializable {
     private String description;
     private ArrayList<ItemModel> items = new ArrayList<ItemModel>();
 
+    public MagnificentListModel() {
+    }
+
+    public MagnificentListModel(Integer id, String principal, String name, String description) {
+        this.id = id;
+        this.principal = principal;
+        this.name = name;
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;

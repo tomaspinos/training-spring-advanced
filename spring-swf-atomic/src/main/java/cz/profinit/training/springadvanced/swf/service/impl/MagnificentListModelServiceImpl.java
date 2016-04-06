@@ -25,7 +25,7 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
     @Override
     public List<MagnificentListModel> getLists() {
         List<MagnificentList> lists = magnificentListService.getLists();
-        List<MagnificentListModel> ret = new ArrayList<MagnificentListModel>(lists.size());
+        List<MagnificentListModel> ret = new ArrayList<>(lists.size());
         for (MagnificentList ml : lists) {
             ret.add(domainToModel(ml, Collections.<Item>emptyList()));
         }
@@ -45,16 +45,12 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
     @Override
     @Transactional(readOnly = true)
     public MagnificentListModel getModel(int listId) {
-        MagnificentList domain = magnificentListService.getList(listId);
-        List<Item> domainItems = magnificentListService.getListItems(listId);
-        MagnificentListModel magnificentListModel = domainToModel(domain, domainItems);
-        return magnificentListModel;
+        return domainToModel(magnificentListService.getList(listId), magnificentListService.getListItems(listId));
     }
 
     @Override
     @Transactional
     public void saveModel(MagnificentListModel model) {
-
         Map<Integer, Item> dbItemsMap = getDbItemsMap(model);
 
         MagnificentList domain = modelToDomain(model);
@@ -70,12 +66,10 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
         for (Item removedItem : dbItemsMap.values()) {
             magnificentListService.deleteItem(removedItem);
         }
-
-
     }
 
     private Map<Integer, Item> getDbItemsMap(MagnificentListModel model) {
-        Map<Integer, Item> dbItemsMap = new HashMap<Integer, Item>();
+        Map<Integer, Item> dbItemsMap = new HashMap<>();
         if (model.getId() != null) {
             for (Item i : magnificentListService.getListItems(model.getId())) {
                 dbItemsMap.put(i.getId(), i);
@@ -84,19 +78,12 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
         return dbItemsMap;
     }
 
-
     private MagnificentList modelToDomain(MagnificentListModel m) {
-        MagnificentList ret = new MagnificentList(m.getId(), m.getName(), m.getDescription(), m.getPrincipal());
-        return ret;
+        return new MagnificentList(m.getId(), m.getName(), m.getDescription(), m.getPrincipal());
     }
 
     private MagnificentListModel domainToModel(MagnificentList m, List<Item> items) {
-        MagnificentListModel ret = new MagnificentListModel();
-        ret.setId(m.getId());
-        ret.setDescription(m.getDescription());
-        ret.setName(m.getName());
-        ret.setPrincipal(m.getPrincipal());
-
+        MagnificentListModel ret = new MagnificentListModel(m.getId(), m.getDescription(), m.getName(), m.getPrincipal());
         for (Item item : items) {
             ret.addItem(domainToItem(item));
         }
@@ -104,18 +91,10 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
     }
 
     private Item itemToDomain(int listId, ItemModel m) {
-        Item ret = new Item(m.getId(), listId, m.getName(), m.getDescription(), m.getPrincipal());
-        return ret;
+        return new Item(m.getId(), listId, m.getName(), m.getDescription(), m.getPrincipal());
     }
 
     private ItemModel domainToItem(Item m) {
-        ItemModel ret = new ItemModel();
-        ret.setId(m.getId());
-        ret.setName(m.getName());
-        ret.setDescription(m.getDescription());
-        ret.setPrincipal(m.getPrincipal());
-        return ret;
+        return new ItemModel(m.getId(), m.getName(), m.getDescription(), m.getPrincipal());
     }
-
-
 }
