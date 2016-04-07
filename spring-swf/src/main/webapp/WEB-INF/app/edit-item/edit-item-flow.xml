@@ -8,8 +8,7 @@
 
     <view-state id="edit-item">
         <on-entry>
-            <evaluate result="viewScope.item"
-                      expression="itemId != null ? modelService.readItem(itemId) : modelService.createItem()"/>
+            <evaluate result="viewScope.item" expression="itemId != null ? modelService.readItem(itemId) : modelService.createItem()"/>
         </on-entry>
         <transition on="save" to="end">
             <evaluate expression="modelService.saveItem(item, listId)"/>
