@@ -1,12 +1,13 @@
 package cz.profinit.training.springadvanced.springrest.chat;
 
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
+
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 
 /**
  * @author tpinos@csob.cz Tomas Pinos (JD71691)
@@ -26,17 +27,18 @@ public class Application implements CommandLineRunner {
 
         System.out.println("Status: " + restTemplate.getForObject(url + "/status", ChatUpdate.class));
 
-        ChatUpdate start = restTemplate.getForObject(url + "/start", ChatUpdate.class);
+        ChatUpdate start = restTemplate.postForObject(url + "/conversation", null, ChatUpdate.class);
         System.out.println("Start: " + start);
 
-        System.out.println("Send: " + restTemplate.postForObject(url + "/send/" + start.getSessionId() + "?text=Howdoyoudo", null, ChatUpdate.class));
+        System.out.println("Send: " + restTemplate.postForObject(url + "/conversation/" + start.getSessionId() + "/message?text=Howdoyoudo", null, ChatUpdate.class));
 
         for (int i = 0; i < 3; i++) {
-            System.out.println("Refresh: " + restTemplate.getForObject(url + "/refresh/" + start.getSessionId(), ChatUpdate.class));
+            System.out.println("Refresh: " + restTemplate.getForObject(url + "/conversation/" + start.getSessionId(), ChatUpdate.class));
         }
 
-        System.out.println("Finish: " + restTemplate.getForObject(url + "/finish/" + start.getSessionId(), ChatUpdate.class));
+        System.out.println("Finish");
+        restTemplate.delete(url + "/conversation/" + start.getSessionId());
 
-        System.out.println("Rating: " + restTemplate.postForObject(url + "/rating/" + start.getSessionId(), new ChatRating(10, "scott", "Rather good"), ChatRatingResponse.class));
+        System.out.println("Rating: " + restTemplate.postForObject(url + "/conversation/" + start.getSessionId() + "/rating", new ChatRating(10, "scott", "Rather good"), ChatRatingResponse.class));
     }
 }
