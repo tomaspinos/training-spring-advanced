@@ -9,6 +9,16 @@ public class ItemModel implements Serializable {
     private String description;
     private String principal;
 
+    public ItemModel() {
+    }
+
+    public ItemModel(Integer id, String name, String description, String principal) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.principal = principal;
+    }
+
     public Integer getId() {
         return id;
     }

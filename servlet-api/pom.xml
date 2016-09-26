@@ -7,7 +7,7 @@
         <groupId>spring-advanced</groupId>
         <artifactId>spring-advanced-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../spring-advanced-parent</relativePath>
+        <relativePath>../spring-advanced-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>servlet-api</artifactId>

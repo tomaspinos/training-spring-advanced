@@ -15,84 +15,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/list")
 public class ListController {
 
     @Autowired
     @Qualifier(value = "listService")
-    MagnificentListService listService;
+    private MagnificentListService listService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getLists() {
-        ModelAndView ret = new ModelAndView("listsview");
-        List<MagnificentList> lists = listService.getLists();
-        ret.addObject("lists", lists);
-        return ret;
+        return new ModelAndView("listsview").
+                addObject("lists", listService.getLists());
     }
 
     @RequestMapping(value = "/{listId}/edit", method = RequestMethod.GET)
     public ModelAndView editListDetails(@PathVariable Integer listId) {
-        ModelAndView ret = new ModelAndView("editlistview");
-        MagnificentList magnificentList = listService.getList(listId);
-        ret.addObject("command", magnificentList);
-        return ret;
+        return new ModelAndView("editlistview").
+                addObject("command", listService.getList(listId));
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addList() {
-        ModelAndView ret = new ModelAndView("editlistview");
-        MagnificentList magnificentList = new MagnificentList(null, "", "", "");
-        ret.addObject("command", magnificentList);
-        return ret;
+        return new ModelAndView("editlistview").
+                addObject("command", new MagnificentList(null, "", "", ""));
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveNewListDetails(@ModelAttribute ListDetailForm listDetailForm, BindingResult result) {
-
-        MagnificentList m = new MagnificentList(listDetailForm.getId(), listDetailForm.getName(), listDetailForm.getDescription(), null);
-        listService.saveList(m);
+        MagnificentList list = new MagnificentList(listDetailForm.getId(), listDetailForm.getName(), listDetailForm.getDescription(), null);
+        listService.saveList(list);
         return "redirect:/list";
     }
 
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
     public ModelAndView getListItems(@PathVariable Integer listId) {
-        ModelAndView ret = new ModelAndView("listdetailview");
-        List<Item> currentItems = listService.getListItems(listId);
-        ret.addObject("items", currentItems);
-
-        MagnificentList magnificentList = listService.getList(listId);
-        ret.addObject("mlist", magnificentList);
-        return ret;
+        return new ModelAndView("listdetailview").
+                addObject("items", listService.getListItems(listId)).
+                addObject("mlist", listService.getList(listId));
     }
 
 
     @RequestMapping(value = "/{listId}/addItem", method = RequestMethod.GET)
     public ModelAndView addItem(@PathVariable Integer listId) {
-        ModelAndView ret = new ModelAndView("edititemview");
-        Item item = new Item(null, listId, "", "", null);
-        ret.addObject("command", item);
-        return ret;
+        return new ModelAndView("edititemview").
+                addObject("command", new Item(null, listId, "", "", null));
     }
 
 
     @RequestMapping("/{listId}/editItem/{itemId}")
     public ModelAndView editItem(@PathVariable Integer itemId) {
-        ModelAndView ret = new ModelAndView("edititemview");
-        Item item = listService.getItem(itemId);
-        ret.addObject("command", item);
-
-        return ret;
+        return new ModelAndView("edititemview").
+                addObject("command", listService.getItem(itemId));
     }
 
     @RequestMapping(value = "/{listId}/saveItem", method = RequestMethod.POST)
-    public String saveItem(@PathVariable Integer listId, @ModelAttribute ItemDetailForm itemDetailForm, BindingResult result) {
-
-        Item i = new Item(itemDetailForm.getId(), itemDetailForm.getListId(), itemDetailForm.getName(), itemDetailForm.getDescription(), null);
-        listService.saveItem(i);
+    public String saveItem(@PathVariable Integer listId, @ModelAttribute ItemDetailForm itemDetailForm) {
+        listService.saveItem(new Item(itemDetailForm.getId(), itemDetailForm.getListId(), itemDetailForm.getName(), itemDetailForm.getDescription(), null));
         return "redirect:/list/" + listId;
     }
 

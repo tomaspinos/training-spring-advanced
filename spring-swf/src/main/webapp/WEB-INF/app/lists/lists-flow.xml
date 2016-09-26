@@ -5,9 +5,7 @@
 
     <view-state id="lists-view">
         <on-entry>
-            <evaluate result="flowScope.mlists"
-                      expression="listService.getLists()"
-                      result-type="dataModel"/>
+            <evaluate result="flowScope.mlists" expression="listService.getLists()" result-type="dataModel"/>
         </on-entry>
         <transition on="add-list" to="add-list"/>
         <transition on="list-detail" to="edit-list"/>

@@ -60,9 +60,10 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/swf-atomic</path>
+                </configuration>
             </plugin>
         </plugins>
-
-        <finalName>spring-swf</finalName>
     </build>
 </project>

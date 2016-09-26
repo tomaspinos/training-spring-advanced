@@ -31,6 +31,5 @@ public class RequestCounterServlet extends HttpServlet {
         response.getWriter().write("Session counter: " + sessionRequestCounterBean.inc() + "\n");
         response.getWriter().write("Singleton counter: " + singletonRequestCounterBean.inc() + "\n");
         response.getWriter().write("Prototype counter: " + prototypeRequestCounterBean.inc() + "\n");
-
     }
 }

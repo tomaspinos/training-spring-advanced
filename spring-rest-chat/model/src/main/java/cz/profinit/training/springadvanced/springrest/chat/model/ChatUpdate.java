@@ -1,9 +1,10 @@
 package cz.profinit.training.springadvanced.springrest.chat.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author tpinos@csob.cz Tomas Pinos (JD71691)
@@ -14,6 +15,7 @@ public class ChatUpdate implements Serializable {
     private ChatStatusType status;
     private String sessionId;
     private List<ChatMessage> messages;
+    private String messageId;
 
     public ChatUpdate() {
     }
@@ -23,9 +25,14 @@ public class ChatUpdate implements Serializable {
     }
 
     public ChatUpdate(ChatStatusType status, String sessionId, List<ChatMessage> messages) {
+        this(status, sessionId, messages, null);
+    }
+
+    public ChatUpdate(ChatStatusType status, String sessionId, List<ChatMessage> messages, String messageId) {
         this.status = status;
         this.sessionId = sessionId;
         this.messages = messages;
+        this.messageId = messageId;
     }
 
     public ChatStatusType getStatus() {
@@ -52,12 +59,21 @@ public class ChatUpdate implements Serializable {
         this.messages = messages;
     }
 
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
     @Override
     public String toString() {
         return "ChatUpdate{" +
-                "status=" + status +
-                ", sessionId='" + sessionId + '\'' +
-                ", messages=" + messages +
-                '}';
+               "status=" + status +
+               ", sessionId='" + sessionId + '\'' +
+               ", messages=" + messages +
+               ", messageId='" + messageId + '\'' +
+               '}';
     }
 }
