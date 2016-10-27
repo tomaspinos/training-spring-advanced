@@ -11,9 +11,6 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-
 @Endpoint
 public class CheckVatEndpoint {
 
@@ -30,19 +27,10 @@ public class CheckVatEndpoint {
         CheckVatResponse response = objectFactory.createCheckVatResponse();
         response.setCountryCode(record.getCountryCode());
         response.setVatNumber(record.getVatNumber());
-        response.setRequestDate(getDatatypeFactory().newXMLGregorianCalendar());
         response.setValid(true);
         response.setName(objectFactory.createCheckVatResponseName(record.getName()));
-        response.setAddress(objectFactory.createCheckVatResponseAddress(record.getName()));
+        response.setAddress(objectFactory.createCheckVatResponseAddress(record.getAddress()));
 
         return response;
-    }
-
-    protected DatatypeFactory getDatatypeFactory() {
-        try {
-            return DatatypeFactory.newInstance();
-        } catch (DatatypeConfigurationException e) {
-            throw new IllegalStateException("Internal error");
-        }
     }
 }

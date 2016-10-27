@@ -7,7 +7,11 @@ public class VatRegistryRecord {
     private final String name;
     private final String address;
 
-    public VatRegistryRecord(String countryCode, String vatNumber, String name, String address) {
+    public VatRegistryRecord(final String countryCode,
+                             final String vatNumber,
+                             final String name,
+                             final String address) {
+
         this.countryCode = countryCode;
         this.vatNumber = vatNumber;
         this.name = name;
