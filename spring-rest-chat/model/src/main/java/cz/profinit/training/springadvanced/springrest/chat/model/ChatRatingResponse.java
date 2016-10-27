@@ -3,9 +3,6 @@ package cz.profinit.training.springadvanced.springrest.chat.model;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @XmlRootElement
 public class ChatRatingResponse implements Serializable {
 

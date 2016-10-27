@@ -2,9 +2,6 @@ package cz.profinit.training.springadvanced.springws.vat.repository;
 
 import org.springframework.stereotype.Repository;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @Repository
 public class CheckVatRepository {
 

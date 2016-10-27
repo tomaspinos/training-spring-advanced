@@ -5,9 +5,6 @@ import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @Component
 public class Client extends WebServiceGatewaySupport {
 

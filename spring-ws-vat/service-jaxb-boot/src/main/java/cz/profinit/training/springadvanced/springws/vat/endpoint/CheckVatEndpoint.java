@@ -14,9 +14,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @Endpoint
 public class CheckVatEndpoint {
 

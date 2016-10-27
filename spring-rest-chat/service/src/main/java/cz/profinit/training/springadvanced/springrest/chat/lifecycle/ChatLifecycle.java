@@ -17,9 +17,6 @@ import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStat
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.RUNNING;
 import static java.util.Collections.singletonList;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @Component
 public class ChatLifecycle {
 

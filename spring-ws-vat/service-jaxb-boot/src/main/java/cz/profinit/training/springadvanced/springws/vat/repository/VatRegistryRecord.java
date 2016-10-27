@@ -1,8 +1,5 @@
 package cz.profinit.training.springadvanced.springws.vat.repository;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 public class VatRegistryRecord {
 
     private final String countryCode;

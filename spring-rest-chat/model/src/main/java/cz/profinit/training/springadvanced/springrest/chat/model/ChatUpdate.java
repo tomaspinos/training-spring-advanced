@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @XmlRootElement
 public class ChatUpdate implements Serializable {
 

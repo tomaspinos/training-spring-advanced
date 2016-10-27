@@ -2,9 +2,6 @@ package cz.profinit.training.springadvanced.puzzles.dependencyrecursion;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 public class SingletonSelfReference {
 
     public static void main(String[] args) {

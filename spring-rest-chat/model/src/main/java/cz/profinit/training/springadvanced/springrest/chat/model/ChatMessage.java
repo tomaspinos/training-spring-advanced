@@ -2,9 +2,6 @@ package cz.profinit.training.springadvanced.springrest.chat.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @XmlRootElement
 public class ChatMessage {
 

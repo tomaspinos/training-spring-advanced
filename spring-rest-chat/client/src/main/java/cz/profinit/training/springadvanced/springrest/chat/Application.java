@@ -9,9 +9,6 @@ import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 
-/**
- * @author tpinos@csob.cz Tomas Pinos (JD71691)
- */
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
