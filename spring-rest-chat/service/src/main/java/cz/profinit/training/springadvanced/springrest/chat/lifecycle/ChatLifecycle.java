@@ -1,33 +1,32 @@
 package cz.profinit.training.springadvanced.springrest.chat.lifecycle;
 
-import java.util.Collections;
-import java.util.Random;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Component;
-
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatMessage;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.Random;
 
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.INCOMING;
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.OUTGOING;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.AVAILABLE;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.RUNNING;
+import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.*;
 import static java.util.Collections.singletonList;
 
 @Component
 public class ChatLifecycle {
 
-    static final String[] WELCOME_MESSAGES = {
+    private static final String[] WELCOME_MESSAGES = {
             "Welcome!",
             "Here we go!",
             "What can I do you for?",
-            "Identify <yourself>!"
+            "Identify <yourself>!",
+            "State your purpose!"
     };
 
-    static final String[] INCOMING_MESSAGES = {
+    private static final String[] INCOMING_MESSAGES = {
             "Ok",
             "Very well!",
             "Well done!",
@@ -35,12 +34,12 @@ public class ChatLifecycle {
             "I'm sorry to hear that..."
     };
 
-    static final String[] GOODBYE_MESSAGES = {
+    private static final String[] GOODBYE_MESSAGES = {
             "Thanks!",
             "Enough is enough"
     };
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public ChatUpdate status() {
         System.out.println("ChatLifecycle.status");
@@ -74,7 +73,7 @@ public class ChatLifecycle {
 
     public ChatUpdate finish(String sessionId) {
         System.out.println("ChatLifecycle.finish");
-        return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(INCOMING, randomGoodbyeMessage())));
+        return new ChatUpdate(FINISHED, sessionId, singletonList(new ChatMessage(INCOMING, randomGoodbyeMessage())));
     }
 
     public ChatRatingResponse rating(String sessionId, ChatRating rating) {
@@ -82,23 +81,23 @@ public class ChatLifecycle {
         return new ChatRatingResponse(sessionId, rating, randomGoodbyeMessage());
     }
 
-    protected String randomSessionId() {
+    private String randomSessionId() {
         return RandomStringUtils.randomAlphanumeric(12).toUpperCase();
     }
 
-    protected String randomMessageId() {
+    private String randomMessageId() {
         return RandomStringUtils.randomAlphanumeric(16).toUpperCase();
     }
 
-    protected String randomWelcomeMessage() {
+    private String randomWelcomeMessage() {
         return WELCOME_MESSAGES[random.nextInt(WELCOME_MESSAGES.length)];
     }
 
-    protected String randomIncomingMessage() {
+    private String randomIncomingMessage() {
         return INCOMING_MESSAGES[random.nextInt(INCOMING_MESSAGES.length)];
     }
 
-    protected String randomGoodbyeMessage() {
+    private String randomGoodbyeMessage() {
         return GOODBYE_MESSAGES[random.nextInt(GOODBYE_MESSAGES.length)];
     }
 }
