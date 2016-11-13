@@ -17,11 +17,7 @@ public class Application {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                String vat = "CZ25650203";
-
-                if (args.length > 0) {
-                    vat = args[0];
-                }
+                String vat = args.length > 0 ? args[0] : "CZ25650203";
 
                 client.checkVat(vat);
             }
