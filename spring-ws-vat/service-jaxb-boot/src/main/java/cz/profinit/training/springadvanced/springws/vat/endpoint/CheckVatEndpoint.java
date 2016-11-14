@@ -12,7 +12,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
-public class CheckVatEndpoint {
+public class
+CheckVatEndpoint {
 
     @Autowired
     private CheckVatRepository repository;

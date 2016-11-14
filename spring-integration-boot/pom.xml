@@ -41,17 +41,10 @@
 
     <repositories>
         <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>http://repo.spring.io/libs-release</url>
+            <id>repository.spring.release</id>
+            <name>Spring GA Repository</name>
+            <url>http://repo.spring.io/release</url>
         </repository>
     </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <url>http://repo.spring.io/libs-release</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
