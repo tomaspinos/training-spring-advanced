@@ -11,9 +11,11 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+/**
+ * TODO Annotate the class and methods properly
+ */
 @Endpoint
-public class
-CheckVatEndpoint {
+public class CheckVatEndpoint {
 
     @Autowired
     private CheckVatRepository repository;
@@ -22,6 +24,8 @@ CheckVatEndpoint {
     @ResponsePayload
     public CheckVatResponse checkVat(@RequestPayload CheckVat request) {
         VatRegistryRecord record = repository.checkVat(request.getCountryCode(), request.getVatNumber());
+
+        // TODO Construct the response
 
         ObjectFactory objectFactory = new ObjectFactory();
 

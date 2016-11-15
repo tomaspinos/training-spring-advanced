@@ -9,6 +9,9 @@ import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 public class Client extends WebServiceGatewaySupport {
 
     public void checkVat(String vat) {
+        // TODO Get WebServiceTemplate from the parent class
+        // TODO Implement the service call
+
         CheckVat request = new CheckVat();
         request.setCountryCode("CZ");
         request.setVatNumber(vat);

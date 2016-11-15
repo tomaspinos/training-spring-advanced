@@ -22,6 +22,9 @@ public class Client {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("springws-client-context.xml");
 
+        // TODO Obtain the WebServiceTemplate from the application context
+        // TODO Implement the service call
+
         WebServiceTemplate template = context.getBean(WebServiceTemplate.class);
 
         StreamSource source = new StreamSource(new StringReader(MESSAGE));
