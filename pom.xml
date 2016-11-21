@@ -18,9 +18,6 @@
         <module>spring-swf</module>
         <module>spring-swf-atomic</module>
         <module>spring-security</module>
-        <module>spring-ws</module>
-        <module>spring-ws-client</module>
-        <module>spring-rest</module>
         <module>spring-integration-boot</module>
     </modules>
 
