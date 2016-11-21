@@ -1,19 +1,30 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatLifecycle;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
 
+    private final ChatLifecycle lifecycle;
+
     @Autowired
-    private ChatLifecycle lifecycle;
+    public ChatController(final ChatLifecycle lifecycle) {
+        this.lifecycle = lifecycle;
+    }
 
     @RequestMapping(value = "/status", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
