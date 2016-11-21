@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ws.test.server.MockWebServiceClient;
 import org.springframework.ws.test.server.RequestCreators;
 import org.springframework.ws.test.server.ResponseMatchers;
@@ -16,8 +16,8 @@ import org.springframework.xml.transform.StringSource;
 import java.util.Collections;
 import java.util.Map;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = WebServiceConfig.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = WebServiceConfig.class)
 public class CheckVatEndpointTest {
 
     private MockWebServiceClient mockClient;

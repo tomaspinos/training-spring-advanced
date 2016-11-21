@@ -48,7 +48,6 @@ public class ListController {
         return "redirect:/list";
     }
 
-
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
     public ModelAndView getListItems(@PathVariable Integer listId) {
         return new ModelAndView("listdetailview").
@@ -56,13 +55,11 @@ public class ListController {
                 addObject("mlist", listService.getList(listId));
     }
 
-
     @RequestMapping(value = "/{listId}/addItem", method = RequestMethod.GET)
     public ModelAndView addItem(@PathVariable Integer listId) {
         return new ModelAndView("edititemview").
                 addObject("command", new Item(null, listId, "", "", null));
     }
-
 
     @RequestMapping("/{listId}/editItem/{itemId}")
     public ModelAndView editItem(@PathVariable Integer itemId) {
@@ -75,6 +72,4 @@ public class ListController {
         listService.saveItem(new Item(itemDetailForm.getId(), itemDetailForm.getListId(), itemDetailForm.getName(), itemDetailForm.getDescription(), null));
         return "redirect:/list/" + listId;
     }
-
-
 }

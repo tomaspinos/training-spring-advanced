@@ -25,8 +25,6 @@ public class CsvToMapTransformer extends AbstractPayloadTransformer<String, Map<
         for (String fieldName : fieldNames) {
             if (fieldName != null) {
                 ret.put(fieldName, fields[0]);
-            } else {
-                //skip the field
             }
         }
 
