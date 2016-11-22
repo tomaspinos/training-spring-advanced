@@ -19,10 +19,10 @@ import org.springframework.integration.stream.CharacterStreamWritingMessageHandl
  */
 @SpringBootApplication
 @IntegrationComponentScan
-public class TelegramApplication {
+public class BasicTelegramApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(TelegramApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(BasicTelegramApplication.class, args);
 
         TelegramGateway gateway = ctx.getBean(TelegramGateway.class);
 
