@@ -18,7 +18,6 @@
         <module>spring-swf</module>
         <module>spring-swf-atomic</module>
         <module>spring-security</module>
-        <module>spring-integration-boot</module>
     </modules>
 
     <repositories>

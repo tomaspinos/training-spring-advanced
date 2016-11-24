@@ -47,5 +47,4 @@
 
     <file:outbound-channel-adapter channel="filesIn" directory="C:\Temp\csops\output" delete-source-files="true"/>
 
-
 </beans>
