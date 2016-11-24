@@ -1,20 +1,21 @@
 package cz.profinit.training.springadvanced.security.service.impl;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
+
 import cz.profinit.training.springadvanced.domain.Item;
 import cz.profinit.training.springadvanced.domain.MagnificentList;
 import cz.profinit.training.springadvanced.security.model.ItemModel;
 import cz.profinit.training.springadvanced.security.model.MagnificentListModel;
 import cz.profinit.training.springadvanced.security.service.MagnificentListModelService;
 import cz.profinit.training.springadvanced.service.MagnificentListService;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MagnificentListModelServiceImpl implements MagnificentListModelService {
 
@@ -28,62 +29,46 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
     @Transactional(readOnly = true)
     @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public List<MagnificentListModel> getLists() {
-        List<MagnificentList> lists = magnificentListService.getLists();
-        List<MagnificentListModel> ret = new ArrayList<MagnificentListModel>(lists.size());
-        for (MagnificentList ml : lists) {
-            ret.add(domainToModel(ml, Collections.<Item>emptyList()));
-        }
-        return ret;
+        return magnificentListService.getLists().stream()
+                .map(ml -> domainToModel(ml, Collections.emptyList()))
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public MagnificentListModel getModel(int listId) {
-        MagnificentList domain = magnificentListService.getList(listId);
-        List<Item> domainItems = magnificentListService.getListItems(listId);
-        MagnificentListModel magnificentListModel = domainToModel(domain, domainItems);
-        return magnificentListModel;
+        return domainToModel(magnificentListService.getList(listId), magnificentListService.getListItems(listId));
     }
 
     @Override
     @Transactional
     @PreAuthorize("hasRole('ROLE_ADMIN') or principal.username.equals(#model.principal)")
     public void saveModel(MagnificentListModel model) {
-
         Map<Integer, Item> dbItemsMap = getDbItemsMap(model);
 
-        MagnificentList domain = modelToDomain(model);
+        MagnificentList domain = new MagnificentList(model.getId(), model.getName(), model.getDescription(), model.getPrincipal());
 
         magnificentListService.saveList(domain);
 
         for (ItemModel m : model.getItems()) {
             dbItemsMap.remove(m.getId());
-            magnificentListService.saveItem(itemToDomain(model.getId(), m));
+            magnificentListService.saveItem(new Item(m.getId(), model.getId(), m.getName(), m.getDescription(), m.getPrincipal()));
         }
-
 
         for (Item removedItem : dbItemsMap.values()) {
             magnificentListService.deleteItem(removedItem);
         }
-
-
     }
 
     private Map<Integer, Item> getDbItemsMap(MagnificentListModel model) {
-        Map<Integer, Item> dbItemsMap = new HashMap<Integer, Item>();
+        Map<Integer, Item> dbItemsMap = new HashMap<>();
         if (model.getId() != null) {
             for (Item i : magnificentListService.getListItems(model.getId())) {
                 dbItemsMap.put(i.getId(), i);
             }
         }
         return dbItemsMap;
-    }
-
-
-    private MagnificentList modelToDomain(MagnificentListModel m) {
-        MagnificentList ret = new MagnificentList(m.getId(), m.getName(), m.getDescription(), m.getPrincipal());
-        return ret;
     }
 
     private MagnificentListModel domainToModel(MagnificentList m, List<Item> items) {
@@ -95,11 +80,7 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
         for (Item item : items) {
             ret.addItem(domainToItem(item));
         }
-        return ret;
-    }
 
-    private Item itemToDomain(int listId, ItemModel m) {
-        Item ret = new Item(m.getId(), listId, m.getName(), m.getDescription(), m.getPrincipal());
         return ret;
     }
 
@@ -111,6 +92,4 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
         ret.setPrincipal(m.getPrincipal());
         return ret;
     }
-
-
 }

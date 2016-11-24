@@ -3,15 +3,13 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
     <import resource="listman-services.xml"/>
     <import resource="listman-dao.xml"/>
     <import resource="dataSource.xml"/>
     <import resource="i18n.xml"/>
     <import resource="security.xml"/>
 
-    <bean id="listModelService"
-          class="cz.profinit.training.springadvanced.security.service.impl.MagnificentListModelServiceImpl">
+    <bean id="listModelService" class="cz.profinit.training.springadvanced.security.service.impl.MagnificentListModelServiceImpl">
         <constructor-arg name="magnificentListService" ref="listService"/>
     </bean>
 

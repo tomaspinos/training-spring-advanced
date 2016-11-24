@@ -5,16 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-
-    <!--<security:ldap-server ldif="classpath:users.ldif" port="33389"/>-->
-
     <security:authentication-manager>
-        <!--<security:ldap-authentication-provider
-                group-search-filter="member={0}"
-                group-search-base="ou=groups"
-                user-search-base="ou=people"
-                user-search-filter="uid={0}"
-                />-->
         <security:authentication-provider>
             <security:user-service>
                 <security:user name="tom" password="tom" authorities="ROLE_USER, ROLE_ADMIN"/>
@@ -38,12 +29,10 @@
         <security:session-management session-authentication-strategy-ref="sessionStrategy"/>
 
         <security:intercept-url pattern="/**" access="ROLE_USER"/>
-
     </security:http>
 
     <!-- Session Authentication Strategy -->
-    <bean id="sessionStrategy"
-          class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+    <bean id="sessionStrategy" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
         <property name="migrateSessionAttributes" value="false"/>
     </bean>
 
