@@ -36,6 +36,7 @@ public class BasicTelegramApplication {
         return f -> f
                 .split(String.class, s -> s.split(" "))
                 .<String, String>transform(String::toUpperCase)
+                // Consumer<AggregatorSpec> aggregator
                 .aggregate(aggregator -> aggregator
                         .outputProcessor(group -> group
                                 .getMessages().stream()

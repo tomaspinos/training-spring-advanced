@@ -1,7 +1,7 @@
 package cz.profinit.training.springadvanced.integration;
 
-import java.io.OutputStream;
-
+import cz.profinit.training.springadvanced.integration.support.DefaultLocalDateTimeProvider;
+import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,8 +12,7 @@ import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.stream.ByteStreamWritingMessageHandler;
 
-import cz.profinit.training.springadvanced.integration.support.DefaultLocalDateTimeProvider;
-import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
+import java.io.OutputStream;
 
 /**
  * Flow accepts {@link String} message and prepends time and "Hello " to it.
@@ -31,6 +30,9 @@ public class HelloWorldApplication {
         ctx.close();
     }
 
+    /**
+     * "helloWorldFlow.input" = the input channel
+     */
     @Bean
     public IntegrationFlow helloWorldFlow(final LocalDateTimeProvider localDateTimeProvider, final OutputStream outputStream) {
         return f -> f

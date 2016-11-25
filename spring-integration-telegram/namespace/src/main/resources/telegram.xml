@@ -7,13 +7,24 @@
                            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
                            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
-    <file:inbound-channel-adapter channel="inputFiles" directory="c:/temp/telegram-input" filename-pattern="*.txt" prevent-duplicates="true">
-        <int:poller id="poller" fixed-delay="1000"/>
+    <file:inbound-channel-adapter channel="inputFiles"
+                                  directory="c:/temp/telegram-input"
+                                  filename-pattern="*.txt"
+                                  prevent-duplicates="true">
+        <int:poller fixed-delay="1000"/>
     </file:inbound-channel-adapter>
 
     <int:channel id="inputFiles"/>
 
-    <file:file-to-string-transformer input-channel="inputFiles" output-channel="inputStrings"/>
+    <file:file-to-string-transformer input-channel="inputFiles" output-channel="inputFilesAsStrings"/>
+
+    <int:channel id="inputFilesAsStrings"/>
+
+    <int:splitter input-channel="inputFilesAsStrings" output-channel="inputStrings">
+        <bean class="org.springframework.integration.splitter.DefaultMessageSplitter">
+            <property name="delimiters" value="&#13;&#10;"/>
+        </bean>
+    </int:splitter>
 
     <int:transformer input-channel="inputStrings" output-channel="telegrams">
         <bean class="cz.profinit.training.springadvanced.integration.TelegramTransformer"/>
@@ -21,6 +32,11 @@
 
     <int:channel id="telegrams"/>
 
-    <file:outbound-channel-adapter channel="telegrams" directory="c:/temp/telegram-output" delete-source-files="true"/>
+    <file:outbound-channel-adapter channel="telegrams"
+                                   directory="c:/temp/telegram-output"
+                                   delete-source-files="true"
+                                   filename-generator-expression=
+                                           "new java.text.SimpleDateFormat('yyyyMMddHHmmssSSS').format(new java.util.Date())
+                                           + '.' + headers['id'] + '.txt'"/>
 
 </beans>
