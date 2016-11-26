@@ -3,6 +3,7 @@ package cz.profinit.training.springadvanced.integration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
@@ -52,25 +53,27 @@ public class TelegramLambdaProcess {
     }
 
     @Bean
-    public FlowConfiguration configuration() {
-        return new FlowConfiguration("c:/temp/telegram-input", "c:/temp/telegram-output");
+    public FlowConfiguration configuration(Environment environment) {
+        return new FlowConfiguration(
+                environment.getProperty("input", "c:/temp/telegram-input"),
+                environment.getProperty("output", "c:/temp/telegram-output"));
     }
 
-    public static class FlowConfiguration {
+    private static class FlowConfiguration {
 
         private final String inputFolder;
         private final String outputFolder;
 
-        public FlowConfiguration(String inputFolder, String outputFolder) {
+        private FlowConfiguration(String inputFolder, String outputFolder) {
             this.inputFolder = inputFolder;
             this.outputFolder = outputFolder;
         }
 
-        public String getInputFolder() {
+        private String getInputFolder() {
             return inputFolder;
         }
 
-        public String getOutputFolder() {
+        private String getOutputFolder() {
             return outputFolder;
         }
     }
