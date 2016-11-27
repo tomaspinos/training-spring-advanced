@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.integration;
+package cz.profinit.training.springadvanced.integration.txt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,9 @@ import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.messaging.MessageHeaders;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -47,7 +49,7 @@ public class TelegramLambdaProcess {
                 .handleWithAdapter(a -> a.file(new File(configuration.getOutputFolder()))
                         .deleteSourceFiles(true)
                         .fileNameGenerator(m ->
-                                new java.text.SimpleDateFormat("yyyyMMddHHmmssSSS").format(new java.util.Date())
+                                new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())
                                         + "." + m.getHeaders().get(MessageHeaders.ID) + ".txt"))
                 .get();
     }

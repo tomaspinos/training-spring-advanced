@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.integration;
+package cz.profinit.training.springadvanced.integration.txt;
 
 import org.junit.Before;
 import org.junit.Test;
