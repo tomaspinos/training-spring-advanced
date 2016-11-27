@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,8 +35,8 @@ public class TelegramLambdaProcessTest {
 
     @Before
     public void setUp() throws Exception {
-        createFolder(INPUT_FOLDER);
-        createFolder(OUTPUT_FOLDER);
+        createFolder(Paths.get(INPUT_FOLDER));
+        createFolder(Paths.get(OUTPUT_FOLDER));
     }
 
     @Test
@@ -52,12 +53,10 @@ public class TelegramLambdaProcessTest {
     private void verifyTelegramsHasBeenProcessed(List<String> lines) throws Exception {
         final int[] telegramCount = {0};
 
-        Files.walk(Paths.get(OUTPUT_FOLDER)).forEach(path -> {
+        withTelegramFiles(path -> {
             try {
-                if (!Files.isDirectory(path)) {
-                    assertEquals("Each output file contains 1 telegram", 1, Files.readAllLines(path).size());
-                    telegramCount[0]++;
-                }
+                assertEquals("Each output file contains 1 telegram", 1, Files.lines(path).count());
+                telegramCount[0]++;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,20 +78,25 @@ public class TelegramLambdaProcessTest {
         return allLines;
     }
 
-    private void createFolder(String folderPath) throws Exception {
-        Path path = Paths.get(folderPath);
+    private void withTelegramFiles(Consumer<Path> consumer) throws IOException {
+        Files.walk(Paths.get(OUTPUT_FOLDER)).filter(path -> !Files.isDirectory(path)).forEach(consumer);
+    }
+
+    private void createFolder(Path path) throws Exception {
         if (Files.exists(path)) {
-            Files.walk(path).forEach(p -> {
-                try {
-                    if (!Files.isDirectory(p)) {
-                        Files.delete(p);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            Files.delete(path);
+            deleteFolder(path);
         }
         Files.createDirectories(path);
+    }
+
+    private void deleteFolder(Path path) throws IOException {
+        Files.walk(path).filter(p -> !Files.isDirectory(p)).forEach(p -> {
+            try {
+                Files.delete(p);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        Files.delete(path);
     }
 }
