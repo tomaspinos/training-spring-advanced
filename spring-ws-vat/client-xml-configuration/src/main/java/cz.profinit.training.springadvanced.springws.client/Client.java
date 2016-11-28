@@ -1,12 +1,13 @@
 package cz.profinit.training.springadvanced.springws.client;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.ws.client.core.WebServiceTemplate;
+import java.io.StringReader;
 
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.StringReader;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.ws.client.core.WebServiceTemplate;
 
 /**
  * Hello world!
@@ -19,16 +20,16 @@ public class Client {
                     "<urn:vatNumber>CZ25650203</urn:vatNumber>\n" +
                     "</urn:checkVat>";
 
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("springws-client-context.xml");
+    public static void main(final String[] args) {
+        final ApplicationContext context = new ClassPathXmlApplicationContext("springws-client-context.xml");
 
         // TODO Obtain the WebServiceTemplate from the application context
         // TODO Implement the service call
 
-        WebServiceTemplate template = context.getBean(WebServiceTemplate.class);
+        final WebServiceTemplate template = context.getBean(WebServiceTemplate.class);
 
-        StreamSource source = new StreamSource(new StringReader(MESSAGE));
-        StreamResult result = new StreamResult(System.out);
+        final StreamSource source = new StreamSource(new StringReader(MESSAGE));
+        final StreamResult result = new StreamResult(System.out);
         template.sendSourceAndReceiveToResult(source, result);
     }
 }

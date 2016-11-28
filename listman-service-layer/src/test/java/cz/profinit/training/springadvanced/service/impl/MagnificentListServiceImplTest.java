@@ -1,9 +1,5 @@
 package cz.profinit.training.springadvanced.service.impl;
 
-import cz.profinit.training.springadvanced.dao.ItemDao;
-import cz.profinit.training.springadvanced.dao.MagnificentListDao;
-import cz.profinit.training.springadvanced.domain.MagnificentList;
-import cz.profinit.training.springadvanced.service.MagnificentListService;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockSupport;
 import org.junit.Before;
@@ -12,6 +8,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import cz.profinit.training.springadvanced.dao.ItemDao;
+import cz.profinit.training.springadvanced.dao.MagnificentListDao;
+import cz.profinit.training.springadvanced.domain.MagnificentList;
+import cz.profinit.training.springadvanced.service.MagnificentListService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -40,7 +41,7 @@ public class MagnificentListServiceImplTest {
     @Test
     public void testSaveNewList() throws Exception {
 
-        MagnificentList list = new MagnificentList(null, "name", "descr", "noname");
+        final MagnificentList list = new MagnificentList(null, "name", "descr", "noname");
 
         listDaoMock.insert(list);
         easyMockSupport.replayAll();
@@ -54,7 +55,7 @@ public class MagnificentListServiceImplTest {
     @Test
     public void testSaveList() throws Exception {
 
-        MagnificentList list = new MagnificentList(1, "name", "descr", "noname");
+        final MagnificentList list = new MagnificentList(1, "name", "descr", "noname");
 
         listDaoMock.update(EasyMock.anyObject(MagnificentList.class));
         easyMockSupport.replayAll();

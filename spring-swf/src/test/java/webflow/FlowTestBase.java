@@ -15,18 +15,18 @@ public abstract class FlowTestBase extends AbstractXmlFlowExecutionTests {
     private final String flowName;
     EasyMockSupport easyMockSupport = new EasyMockSupport();
 
-    protected FlowTestBase(String flowName) {
+    protected FlowTestBase(final String flowName) {
         this.flowName = flowName;
     }
 
     @Override
-    protected FlowDefinitionResource getResource(FlowDefinitionResourceFactory flowDefinitionResourceFactory) {
+    protected FlowDefinitionResource getResource(final FlowDefinitionResourceFactory flowDefinitionResourceFactory) {
         return flowDefinitionResourceFactory.createFileResource(WEBINF + "app/" + flowName);
     }
 
     @Override
-    protected void configureFlowBuilderContext(MockFlowBuilderContext builderContext) {
-        GenericConversionService genericConversionService = (GenericConversionService) builderContext.getConversionService();
+    protected void configureFlowBuilderContext(final MockFlowBuilderContext builderContext) {
+        final GenericConversionService genericConversionService = (GenericConversionService) builderContext.getConversionService();
         genericConversionService.addAlias("dataModel", OneSelectionTrackingListDataModel.class);
         genericConversionService.addConverter(new DataModelConverter());
     }

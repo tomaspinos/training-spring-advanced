@@ -1,7 +1,8 @@
 package cz.profinit.training.springadvanced.springrest.chat.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ChatRating implements Serializable {
@@ -13,7 +14,7 @@ public class ChatRating implements Serializable {
     public ChatRating() {
     }
 
-    public ChatRating(int rating, String username, String note) {
+    public ChatRating(final int rating, final String username, final String note) {
         this.rating = rating;
         this.username = username;
         this.note = note;
@@ -23,7 +24,7 @@ public class ChatRating implements Serializable {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(final int rating) {
         this.rating = rating;
     }
 
@@ -31,7 +32,7 @@ public class ChatRating implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -39,7 +40,7 @@ public class ChatRating implements Serializable {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(final String note) {
         this.note = note;
     }
 

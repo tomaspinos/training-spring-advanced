@@ -11,7 +11,7 @@ public class ItemDetailForm {
         return id;
     }
 
-    public void setId(Integer listId) {
+    public void setId(final Integer listId) {
         this.id = listId;
     }
 
@@ -19,7 +19,7 @@ public class ItemDetailForm {
         return listId;
     }
 
-    public void setListId(Integer listId) {
+    public void setListId(final Integer listId) {
         this.listId = listId;
     }
 
@@ -27,7 +27,7 @@ public class ItemDetailForm {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -35,7 +35,7 @@ public class ItemDetailForm {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 

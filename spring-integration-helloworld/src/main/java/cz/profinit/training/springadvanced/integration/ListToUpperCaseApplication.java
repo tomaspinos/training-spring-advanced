@@ -19,10 +19,10 @@ import org.springframework.integration.dsl.IntegrationFlow;
 @IntegrationComponentScan
 public class ListToUpperCaseApplication {
 
-    public static void main(String[] args) throws InterruptedException {
-        ConfigurableApplicationContext ctx = SpringApplication.run(ListToUpperCaseApplication.class, args);
+    public static void main(final String[] args) throws InterruptedException {
+        final ConfigurableApplicationContext ctx = SpringApplication.run(ListToUpperCaseApplication.class, args);
 
-        List<String> strings = Arrays.asList("foo", "bar", "rum", "gin");
+        final List<String> strings = Arrays.asList("foo", "bar", "rum", "gin");
         System.out.println(ctx.getBean(Upcase.class).upcase(strings));
 
         ctx.close();

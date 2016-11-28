@@ -11,7 +11,7 @@ public class ChatMessage {
     public ChatMessage() {
     }
 
-    public ChatMessage(ChatMessageDirectionType direction, String text) {
+    public ChatMessage(final ChatMessageDirectionType direction, final String text) {
         this.direction = direction;
         this.text = text;
     }
@@ -20,7 +20,7 @@ public class ChatMessage {
         return direction;
     }
 
-    public void setDirection(ChatMessageDirectionType direction) {
+    public void setDirection(final ChatMessageDirectionType direction) {
         this.direction = direction;
     }
 
@@ -28,7 +28,7 @@ public class ChatMessage {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 

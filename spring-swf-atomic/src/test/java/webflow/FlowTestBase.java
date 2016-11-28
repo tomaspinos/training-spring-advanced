@@ -11,12 +11,12 @@ public abstract class FlowTestBase extends AbstractXmlFlowExecutionTests {
     private final String flowName;
     EasyMockSupport easyMockSupport = new EasyMockSupport();
 
-    protected FlowTestBase(String flowName) {
+    protected FlowTestBase(final String flowName) {
         this.flowName = flowName;
     }
 
     @Override
-    protected FlowDefinitionResource getResource(FlowDefinitionResourceFactory flowDefinitionResourceFactory) {
+    protected FlowDefinitionResource getResource(final FlowDefinitionResourceFactory flowDefinitionResourceFactory) {
         return flowDefinitionResourceFactory.createFileResource(WEBINF + "app/" + flowName);
     }
 

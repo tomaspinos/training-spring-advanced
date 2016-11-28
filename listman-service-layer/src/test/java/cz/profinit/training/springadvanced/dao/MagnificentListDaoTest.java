@@ -1,9 +1,10 @@
 package cz.profinit.training.springadvanced.dao;
 
-import cz.profinit.training.springadvanced.domain.MagnificentList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import cz.profinit.training.springadvanced.domain.MagnificentList;
 
 
 public class MagnificentListDaoTest extends AbstractDaoTest {
@@ -13,7 +14,7 @@ public class MagnificentListDaoTest extends AbstractDaoTest {
     @Test
     public void insert() {
 
-        MagnificentList mlist = new MagnificentList(null, "mlist", "descr", "noname");
+        final MagnificentList mlist = new MagnificentList(null, "mlist", "descr", "noname");
         listDao.insert(mlist);
         Assert.assertNotNull(mlist.getId());
     }

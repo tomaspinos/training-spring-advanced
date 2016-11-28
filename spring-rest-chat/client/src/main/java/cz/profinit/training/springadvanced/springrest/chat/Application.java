@@ -12,19 +12,19 @@ import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    public static void main(String args[]) {
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        RestTemplate restTemplate = new RestTemplate();
+    public void run(final String... args) throws Exception {
+        final RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://localhost:8080/chat";
+        final String url = "http://localhost:8080/chat";
 
         System.out.println("Status: " + restTemplate.getForObject(url + "/status", ChatUpdate.class));
 
-        ChatUpdate start = restTemplate.postForObject(url + "/conversation", null, ChatUpdate.class);
+        final ChatUpdate start = restTemplate.postForObject(url + "/conversation", null, ChatUpdate.class);
         System.out.println("Start: " + start);
 
         System.out.println("Send: " + restTemplate.postForObject(url + "/conversation/" + start.getSessionId() + "/message?text=Howdoyoudo", null, ChatUpdate.class));

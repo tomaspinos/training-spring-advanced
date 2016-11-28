@@ -13,7 +13,7 @@ public class ItemModel implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -21,7 +21,7 @@ public class ItemModel implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -29,7 +29,7 @@ public class ItemModel implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -37,7 +37,7 @@ public class ItemModel implements Serializable {
         return principal;
     }
 
-    public void setPrincipal(String principal) {
+    public void setPrincipal(final String principal) {
         this.principal = principal;
     }
 }

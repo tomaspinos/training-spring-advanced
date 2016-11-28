@@ -1,13 +1,14 @@
 package cz.profinit.training.springadvanced.servletapi;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class RequestCounterServlet extends HttpServlet {
 
@@ -16,17 +17,17 @@ public class RequestCounterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WebApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+        final WebApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
 
-        RequestCounterBean sessionRequestCounterBean = applicationContext.getBean("sessionRqCounter", RequestCounterBean.class);
-        RequestCounterBean singletonRequestCounterBean = applicationContext.getBean("singletonRqCounter", RequestCounterBean.class);
-        RequestCounterBean prototypeRequestCounterBean = applicationContext.getBean("prototypeRqCounter", RequestCounterBean.class);
+        final RequestCounterBean sessionRequestCounterBean = applicationContext.getBean("sessionRqCounter", RequestCounterBean.class);
+        final RequestCounterBean singletonRequestCounterBean = applicationContext.getBean("singletonRqCounter", RequestCounterBean.class);
+        final RequestCounterBean prototypeRequestCounterBean = applicationContext.getBean("prototypeRqCounter", RequestCounterBean.class);
 
         response.getWriter().write("Session counter: " + sessionRequestCounterBean.inc() + "\n");
         response.getWriter().write("Singleton counter: " + singletonRequestCounterBean.inc() + "\n");

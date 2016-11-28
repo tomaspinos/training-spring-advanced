@@ -1,5 +1,11 @@
 package cz.profinit.training.springadvanced.integration.txt;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.Collectors;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,23 +18,17 @@ import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.messaging.MessageHeaders;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Collectors;
-
 @SpringBootApplication
 @IntegrationComponentScan
 public class TelegramLambdaProcess {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(TelegramLambdaProcess.class, args);
     }
 
     @Bean
-    public IntegrationFlow integrationFlow(FlowConfiguration configuration) {
-        DefaultMessageSplitter splitter = new DefaultMessageSplitter();
+    public IntegrationFlow integrationFlow(final FlowConfiguration configuration) {
+        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
         splitter.setDelimiters("\r\n");
 
         return IntegrationFlows
@@ -55,7 +55,7 @@ public class TelegramLambdaProcess {
     }
 
     @Bean
-    public FlowConfiguration configuration(Environment environment) {
+    public FlowConfiguration configuration(final Environment environment) {
         return new FlowConfiguration(
                 environment.getProperty("input", "c:/temp/telegram-input"),
                 environment.getProperty("output", "c:/temp/telegram-output"));
@@ -66,7 +66,7 @@ public class TelegramLambdaProcess {
         private final String inputFolder;
         private final String outputFolder;
 
-        private FlowConfiguration(String inputFolder, String outputFolder) {
+        private FlowConfiguration(final String inputFolder, final String outputFolder) {
             this.inputFolder = inputFolder;
             this.outputFolder = outputFolder;
         }

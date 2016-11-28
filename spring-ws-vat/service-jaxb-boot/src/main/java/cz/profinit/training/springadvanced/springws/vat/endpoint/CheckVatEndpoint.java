@@ -27,14 +27,14 @@ public class CheckVatEndpoint {
 
     @PayloadRoot(namespace = "urn:ec.europa.eu:taxud:vies:services:checkVat:types", localPart = "checkVat")
     @ResponsePayload
-    public CheckVatResponse checkVat(@RequestPayload CheckVat request) {
-        VatRegistryRecord record = repository.checkVat(request.getCountryCode(), request.getVatNumber());
+    public CheckVatResponse checkVat(@RequestPayload final CheckVat request) {
+        final VatRegistryRecord record = repository.checkVat(request.getCountryCode(), request.getVatNumber());
 
         // TODO Construct the response
 
-        ObjectFactory objectFactory = new ObjectFactory();
+        final ObjectFactory objectFactory = new ObjectFactory();
 
-        CheckVatResponse response = objectFactory.createCheckVatResponse();
+        final CheckVatResponse response = objectFactory.createCheckVatResponse();
         response.setCountryCode(record.getCountryCode());
         response.setVatNumber(record.getVatNumber());
         response.setValid(true);

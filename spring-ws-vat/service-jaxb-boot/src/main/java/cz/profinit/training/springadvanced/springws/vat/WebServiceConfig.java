@@ -19,16 +19,16 @@ import org.springframework.xml.xsd.XsdSchema;
 public class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
-    public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
-        MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+    public ServletRegistrationBean messageDispatcherServlet(final ApplicationContext applicationContext) {
+        final MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
     @Bean(name = "checkVatService")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema vatSchema) {
-        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    public DefaultWsdl11Definition defaultWsdl11Definition(final XsdSchema vatSchema) {
+        final DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("checkVatPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("urn:ec.europa.eu:taxud:vies:services:checkVat:types");

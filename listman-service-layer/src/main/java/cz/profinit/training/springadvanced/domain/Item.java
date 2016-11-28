@@ -10,7 +10,7 @@ public class Item implements AbstractDomainObject<Integer> {
     Integer id;
 
 
-    public Item(Integer id, Integer listId, String name, String description, String principal) {
+    public Item(final Integer id, final Integer listId, final String name, final String description, final String principal) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -24,7 +24,7 @@ public class Item implements AbstractDomainObject<Integer> {
     }
 
     @Override
-    public void setId(Integer primaryKey) {
+    public void setId(final Integer primaryKey) {
         id = primaryKey;
     }
 

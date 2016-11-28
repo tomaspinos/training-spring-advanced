@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class);
     }
 
@@ -16,8 +16,8 @@ public class Application {
     CommandLineRunner run(final Client client) {
         return new CommandLineRunner() {
             @Override
-            public void run(String... args) throws Exception {
-                String vat = args.length > 0 ? args[0] : "CZ25650203";
+            public void run(final String... args) throws Exception {
+                final String vat = args.length > 0 ? args[0] : "CZ25650203";
 
                 client.checkVat(vat);
             }

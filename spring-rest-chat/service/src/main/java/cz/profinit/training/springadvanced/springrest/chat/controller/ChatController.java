@@ -40,37 +40,37 @@ public class ChatController {
 
     @RequestMapping(value = "/conversation/{sessionId}/message", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ChatUpdate send(@PathVariable String sessionId, @RequestParam String text) {
+    public ChatUpdate send(@PathVariable final String sessionId, @RequestParam final String text) {
         return lifecycle.send(sessionId, text);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}/message/{messageId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ChatUpdate modify(@PathVariable String sessionId, @PathVariable String messageId, @RequestParam String text) {
+    public ChatUpdate modify(@PathVariable final String sessionId, @PathVariable final String messageId, @RequestParam final String text) {
         return lifecycle.modify(sessionId, messageId, text);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}/message/{messageId}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ChatUpdate delete(@PathVariable String sessionId, @PathVariable String messageId) {
+    public ChatUpdate delete(@PathVariable final String sessionId, @PathVariable final String messageId) {
         return lifecycle.delete(sessionId, messageId);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate refresh(@PathVariable String sessionId) {
+    public ChatUpdate refresh(@PathVariable final String sessionId) {
         return lifecycle.refresh(sessionId);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate finish(@PathVariable String sessionId) {
+    public ChatUpdate finish(@PathVariable final String sessionId) {
         return lifecycle.finish(sessionId);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}/rating", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ChatRatingResponse rating(@PathVariable String sessionId, @RequestBody ChatRating rating) {
+    public ChatRatingResponse rating(@PathVariable final String sessionId, @RequestBody final ChatRating rating) {
         return lifecycle.rating(sessionId, rating);
     }
 }

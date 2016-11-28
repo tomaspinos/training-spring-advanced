@@ -17,15 +17,15 @@ public class ChatUpdate implements Serializable {
     public ChatUpdate() {
     }
 
-    public ChatUpdate(ChatStatusType status) {
+    public ChatUpdate(final ChatStatusType status) {
         this(status, null, Collections.emptyList());
     }
 
-    public ChatUpdate(ChatStatusType status, String sessionId, List<ChatMessage> messages) {
+    public ChatUpdate(final ChatStatusType status, final String sessionId, final List<ChatMessage> messages) {
         this(status, sessionId, messages, null);
     }
 
-    public ChatUpdate(ChatStatusType status, String sessionId, List<ChatMessage> messages, String messageId) {
+    public ChatUpdate(final ChatStatusType status, final String sessionId, final List<ChatMessage> messages, final String messageId) {
         this.status = status;
         this.sessionId = sessionId;
         this.messages = messages;
@@ -36,7 +36,7 @@ public class ChatUpdate implements Serializable {
         return status;
     }
 
-    public void setStatus(ChatStatusType status) {
+    public void setStatus(final ChatStatusType status) {
         this.status = status;
     }
 
@@ -44,7 +44,7 @@ public class ChatUpdate implements Serializable {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(final String sessionId) {
         this.sessionId = sessionId;
     }
 
@@ -52,7 +52,7 @@ public class ChatUpdate implements Serializable {
         return messages;
     }
 
-    public void setMessages(List<ChatMessage> messages) {
+    public void setMessages(final List<ChatMessage> messages) {
         this.messages = messages;
     }
 
@@ -60,7 +60,7 @@ public class ChatUpdate implements Serializable {
         return messageId;
     }
 
-    public void setMessageId(String messageId) {
+    public void setMessageId(final String messageId) {
         this.messageId = messageId;
     }
 

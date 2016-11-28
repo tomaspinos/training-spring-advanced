@@ -7,7 +7,7 @@ public class MagnificentList implements AbstractDomainObject<Integer> {
     private final String description;
     private Integer id;
 
-    public MagnificentList(Integer id, String name, String description, String principal) {
+    public MagnificentList(final Integer id, final String name, final String description, final String principal) {
         this.id = id;
         this.principal = principal;
         this.name = name;
@@ -20,7 +20,7 @@ public class MagnificentList implements AbstractDomainObject<Integer> {
     }
 
     @Override
-    public void setId(Integer primaryKey) {
+    public void setId(final Integer primaryKey) {
         id = primaryKey;
     }
 

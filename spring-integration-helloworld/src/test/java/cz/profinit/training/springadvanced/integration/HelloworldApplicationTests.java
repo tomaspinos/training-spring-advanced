@@ -1,6 +1,10 @@
 package cz.profinit.training.springadvanced.integration;
 
-import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.time.LocalDateTime;
-import java.time.Month;
+import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {HelloWorldApplication.class, HelloworldApplicationTests.TestConfiguration.class})
@@ -34,7 +35,7 @@ public class HelloworldApplicationTests {
         }
     }
 
-    private static ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
 	@Autowired
 	private HelloWorldApplication.HelloWorldGateway helloWorldGateway;

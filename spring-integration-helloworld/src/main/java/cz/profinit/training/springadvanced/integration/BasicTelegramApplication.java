@@ -1,5 +1,7 @@
 package cz.profinit.training.springadvanced.integration;
 
+import java.util.stream.Collectors;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -10,8 +12,6 @@ import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.stream.CharacterStreamWritingMessageHandler;
 
-import java.util.stream.Collectors;
-
 /**
  * Flow accepts a sentence ({@link String}, splits it to words, capitalizes them and joins them with " - ".
  * Just like telegrams do.
@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 @IntegrationComponentScan
 public class BasicTelegramApplication {
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(BasicTelegramApplication.class, args);
+    public static void main(final String[] args) {
+        final ConfigurableApplicationContext ctx = SpringApplication.run(BasicTelegramApplication.class, args);
 
-        TelegramGateway gateway = ctx.getBean(TelegramGateway.class);
+        final TelegramGateway gateway = ctx.getBean(TelegramGateway.class);
 
         gateway.send("Calling Occupants of Interplanetary Craft");
 

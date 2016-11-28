@@ -1,7 +1,8 @@
 package cz.profinit.training.springadvanced.springrest.chat.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ChatRatingResponse implements Serializable {
@@ -13,7 +14,7 @@ public class ChatRatingResponse implements Serializable {
     public ChatRatingResponse() {
     }
 
-    public ChatRatingResponse(String sessionId, ChatRating rating, String goodbyeMessage) {
+    public ChatRatingResponse(final String sessionId, final ChatRating rating, final String goodbyeMessage) {
         this.sessionId = sessionId;
         this.rating = rating;
         this.goodbyeMessage = goodbyeMessage;
@@ -23,7 +24,7 @@ public class ChatRatingResponse implements Serializable {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(final String sessionId) {
         this.sessionId = sessionId;
     }
 
@@ -31,7 +32,7 @@ public class ChatRatingResponse implements Serializable {
         return rating;
     }
 
-    public void setRating(ChatRating rating) {
+    public void setRating(final ChatRating rating) {
         this.rating = rating;
     }
 
@@ -39,7 +40,7 @@ public class ChatRatingResponse implements Serializable {
         return goodbyeMessage;
     }
 
-    public void setGoodbyeMessage(String goodbyeMessage) {
+    public void setGoodbyeMessage(final String goodbyeMessage) {
         this.goodbyeMessage = goodbyeMessage;
     }
 

@@ -1,7 +1,8 @@
 package webflow;
 
-import cz.profinit.training.springadvanced.swf.model.MagnificentListModel;
-import cz.profinit.training.springadvanced.swf.service.MagnificentListModelService;
+import java.util.Collections;
+import java.util.List;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 import org.springframework.binding.convert.service.GenericConversionService;
@@ -13,8 +14,8 @@ import org.springframework.webflow.engine.Flow;
 import org.springframework.webflow.test.MockExternalContext;
 import org.springframework.webflow.test.MockFlowBuilderContext;
 
-import java.util.Collections;
-import java.util.List;
+import cz.profinit.training.springadvanced.swf.model.MagnificentListModel;
+import cz.profinit.training.springadvanced.swf.service.MagnificentListModelService;
 
 public class ListsFlowTest extends FlowTestBase {
 
@@ -30,10 +31,10 @@ public class ListsFlowTest extends FlowTestBase {
         magnificentListModelService = easyMockSupport.createMock(MagnificentListModelService.class);
     }
 
-    protected void configureFlowBuilderContext(MockFlowBuilderContext builderContext) {
+    protected void configureFlowBuilderContext(final MockFlowBuilderContext builderContext) {
         builderContext.registerBean("listModelService", magnificentListModelService);
         // TODO: presunout do Base
-        GenericConversionService genericConversionService = (GenericConversionService) builderContext.getConversionService();
+        final GenericConversionService genericConversionService = (GenericConversionService) builderContext.getConversionService();
         genericConversionService.addAlias("dataModel", OneSelectionTrackingListDataModel.class);
         genericConversionService.addConverter(new DataModelConverter());
     }
@@ -41,11 +42,11 @@ public class ListsFlowTest extends FlowTestBase {
 
     @Test
     public void testStartFlow() {
-        List<MagnificentListModel> model = Collections.emptyList();
+        final List<MagnificentListModel> model = Collections.emptyList();
         EasyMock.expect(magnificentListModelService.getLists()).andReturn(model);
         easyMockSupport.replayAll();
 
-        ExternalContext context = new MockExternalContext();
+        final ExternalContext context = new MockExternalContext();
         startFlow(context);
 
         easyMockSupport.verifyAll();
@@ -56,7 +57,7 @@ public class ListsFlowTest extends FlowTestBase {
     @Test
     public void testTransition() {
 
-        List<MagnificentListModel> mlists = Collections.emptyList();
+        final List<MagnificentListModel> mlists = Collections.emptyList();
         EasyMock.expect(magnificentListModelService.getLists()).andReturn(mlists);
         easyMockSupport.replayAll();
 
@@ -67,7 +68,7 @@ public class ListsFlowTest extends FlowTestBase {
 
         getFlowDefinitionRegistry().registerFlowDefinition(createMockExampleSubflow());
 
-        MockExternalContext context = new MockExternalContext();
+        final MockExternalContext context = new MockExternalContext();
         context.setEventId("add-list");
         resumeFlow(context);
 
@@ -77,7 +78,7 @@ public class ListsFlowTest extends FlowTestBase {
 
 
     private Flow createMockExampleSubflow() {
-        Flow mockExampleFlow = new Flow("edit-list");
+        final Flow mockExampleFlow = new Flow("edit-list");
         /* Takhle lze zkontrolovat pripadne vstupy
         mockExampleFlow.setInputMapper(new Mapper() {
             public MappingResults map(Object source, Object target) {

@@ -1,6 +1,8 @@
 package cz.profinit.training.springadvanced.springws.vat.endpoint;
 
-import cz.profinit.training.springadvanced.springws.vat.WebServiceConfig;
+import java.util.Collections;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +15,7 @@ import org.springframework.ws.test.server.RequestCreators;
 import org.springframework.ws.test.server.ResponseMatchers;
 import org.springframework.xml.transform.StringSource;
 
-import java.util.Collections;
-import java.util.Map;
+import cz.profinit.training.springadvanced.springws.vat.WebServiceConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebServiceConfig.class)
@@ -32,13 +33,13 @@ public class CheckVatEndpointTest {
 
     @Test
     public void checkVat1() {
-        StringSource requestPayload = new StringSource(
+        final StringSource requestPayload = new StringSource(
                 "<checkVat xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
                         "   <countryCode>CZ</countryCode>\n" +
                         "   <vatNumber>CZ25650203</vatNumber>\n" +
                         "</checkVat>\n");
 
-        StringSource responsePayload = new StringSource(
+        final StringSource responsePayload = new StringSource(
                 "<checkVatResponse xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
                         "   <countryCode>CZ</countryCode>\n" +
                         "   <vatNumber>CZ25650203</vatNumber>\n" +
@@ -53,13 +54,13 @@ public class CheckVatEndpointTest {
 
     @Test
     public void checkVat2() {
-        StringSource requestPayload = new StringSource(
+        final StringSource requestPayload = new StringSource(
                 "<checkVat xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
                         "   <countryCode>CZ</countryCode>\n" +
                         "   <vatNumber>CZ25650203</vatNumber>\n" +
                         "</checkVat>\n");
 
-        Map<String, String> nsMap = Collections.singletonMap("ns", "urn:ec.europa.eu:taxud:vies:services:checkVat:types");
+        final Map<String, String> nsMap = Collections.singletonMap("ns", "urn:ec.europa.eu:taxud:vies:services:checkVat:types");
 
         mockClient.sendRequest(RequestCreators.withPayload(requestPayload))
                 .andExpect(ResponseMatchers.noFault())

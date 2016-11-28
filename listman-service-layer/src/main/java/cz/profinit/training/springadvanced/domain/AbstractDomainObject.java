@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 public interface AbstractDomainObject<IDT> extends Serializable {
 
-    public IDT getId();
+    IDT getId();
 
-    public void setId(IDT primaryKey);
+    void setId(IDT primaryKey);
 
 }

@@ -1,5 +1,11 @@
 package cz.profinit.training.springadvanced.integration.txtAndXml;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.Collectors;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,23 +20,17 @@ import org.springframework.integration.xml.splitter.XPathMessageSplitter;
 import org.springframework.integration.xml.transformer.XPathTransformer;
 import org.springframework.messaging.MessageHeaders;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Collectors;
-
 @SpringBootApplication
 @IntegrationComponentScan
 public class TelegramTxtAndXmlLambdaProcess {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(TelegramTxtAndXmlLambdaProcess.class, args);
     }
 
     @Bean
-    public IntegrationFlow txtFlow(FlowConfiguration configuration) {
-        DefaultMessageSplitter splitter = new DefaultMessageSplitter();
+    public IntegrationFlow txtFlow(final FlowConfiguration configuration) {
+        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
         splitter.setDelimiters("\r\n");
 
         return IntegrationFlows
@@ -47,7 +47,7 @@ public class TelegramTxtAndXmlLambdaProcess {
     }
 
     @Bean
-    public IntegrationFlow xmlFlow(FlowConfiguration configuration) {
+    public IntegrationFlow xmlFlow(final FlowConfiguration configuration) {
         return IntegrationFlows
                 .from(s -> s.file(new File(configuration.getInputFolder()))
                                 .patternFilter("*.xml")
@@ -61,7 +61,7 @@ public class TelegramTxtAndXmlLambdaProcess {
     }
 
     @Bean
-    public IntegrationFlow telegramFlow(FlowConfiguration configuration) {
+    public IntegrationFlow telegramFlow(final FlowConfiguration configuration) {
         return f -> f
                 .transform(Transformers.<String, String>converter(payload ->
                         Arrays.stream(payload.split(" "))
@@ -77,7 +77,7 @@ public class TelegramTxtAndXmlLambdaProcess {
     }
 
     @Bean
-    public FlowConfiguration configuration(Environment environment) {
+    public FlowConfiguration configuration(final Environment environment) {
         return new FlowConfiguration(
                 environment.getProperty("input", "c:/temp/telegram-input"),
                 environment.getProperty("output", "c:/temp/telegram-output"),
@@ -90,7 +90,7 @@ public class TelegramTxtAndXmlLambdaProcess {
         private final String outputFolder;
         private final int pollerDelay;
 
-        private FlowConfiguration(String inputFolder, String outputFolder, int pollerDelay) {
+        private FlowConfiguration(final String inputFolder, final String outputFolder, final int pollerDelay) {
             this.inputFolder = inputFolder;
             this.outputFolder = outputFolder;
             this.pollerDelay = pollerDelay;
@@ -104,7 +104,7 @@ public class TelegramTxtAndXmlLambdaProcess {
             return outputFolder;
         }
 
-        public int getPollerDelay() {
+        private int getPollerDelay() {
             return pollerDelay;
         }
     }

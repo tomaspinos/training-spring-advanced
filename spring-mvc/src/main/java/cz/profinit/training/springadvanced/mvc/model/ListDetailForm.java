@@ -10,7 +10,7 @@ public class ListDetailForm {
         return listId;
     }
 
-    public void setId(Integer listId) {
+    public void setId(final Integer listId) {
         this.listId = listId;
     }
 
@@ -18,7 +18,7 @@ public class ListDetailForm {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -26,7 +26,7 @@ public class ListDetailForm {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 

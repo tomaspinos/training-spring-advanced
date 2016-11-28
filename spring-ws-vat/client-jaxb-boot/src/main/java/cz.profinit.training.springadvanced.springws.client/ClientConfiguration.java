@@ -9,14 +9,14 @@ public class ClientConfiguration {
 
     @Bean
     public Jaxb2Marshaller marshaller() {
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("eu.europa.ec.taxud.vies.services.checkvat.types");
         return marshaller;
     }
 
     @Bean
-    public Client client(Jaxb2Marshaller marshaller) {
-        Client client = new Client();
+    public Client client(final Jaxb2Marshaller marshaller) {
+        final Client client = new Client();
         client.setDefaultUri("http://localhost:8080/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);

@@ -13,9 +13,9 @@ public class MagnificentListModel implements Serializable {
     private Integer id;
     private String name;
     private String description;
-    private ArrayList<ItemModel> items = new ArrayList<ItemModel>();
+    private final ArrayList<ItemModel> items = new ArrayList<ItemModel>();
 
-    public MagnificentListModel(String principal) {
+    public MagnificentListModel(final String principal) {
         this.principal = principal;
     }
 
@@ -23,7 +23,7 @@ public class MagnificentListModel implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class MagnificentListModel implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -43,7 +43,7 @@ public class MagnificentListModel implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -51,25 +51,25 @@ public class MagnificentListModel implements Serializable {
         return Collections.unmodifiableList(items);
     }
 
-    public void addItem(ItemModel item) {
+    public void addItem(final ItemModel item) {
         items.add(item);
     }
 
-    public void updateItem(ItemModel item) {
-        int idx = getItemIndex(item);
+    public void updateItem(final ItemModel item) {
+        final int idx = getItemIndex(item);
         if (idx != NOT_FOUND) {
             items.set(idx, item);
         }
     }
 
-    public void removeItem(ItemModel item) {
-        int idx = getItemIndex(item);
+    public void removeItem(final ItemModel item) {
+        final int idx = getItemIndex(item);
         if (idx != NOT_FOUND) {
             items.remove(idx);
         }
     }
 
-    private int getItemIndex(ItemModel item) {
+    private int getItemIndex(final ItemModel item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(item.getId())) {
                 return i;
