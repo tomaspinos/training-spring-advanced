@@ -3,19 +3,18 @@
       xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <input name="itemId"/>
-    <input name="listId"/>
+    <input name="item" required="true" type="cz.profinit.training.springadvanced.swf.model.ItemModel"/>
 
     <view-state id="edit-item">
-        <on-entry>
-            <evaluate result="viewScope.item" expression="itemId != null ? modelService.readItem(itemId) : modelService.createItem()"/>
-        </on-entry>
-        <transition on="save" to="end">
-            <evaluate expression="modelService.saveItem(item, listId)"/>
-        </transition>
-        <transition on="cancel" to="end"/>
+        <transition on="save" to="save"/>
+        <transition on="cancel" to="cancel"/>
+
     </view-state>
 
-    <end-state id="end"/>
+    <end-state id="save">
+        <output name="savedItem" value="item"/>
+    </end-state>
+
+    <end-state id="cancel"/>
 
 </flow>

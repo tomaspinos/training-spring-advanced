@@ -18,6 +18,7 @@
             <groupId>spring-advanced</groupId>
             <artifactId>listman-service-layer</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -25,10 +26,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.webflow</groupId>
@@ -56,7 +53,6 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Maven Tomcat Plugin -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>

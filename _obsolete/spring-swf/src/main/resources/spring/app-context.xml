@@ -8,7 +8,7 @@
     <import resource="dataSource.xml"/>
     <import resource="i18n.xml"/>
 
-    <bean id="listModelService" class="cz.profinit.training.springadvanced.swf.service.impl.MagnificentListModelServiceImpl">
+    <bean id="modelService" class="cz.profinit.training.springadvanced.webflow.ModelService">
         <constructor-arg name="magnificentListService" ref="listService"/>
     </bean>
 

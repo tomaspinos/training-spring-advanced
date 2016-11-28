@@ -3,51 +3,46 @@
       xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <var name="mlist" class="cz.profinit.training.springadvanced.swf.model.MagnificentListModel"/>
+
     <input name="listId"/>
 
-    <decision-state id="isNew">
-        <if test="listId == null"
-            then="edit-new-list"
-            else="edit-list"/>
+    <decision-state id="start">
+        <if test="listId==null" then="createNewListModel" else="loadModelFromDb"/>
     </decision-state>
 
+    <action-state id="createNewListModel">
+        <set name="mlist" value="listModelService.createEmptyModel()"/>
+        <transition to="edit-list"/>
+    </action-state>
 
-    <view-state id="edit-new-list" view="edit-list.xhtml">
-        <on-entry>
-            <evaluate result="flowScope.items" expression="T(java.util.Collections).emptyList()"
-                      result-type="dataModel"/>
-            <evaluate result="viewScope.list" expression="modelService.createList()"/>
-        </on-entry>
-        <transition on="add-item" to="add-item"/>
-        <transition on="edit-item" to="edit-item"/>
-        <transition on="save" to="end">
-            <evaluate expression="modelService.saveMList(list)"/>
-        </transition>
-        <transition on="cancel" to="end"/>
-    </view-state>
+    <action-state id="loadModelFromDb">
+        <set name="mlist" value="listModelService.getModel(listId)"/>
+        <transition to="edit-list"/>
+    </action-state>
 
     <view-state id="edit-list">
         <on-entry>
-            <evaluate result="flowScope.items" expression="listService.getListItems(listId)" result-type="dataModel"/>
-            <evaluate result="viewScope.list" expression="modelService.readMlist(listId)"/>
+            <evaluate result="flowScope.items" expression="mlist.items" result-type="dataModel"/>
         </on-entry>
         <transition on="add-item" to="add-item"/>
         <transition on="edit-item" to="edit-item"/>
         <transition on="save" to="end">
-            <evaluate expression="modelService.saveMList(list)"/>
+            <evaluate expression="listModelService.saveModel(mlist)"/>
         </transition>
         <transition on="cancel" to="end"/>
     </view-state>
 
     <subflow-state id="add-item" subflow="edit-item">
-        <input name="listId" value="listId"/>
-        <input name="itemId" value="null"/>
-        <transition to="edit-list"/>
+        <input name="item" value="listModelService.createNewItem()"/>
+        <transition on="save" to="edit-list">
+            <evaluate expression="mlist.addItem(currentEvent.attributes.savedItem)"/>
+        </transition>
+        <transition on="cancel" to="edit-list"/>
     </subflow-state>
 
     <subflow-state id="edit-item" subflow="edit-item">
-        <input name="listId" value="listId"/>
-        <input name="itemId" value="items.selectedRow.id"/>
+        <input name="item" value="items.selectedRow"/>
         <transition to="edit-list"/>
     </subflow-state>
 

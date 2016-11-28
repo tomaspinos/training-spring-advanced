@@ -57,10 +57,10 @@
     </context-param>
 
     <!-- V pripade exception se zobrazi tato stranka -->
-    <error-page>
+    <!--<error-page>
         <error-code>500</error-code>
         <location>/static/error.html</location>
     </error-page>
-
+-->
 
 </web-app>

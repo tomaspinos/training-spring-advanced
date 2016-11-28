@@ -22,9 +22,9 @@
 
         <h:panelGrid id="pageContent" layout="block" columns="2">
             <h:outputLabel>Name</h:outputLabel>
-            <h:inputText id="name" value="#{mlist.name}"/>
+            <h:inputText id="name" value="#{list.name}"/>
             <h:outputLabel>Description</h:outputLabel>
-            <h:inputText id="description" value="#{mlist.description}"/>
+            <h:inputText id="description" value="#{list.description}"/>
         </h:panelGrid>
 
         <h2>List items:</h2>
@@ -42,7 +42,7 @@
             </h:column>
         </h:dataTable>
 
-        <h:commandButton action="add-item" value="Add item"/>
+        <h:commandButton rendered="#{listId!=null}" action="add-item" value="Add item"/>
 
         <h:panelGrid columns="2" styleClass="pgButtons">
             <h:commandButton action="save" value="Save"/>
