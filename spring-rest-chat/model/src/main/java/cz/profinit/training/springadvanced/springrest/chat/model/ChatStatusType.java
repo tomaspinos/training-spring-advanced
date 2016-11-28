@@ -5,5 +5,6 @@ public enum ChatStatusType {
     AVAILABLE,
     UNAVAILABLE,
     RUNNING,
-    FINISHED
+    FINISHED,
+    ERROR
 }

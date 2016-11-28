@@ -5,15 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
 
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class ChatClientApplication implements CommandLineRunner {
 
     public static void main(final String[] args) {
-        SpringApplication.run(Application.class);
+        SpringApplication.run(ChatClientApplication.class);
     }
 
     @Override
@@ -24,6 +22,8 @@ public class Application implements CommandLineRunner {
 
         System.out.println("Status: " + restTemplate.getForObject(url + "/status", ChatUpdate.class));
 
+        restTemplate.getForObject(url + "/conversation/" + "AAA999XXX", ChatUpdate.class);
+/*
         final ChatUpdate start = restTemplate.postForObject(url + "/conversation", null, ChatUpdate.class);
         System.out.println("Start: " + start);
 
@@ -37,5 +37,6 @@ public class Application implements CommandLineRunner {
         restTemplate.delete(url + "/conversation/" + start.getSessionId());
 
         System.out.println("Rating: " + restTemplate.postForObject(url + "/conversation/" + start.getSessionId() + "/rating", new ChatRating(10, "scott", "Rather good"), ChatRatingResponse.class));
+        */
     }
 }

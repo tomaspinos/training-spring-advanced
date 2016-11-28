@@ -1,6 +1,8 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
-import cz.profinit.training.springadvanced.springrest.chat.Application;
+import java.nio.charset.StandardCharsets;
+
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,18 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.nio.charset.StandardCharsets;
-
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import cz.profinit.training.springadvanced.springrest.chat.ChatApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = ChatApplication.class)
 @WebAppConfiguration
 public class ChatControllerTest {
 
@@ -43,39 +42,45 @@ public class ChatControllerTest {
 
     @Test
     public void statusIsOk() throws Exception {
-        mockMvc.perform(get("/chat/status")).
-                andExpect(status().isOk()).
-                andExpect(content().contentType(JSON_UTF8)).
-                andExpect(jsonPath("status", is("AVAILABLE")));
+        mockMvc.perform(MockMvcRequestBuilders.get("/chat/status")).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andExpect(MockMvcResultMatchers.content().contentType(JSON_UTF8)).
+                andExpect(MockMvcResultMatchers.jsonPath("status", Matchers.is("AVAILABLE")));
     }
 
     @Test
     public void statusIsOkXml() throws Exception {
-        mockMvc.perform(get("/chat/status").accept(XML_UTF8)).
-                andExpect(status().isOk()).
-                andExpect(content().contentType(XML_UTF8)).
-                andExpect(xpath("//status").string("AVAILABLE"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/chat/status").accept(XML_UTF8)).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andExpect(MockMvcResultMatchers.content().contentType(XML_UTF8)).
+                andExpect(MockMvcResultMatchers.xpath("//status").string("AVAILABLE"));
     }
 
     @Test
     public void startReturnsSessionIdAndWelcomeMessage() throws Exception {
-        mockMvc.perform(post("/chat/conversation")).
-                andExpect(status().isCreated()).
-                andExpect(content().contentType(JSON_UTF8)).
-                andExpect(jsonPath("sessionId", not(isEmptyOrNullString()))).
-                andExpect(jsonPath("status", is("RUNNING"))).
-                andExpect(jsonPath("messages", hasSize(1))).
-                andExpect(jsonPath("messages[0]", not(isEmptyOrNullString())));
+        mockMvc.perform(MockMvcRequestBuilders.post("/chat/conversation")).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
+                andExpect(MockMvcResultMatchers.content().contentType(JSON_UTF8)).
+                andExpect(MockMvcResultMatchers.jsonPath("sessionId", Matchers.not(Matchers.isEmptyOrNullString()))).
+                andExpect(MockMvcResultMatchers.jsonPath("status", Matchers.is("RUNNING"))).
+                andExpect(MockMvcResultMatchers.jsonPath("messages", Matchers.hasSize(1))).
+                andExpect(MockMvcResultMatchers.jsonPath("messages[0]", Matchers.not(Matchers.isEmptyOrNullString())));
     }
 
     @Test
     public void startReturnsSessionIdAndWelcomeMessageXml() throws Exception {
-        mockMvc.perform(post("/chat/conversation").accept(XML_UTF8)).
-                andExpect(status().isCreated()).
-                andExpect(content().contentType(XML_UTF8)).
-                andExpect(xpath("//sessionId").string(notNullValue())).
-                andExpect(xpath("//status").string("RUNNING")).
-                andExpect(xpath("//messages").nodeCount(1)).
-                andExpect(xpath("//messages[position() = 1]").string(notNullValue()));
+        mockMvc.perform(MockMvcRequestBuilders.post("/chat/conversation").accept(XML_UTF8)).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
+                andExpect(MockMvcResultMatchers.content().contentType(XML_UTF8)).
+                andExpect(MockMvcResultMatchers.xpath("//sessionId").string(Matchers.notNullValue())).
+                andExpect(MockMvcResultMatchers.xpath("//status").string("RUNNING")).
+                andExpect(MockMvcResultMatchers.xpath("//messages").nodeCount(1)).
+                andExpect(MockMvcResultMatchers.xpath("//messages[position() = 1]").string(Matchers.notNullValue()));
+    }
+
+    @Test
+    public void refreshReturnsNotFoundStatusForNonexistingSessionId() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("chat/conversation/XXXERRRORXXX"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }
