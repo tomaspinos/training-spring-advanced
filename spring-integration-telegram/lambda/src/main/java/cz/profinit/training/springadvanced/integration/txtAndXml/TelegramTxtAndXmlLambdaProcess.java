@@ -15,6 +15,7 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.dsl.support.Transformers;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.integration.xml.splitter.XPathMessageSplitter;
 import org.springframework.integration.xml.transformer.XPathTransformer;
@@ -30,9 +31,6 @@ public class TelegramTxtAndXmlLambdaProcess {
 
     @Bean
     public IntegrationFlow txtFlow(final FlowConfiguration configuration) {
-        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
-        splitter.setDelimiters("\r\n");
-
         return IntegrationFlows
                 // MessageSourcesFunction sources, Consumer<SourcePollingChannelAdapterSpec> endpointConfigurer
                 // MessageSources s
@@ -41,7 +39,7 @@ public class TelegramTxtAndXmlLambdaProcess {
                                 .preventDuplicates(),
                         e -> e.poller(Pollers.fixedDelay(configuration.getPollerDelay())))
                 .transform(Transformers.fileToString())
-                .split(splitter)
+                .split(txtSplitter())
                 .channel("telegramFlow.input")
                 .get();
     }
@@ -63,10 +61,12 @@ public class TelegramTxtAndXmlLambdaProcess {
     @Bean
     public IntegrationFlow telegramFlow(final FlowConfiguration configuration) {
         return f -> f
+                .<String>filter(s -> s.trim().length() > 0)
                 .transform(Transformers.<String, String>converter(payload ->
                         Arrays.stream(payload.split(" "))
                                 .map(String::toUpperCase)
                                 .collect(Collectors.joining(" - "))))
+                .wireTap(sf -> sf.handle(loggingHandler()))
                 // Function<Adapters, MessageHandlerSpec<?, H>> adapters
                 // Adapters a
                 .handleWithAdapter(a -> a.file(new File(configuration.getOutputFolder()))
@@ -82,6 +82,20 @@ public class TelegramTxtAndXmlLambdaProcess {
                 environment.getProperty("input", "c:/temp/telegram-input"),
                 environment.getProperty("output", "c:/temp/telegram-output"),
                 environment.getProperty("delay", Integer.class, 1000));
+    }
+
+    @Bean
+    public DefaultMessageSplitter txtSplitter() {
+        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
+        splitter.setDelimiters("\r\n");
+        return splitter;
+    }
+
+    @Bean
+    public LoggingHandler loggingHandler() {
+        final LoggingHandler loggingHandler =  new LoggingHandler(LoggingHandler.Level.INFO.name());
+        loggingHandler.setLoggerName("Telegrams");
+        return loggingHandler;
     }
 
     private static class FlowConfiguration {

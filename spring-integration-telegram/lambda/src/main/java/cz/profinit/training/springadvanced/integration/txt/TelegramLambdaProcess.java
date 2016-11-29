@@ -15,6 +15,7 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.dsl.support.Transformers;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.messaging.MessageHeaders;
 
@@ -28,22 +29,21 @@ public class TelegramLambdaProcess {
 
     @Bean
     public IntegrationFlow integrationFlow(final FlowConfiguration configuration) {
-        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
-        splitter.setDelimiters("\r\n");
-
         return IntegrationFlows
                 // MessageSourcesFunction sources, Consumer<SourcePollingChannelAdapterSpec> endpointConfigurer
                 // MessageSources s
                 .from(s -> s.file(new File(configuration.getInputFolder()))
                                 .patternFilter("*.txt")
                                 .preventDuplicates(),
-                        e -> e.poller(Pollers.fixedDelay(1000)))
+                        e -> e.poller(Pollers.fixedDelay(configuration.getPollerDelay())))
                 .transform(Transformers.fileToString())
-                .split(splitter)
+                .split(txtSplitter())
+                .<String>filter(s -> s.trim().length() > 0)
                 .transform(Transformers.<String, String>converter(payload ->
                         Arrays.stream(payload.split(" "))
                                 .map(String::toUpperCase)
                                 .collect(Collectors.joining(" - "))))
+                .wireTap(sf -> sf.handle(loggingHandler()))
                 // Function<Adapters, MessageHandlerSpec<?, H>> adapters
                 // Adapters a
                 .handleWithAdapter(a -> a.file(new File(configuration.getOutputFolder()))
@@ -58,17 +58,34 @@ public class TelegramLambdaProcess {
     public FlowConfiguration configuration(final Environment environment) {
         return new FlowConfiguration(
                 environment.getProperty("input", "c:/temp/telegram-input"),
-                environment.getProperty("output", "c:/temp/telegram-output"));
+                environment.getProperty("output", "c:/temp/telegram-output"),
+                environment.getProperty("delay", Integer.class, 1000));
+    }
+
+    @Bean
+    public DefaultMessageSplitter txtSplitter() {
+        final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
+        splitter.setDelimiters("\r\n");
+        return splitter;
+    }
+
+    @Bean
+    public LoggingHandler loggingHandler() {
+        final LoggingHandler loggingHandler =  new LoggingHandler(LoggingHandler.Level.INFO.name());
+        loggingHandler.setLoggerName("Telegrams");
+        return loggingHandler;
     }
 
     private static class FlowConfiguration {
 
         private final String inputFolder;
         private final String outputFolder;
+        private final int pollerDelay;
 
-        private FlowConfiguration(final String inputFolder, final String outputFolder) {
+        private FlowConfiguration(final String inputFolder, final String outputFolder, final int pollerDelay) {
             this.inputFolder = inputFolder;
             this.outputFolder = outputFolder;
+            this.pollerDelay = pollerDelay;
         }
 
         private String getInputFolder() {
@@ -77,6 +94,10 @@ public class TelegramLambdaProcess {
 
         private String getOutputFolder() {
             return outputFolder;
+        }
+
+        private int getPollerDelay() {
+            return pollerDelay;
         }
     }
 }
