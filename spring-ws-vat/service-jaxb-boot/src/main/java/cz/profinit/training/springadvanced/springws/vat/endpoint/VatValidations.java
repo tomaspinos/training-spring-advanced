@@ -2,6 +2,9 @@ package cz.profinit.training.springadvanced.springws.vat.endpoint;
 
 import org.springframework.util.StringUtils;
 
+import cz.profinit.training.springadvanced.springws.vat.endpoint.exception.InvalidCountryCodeException;
+import cz.profinit.training.springadvanced.springws.vat.endpoint.exception.InvalidVatNumberException;
+
 public final class VatValidations {
 
     public VatValidations() {

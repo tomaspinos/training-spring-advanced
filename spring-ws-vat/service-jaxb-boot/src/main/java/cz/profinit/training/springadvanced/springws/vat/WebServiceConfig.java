@@ -1,6 +1,8 @@
 package cz.profinit.training.springadvanced.springws.vat;
 
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import java.util.List;
+
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,10 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
+
+import cz.profinit.training.springadvanced.springws.vat.endpoint.interceptor.CountingEndpointInterceptor;
 
 @EnableWs
 @Configuration
@@ -39,5 +44,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public XsdSchema vatSchema() {
         return new SimpleXsdSchema(new ClassPathResource("checkVatService.xsd"));
+    }
+
+    @Override
+    public void addInterceptors(final List<EndpointInterceptor> interceptors) {
+        interceptors.add(new CountingEndpointInterceptor());
     }
 }

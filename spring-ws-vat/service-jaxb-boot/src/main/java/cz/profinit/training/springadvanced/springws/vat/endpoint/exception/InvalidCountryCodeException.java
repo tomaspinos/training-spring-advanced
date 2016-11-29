@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.springws.vat.endpoint;
+package cz.profinit.training.springadvanced.springws.vat.endpoint.exception;
 
 import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;

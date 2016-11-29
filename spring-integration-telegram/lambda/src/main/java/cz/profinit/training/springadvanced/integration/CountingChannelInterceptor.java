@@ -15,7 +15,7 @@ public class CountingChannelInterceptor extends ChannelInterceptorAdapter {
 
     private static final Log logger = LogFactory.getLog(CountingChannelInterceptor.class);
 
-    private final AtomicInteger sendCount = new AtomicInteger();
+    private final AtomicInteger sendCount = new AtomicInteger(0);
 
     @Override
     public Message<?> preSend(final Message<?> message, final MessageChannel channel) {
