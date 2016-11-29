@@ -20,6 +20,9 @@ import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.integration.xml.splitter.XPathMessageSplitter;
 import org.springframework.integration.xml.transformer.XPathTransformer;
 import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.ChannelInterceptor;
+
+import cz.profinit.training.springadvanced.integration.CountingChannelInterceptor;
 
 @SpringBootApplication
 @IntegrationComponentScan
@@ -66,6 +69,7 @@ public class TelegramTxtAndXmlLambdaProcess {
                         Arrays.stream(payload.split(" "))
                                 .map(String::toUpperCase)
                                 .collect(Collectors.joining(" - "))))
+                .channel(ch -> ch.direct().interceptor(countingInterceptor()))
                 .wireTap(sf -> sf.handle(loggingHandler()))
                 // Function<Adapters, MessageHandlerSpec<?, H>> adapters
                 // Adapters a
@@ -96,6 +100,11 @@ public class TelegramTxtAndXmlLambdaProcess {
         final LoggingHandler loggingHandler =  new LoggingHandler(LoggingHandler.Level.INFO.name());
         loggingHandler.setLoggerName("Telegrams");
         return loggingHandler;
+    }
+
+    @Bean
+    public ChannelInterceptor countingInterceptor() {
+        return new CountingChannelInterceptor();
     }
 
     private static class FlowConfiguration {

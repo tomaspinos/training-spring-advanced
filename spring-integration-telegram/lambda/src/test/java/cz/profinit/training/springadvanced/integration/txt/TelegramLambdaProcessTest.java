@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import org.junit.Before;
@@ -51,18 +52,18 @@ public class TelegramLambdaProcessTest {
     }
 
     private void verifyTelegramsHasBeenProcessed(final List<String> lines) throws Exception {
-        final int[] telegramCount = {0};
+        final AtomicInteger telegramCount = new AtomicInteger(0);
 
         withTelegramFiles(path -> {
             try {
                 assertEquals("Each output file contains 1 telegram", 1, Files.lines(path).count());
-                telegramCount[0]++;
+                telegramCount.incrementAndGet();
             } catch (final IOException e) {
                 e.printStackTrace();
             }
         });
 
-        assertEquals("Not all telegrams processed", lines.size(), telegramCount[0]);
+        assertEquals("Not all telegrams processed", lines.size(), telegramCount.get());
     }
 
     private List<String> copyInputFilesAndReadAllLines() throws IOException {
