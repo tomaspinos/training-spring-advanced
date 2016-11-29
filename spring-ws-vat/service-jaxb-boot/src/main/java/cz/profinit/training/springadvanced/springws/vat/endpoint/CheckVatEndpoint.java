@@ -28,6 +28,9 @@ public class CheckVatEndpoint {
     @PayloadRoot(namespace = "urn:ec.europa.eu:taxud:vies:services:checkVat:types", localPart = "checkVat")
     @ResponsePayload
     public CheckVatResponse checkVat(@RequestPayload final CheckVat request) {
+        VatValidations.validateCountryCode(request.getCountryCode());
+        VatValidations.validateVatNmber(request.getVatNumber());
+
         final VatRegistryRecord record = repository.checkVat(request.getCountryCode(), request.getVatNumber());
 
         // TODO Construct the response
