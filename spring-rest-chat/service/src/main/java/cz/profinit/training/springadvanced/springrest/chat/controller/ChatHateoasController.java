@@ -1,7 +1,11 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +20,13 @@ import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingRespo
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 
 @RestController
-@RequestMapping("/chat")
-public class ChatController {
+@RequestMapping("/chat-hateoas")
+public class ChatHateoasController {
 
     private final ChatLifecycle lifecycle;
 
     @Autowired
-    public ChatController(final ChatLifecycle lifecycle) {
+    public ChatHateoasController(final ChatLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 
@@ -34,14 +38,32 @@ public class ChatController {
 
     @RequestMapping(value = "/conversation", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public ChatUpdate start() {
-        return lifecycle.start();
+    public ResponseEntity<ChatUpdateResource> start() {
+        final ChatUpdate update = lifecycle.start();
+        final ChatUpdateResource resource = new ChatUpdateResource(update);
+        resource.add(ControllerLinkBuilder.linkTo(
+                ControllerLinkBuilder.methodOn(ChatHateoasController.class).refresh(update.getSessionId())).withSelfRel());
+        return ResponseEntity.created(URI.create(resource.getLink("self").getHref()))
+                .body(resource);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}/message", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ChatUpdate send(@PathVariable final String sessionId, @RequestParam final String text) {
-        return lifecycle.sendMessage(sessionId, text);
+    public ResponseEntity<ChatUpdateResource> send(@PathVariable final String sessionId, @RequestParam final String text) {
+        final ChatUpdate update = lifecycle.sendMessage(sessionId, text);
+        final ChatUpdateResource resource = new ChatUpdateResource(update);
+        resource.add(ControllerLinkBuilder.linkTo(
+                ControllerLinkBuilder.methodOn(ChatHateoasController.class).message(update.getSessionId(), update.getMessageId())).withSelfRel());
+        resource.add(ControllerLinkBuilder.linkTo(
+                ControllerLinkBuilder.methodOn(ChatHateoasController.class).refresh(update.getSessionId())).withRel("conversation"));
+        return ResponseEntity.created(URI.create(resource.getLink("self").getHref()))
+                .body(resource);
+    }
+
+    @RequestMapping(value = "/conversation/{sessionId}/message/{messageId}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ChatUpdate message(@PathVariable final String sessionId, @PathVariable final String messageId) {
+        return lifecycle.getMessage(sessionId, messageId);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}/message/{messageId}", method = RequestMethod.PUT)
@@ -58,8 +80,12 @@ public class ChatController {
 
     @RequestMapping(value = "/conversation/{sessionId}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate refresh(@PathVariable final String sessionId) {
-        return lifecycle.refresh(sessionId);
+    public ResponseEntity<ChatUpdateResource> refresh(@PathVariable final String sessionId) {
+        final ChatUpdate update = lifecycle.refresh(sessionId);
+        final ChatUpdateResource resource = new ChatUpdateResource(update);
+        resource.add(ControllerLinkBuilder.linkTo(
+                ControllerLinkBuilder.methodOn(ChatHateoasController.class).refresh(sessionId)).withSelfRel());
+        return ResponseEntity.ok(resource);
     }
 
     @RequestMapping(value = "/conversation/{sessionId}", method = RequestMethod.DELETE)

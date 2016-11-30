@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatMessage;
@@ -44,54 +46,62 @@ public class ChatLifecycle {
             "Enough is enough"
     };
 
+    private static final Log logger = LogFactory.getLog(ChatLifecycle.class);
+
     private final Set<String> runningSessionIds = new HashSet<>();
     private final Set<String> deletedSessionIds = new HashSet<>();
 
     private final Random random = new Random();
 
     public ChatUpdate status() {
-        System.out.println("ChatLifecycle.status");
+        logger.info("status");
         return new ChatUpdate(AVAILABLE);
     }
 
     public ChatUpdate start() {
-        System.out.println("ChatLifecycle.start");
+        logger.info("start");
         return new ChatUpdate(RUNNING, createSession(), singletonList(new ChatMessage(INCOMING, randomWelcomeMessage())));
     }
 
-    public ChatUpdate send(final String sessionId, final String text) {
-        System.out.println("ChatLifecycle.send");
+    public ChatUpdate sendMessage(final String sessionId, final String text) {
+        logger.info("send");
         verifySessionIsRunning(sessionId);
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, text)), randomMessageId());
     }
 
-    public ChatUpdate modify(final String sessionId, final String messageId, final String text) {
-        System.out.println("ChatLifecycle.modify");
+    public ChatUpdate getMessage(final String sessionId, final String messageId) {
+        logger.info("getMessage");
+        verifySessionIsRunning(sessionId);
+        return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, "Censored")), messageId);
+    }
+
+    public ChatUpdate modifyMessage(final String sessionId, final String messageId, final String text) {
+        logger.info("modify");
         verifySessionIsRunning(sessionId);
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, text)), messageId);
     }
 
-    public ChatUpdate delete(final String sessionId, final String messageId) {
-        System.out.println("ChatLifecycle.delete");
+    public ChatUpdate deleteMessage(final String sessionId, final String messageId) {
+        logger.info("delete");
         verifySessionIsRunning(sessionId);
         return new ChatUpdate(RUNNING, sessionId, Collections.emptyList(), messageId);
     }
 
     public ChatUpdate refresh(final String sessionId) {
-        System.out.println("ChatLifecycle.refresh");
+        logger.info("refresh");
         verifySessionIsRunning(sessionId);
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(INCOMING, randomIncomingMessage())));
     }
 
     public ChatUpdate finish(final String sessionId) {
-        System.out.println("ChatLifecycle.finish");
+        logger.info("finish");
         verifySessionIsRunning(sessionId);
         deleteSession(sessionId);
         return new ChatUpdate(FINISHED, sessionId, singletonList(new ChatMessage(INCOMING, randomGoodbyeMessage())));
     }
 
     public ChatRatingResponse rating(final String sessionId, final ChatRating rating) {
-        System.out.println("ChatLifecycle.rating");
+        logger.info("rating");
         verifySessionIsRunningOrDeleted(sessionId);
         return new ChatRatingResponse(sessionId, rating, randomGoodbyeMessage());
     }
