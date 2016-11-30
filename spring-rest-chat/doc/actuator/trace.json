@@ -1,0 +1,505 @@
+[
+  {
+    "timestamp": 1480538021827,
+    "info": {
+      "method": "POST",
+      "path": "/chat/conversation/4F4QAI6FLGBG/rating",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "content-type": "application/xml",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "content-length": "149"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "202"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021785,
+    "info": {
+      "method": "DELETE",
+      "path": "/chat/conversation/4F4QAI6FLGBG",
+      "headers": {
+        "request": {
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+          "connection": "keep-alive"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021779,
+    "info": {
+      "method": "GET",
+      "path": "/chat/conversation/4F4QAI6FLGBG",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021775,
+    "info": {
+      "method": "GET",
+      "path": "/chat/conversation/4F4QAI6FLGBG",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021769,
+    "info": {
+      "method": "GET",
+      "path": "/chat/conversation/4F4QAI6FLGBG",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021763,
+    "info": {
+      "method": "POST",
+      "path": "/chat/conversation/4F4QAI6FLGBG/message",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "content-type": "application/x-www-form-urlencoded",
+          "content-length": "0"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "202"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021754,
+    "info": {
+      "method": "POST",
+      "path": "/chat/conversation",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "content-type": "application/x-www-form-urlencoded",
+          "content-length": "0"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "201"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480538021644,
+    "info": {
+      "method": "GET",
+      "path": "/chat/status",
+      "headers": {
+        "request": {
+          "accept": "application/xml, text/xml, application/json, application/*+xml, application/*+json",
+          "user-agent": "Java/1.8.0_66",
+          "host": "localhost:8080",
+          "connection": "keep-alive"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/xml",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:33:41 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537662466,
+    "info": {
+      "method": "GET",
+      "path": "/configprops",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:27:42 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537646791,
+    "info": {
+      "method": "GET",
+      "path": "/autoconfig",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:27:26 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537588133,
+    "info": {
+      "method": "GET",
+      "path": "/metrics",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:26:28 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537581774,
+    "info": {
+      "method": "GET",
+      "path": "/trace",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:26:21 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537554257,
+    "info": {
+      "method": "GET",
+      "path": "/env",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:25:54 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537527065,
+    "info": {
+      "method": "GET",
+      "path": "/actuator",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:25:27 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537468859,
+    "info": {
+      "method": "GET",
+      "path": "/health",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:24:28 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537413372,
+    "info": {
+      "method": "GET",
+      "path": "/mappings",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:23:33 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537410355,
+    "info": {
+      "method": "GET",
+      "path": "/mapping",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "status": "404"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537402256,
+    "info": {
+      "method": "GET",
+      "path": "/beans",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:23:22 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537344345,
+    "info": {
+      "method": "GET",
+      "path": "/health",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Content-Type": "application/json;charset=UTF-8",
+          "Transfer-Encoding": "chunked",
+          "Date": "Wed, 30 Nov 2016 20:22:24 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537329917,
+    "info": {
+      "method": "GET",
+      "path": "/favicon.ico",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "*/*",
+          "referer": "http://localhost:8080/chat",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "Last-Modified": "Mon, 26 Sep 2016 20:08:05 GMT",
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "Content-Length": "946",
+          "Date": "Wed, 30 Nov 2016 20:22:09 GMT",
+          "status": "200"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": 1480537329303,
+    "info": {
+      "method": "GET",
+      "path": "/chat",
+      "headers": {
+        "request": {
+          "host": "localhost:8080",
+          "connection": "keep-alive",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "accept-encoding": "gzip, deflate, sdch, br",
+          "accept-language": "cs,en-US;q=0.8,en;q=0.6,sk;q=0.4"
+        },
+        "response": {
+          "X-Application-Context": "application",
+          "status": "404"
+        }
+      }
+    }
+  }
+]
