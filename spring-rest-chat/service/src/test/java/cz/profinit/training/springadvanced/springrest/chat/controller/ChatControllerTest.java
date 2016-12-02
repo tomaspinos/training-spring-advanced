@@ -1,7 +1,6 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
-import java.nio.charset.StandardCharsets;
-
+import cz.profinit.training.springadvanced.springrest.chat.ChatServiceApplication;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +16,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import cz.profinit.training.springadvanced.springrest.chat.ChatApplication;
+import java.nio.charset.StandardCharsets;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ChatApplication.class)
+@SpringBootTest(classes = ChatServiceApplication.class)
 @WebAppConfiguration
 public class ChatControllerTest {
 

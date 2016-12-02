@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChatApplication {
+public class ChatServiceApplication {
 
     public static void main(final String[] args) {
-        SpringApplication.run(ChatApplication.class, args);
+        SpringApplication.run(ChatServiceApplication.class, args);
     }
 }

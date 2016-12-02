@@ -1,0 +1,52 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost:8080/actuator"
+    },
+    {
+      "rel": "metrics",
+      "href": "http://localhost:8080/metrics"
+    },
+    {
+      "rel": "info",
+      "href": "http://localhost:8080/info"
+    },
+    {
+      "rel": "health",
+      "href": "http://localhost:8080/health"
+    },
+    {
+      "rel": "heapdump",
+      "href": "http://localhost:8080/heapdump"
+    },
+    {
+      "rel": "autoconfig",
+      "href": "http://localhost:8080/autoconfig"
+    },
+    {
+      "rel": "dump",
+      "href": "http://localhost:8080/dump"
+    },
+    {
+      "rel": "mappings",
+      "href": "http://localhost:8080/mappings"
+    },
+    {
+      "rel": "trace",
+      "href": "http://localhost:8080/trace"
+    },
+    {
+      "rel": "beans",
+      "href": "http://localhost:8080/beans"
+    },
+    {
+      "rel": "env",
+      "href": "http://localhost:8080/env"
+    },
+    {
+      "rel": "configprops",
+      "href": "http://localhost:8080/configprops"
+    }
+  ]
+}

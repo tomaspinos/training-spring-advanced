@@ -1,0 +1,143 @@
+{
+  "/webjars/**": {
+    "bean": "resourceHandlerMapping"
+  },
+  "/**": {
+    "bean": "resourceHandlerMapping"
+  },
+  "/**/favicon.ico": {
+    "bean": "faviconHandlerMapping"
+  },
+  "{[/chat/conversation/{sessionId}/message/{messageId}],methods=[DELETE]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.delete(java.lang.String,java.lang.String)"
+  },
+  "{[/chat/conversation],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.start()"
+  },
+  "{[/chat/status],methods=[GET]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.status()"
+  },
+  "{[/chat/conversation/{sessionId}],methods=[GET]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.refresh(java.lang.String)"
+  },
+  "{[/chat/conversation/{sessionId}],methods=[DELETE]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.finish(java.lang.String)"
+  },
+  "{[/chat/conversation/{sessionId}/message],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.send(java.lang.String,java.lang.String)"
+  },
+  "{[/chat/conversation/{sessionId}/rating],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.rating(java.lang.String,cz.profinit.training.springadvanced.springrest.chat.model.ChatRating)"
+  },
+  "{[/chat/conversation/{sessionId}/message/{messageId}],methods=[PUT]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatController.modify(java.lang.String,java.lang.String,java.lang.String)"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}/message/{messageId}],methods=[DELETE]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.delete(java.lang.String,java.lang.String)"
+  },
+  "{[/chat-hateoas/conversation],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public org.springframework.http.ResponseEntity<cz.profinit.training.springadvanced.springrest.chat.controller.ChatUpdateResource> cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.start()"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}/message/{messageId}],methods=[GET]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.message(java.lang.String,java.lang.String)"
+  },
+  "{[/chat-hateoas/status],methods=[GET]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.status()"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}],methods=[GET]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public org.springframework.http.ResponseEntity<cz.profinit.training.springadvanced.springrest.chat.controller.ChatUpdateResource> cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.refresh(java.lang.String)"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}],methods=[DELETE]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.finish(java.lang.String)"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}/message],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public org.springframework.http.ResponseEntity<cz.profinit.training.springadvanced.springrest.chat.controller.ChatUpdateResource> cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.send(java.lang.String,java.lang.String)"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}/rating],methods=[POST]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.rating(java.lang.String,cz.profinit.training.springadvanced.springrest.chat.model.ChatRating)"
+  },
+  "{[/chat-hateoas/conversation/{sessionId}/message/{messageId}],methods=[PUT]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate cz.profinit.training.springadvanced.springrest.chat.controller.ChatHateoasController.modify(java.lang.String,java.lang.String,java.lang.String)"
+  },
+  "{[/error]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)"
+  },
+  "{[/error],produces=[text/html]}": {
+    "bean": "requestMappingHandlerMapping",
+    "method": "public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)"
+  },
+  "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)"
+  },
+  "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/health || /health.json],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)"
+  },
+  "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/dump || /dump.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/trace || /trace.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/env/{name:.*}],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)"
+  },
+  "{[/env || /env.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/info || /info.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/heapdump || /heapdump.json],methods=[GET],produces=[application/octet-stream]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public void org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint.invoke(boolean,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,javax.servlet.ServletException"
+  },
+  "{[/actuator || /actuator.json],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public org.springframework.hateoas.ResourceSupport org.springframework.boot.actuate.endpoint.mvc.HalJsonMvcEndpoint.links()"
+  },
+  "{[/beans || /beans.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  },
+  "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}": {
+    "bean": "endpointHandlerMapping",
+    "method": "public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()"
+  }
+}
