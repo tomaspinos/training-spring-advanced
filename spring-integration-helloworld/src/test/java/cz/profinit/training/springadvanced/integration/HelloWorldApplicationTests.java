@@ -18,8 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {HelloWorldApplication.class, HelloworldApplicationTests.TestConfiguration.class})
-public class HelloworldApplicationTests {
+@SpringBootTest(classes = {HelloWorldApplication.class, HelloWorldApplicationTests.TestConfiguration.class})
+public class HelloWorldApplicationTests {
 
     @Configuration
     public static class TestConfiguration {

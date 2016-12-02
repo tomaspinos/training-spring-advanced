@@ -14,6 +14,7 @@
         <module>spring-advanced-parent</module>
         <module>listman-service-layer</module>
         <module>servlet-api</module>
+        <module>spring-warmup</module>
         <module>spring-mvc</module>
         <module>spring-swf</module>
         <module>spring-security</module>
