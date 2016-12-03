@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:urn="urn:ec.europa.eu:taxud:vies:services:checkVat:types">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <urn:checkVatResponse>
+            <urn:countryCode>CZ</urn:countryCode>
+            <urn:vatNumber>CZ25650203</urn:vatNumber>
+            <urn:requestDate>2016-03-22</urn:requestDate>
+            <urn:valid>true</urn:valid>
+            <urn:name>Profinit, s.r.o.</urn:name>
+            <urn:address>Tychonova 2, 160 00 Praha 6</urn:address>
+        </urn:checkVatResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
