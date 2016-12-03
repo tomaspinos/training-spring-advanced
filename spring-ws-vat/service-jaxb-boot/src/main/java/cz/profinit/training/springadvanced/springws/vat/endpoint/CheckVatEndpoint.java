@@ -48,4 +48,14 @@ public class CheckVatEndpoint {
 
         return response;
     }
+
+    /*
+    Mapping with @XPathParam
+
+    @PayloadRoot(namespace = "urn:ec.europa.eu:taxud:vies:services:checkVat:types", localPart = "checkVat")
+    @Namespace(prefix = "urn", uri = "urn:ec.europa.eu:taxud:vies:services:checkVat:types")
+    @ResponsePayload
+    public CheckVatResponse checkVat(final @XPathParam("/urn:checkVat/urn:countryCode") String countryCode,
+                                     final @XPathParam("/urn:checkVat/urn:vatNumber") String vatNumber) {
+     */
 }
