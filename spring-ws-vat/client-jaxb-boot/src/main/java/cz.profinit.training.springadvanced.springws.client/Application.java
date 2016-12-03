@@ -14,13 +14,10 @@ public class Application {
 
     @Bean
     CommandLineRunner run(final Client client) {
-        return new CommandLineRunner() {
-            @Override
-            public void run(final String... args) throws Exception {
-                final String vat = args.length > 0 ? args[0] : "CZ25650203";
+        return args -> {
+            final String vat = args.length > 0 ? args[0] : "CZ25650203";
 
-                client.checkVat(vat);
-            }
+            client.checkVat(vat);
         };
     }
 }

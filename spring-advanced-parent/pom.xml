@@ -7,7 +7,7 @@
 
     <groupId>spring-advanced</groupId>
     <artifactId>spring-advanced-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -21,7 +21,7 @@
             <dependency>
                 <groupId>spring-advanced</groupId>
                 <artifactId>listman-service-layer</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.spring.platform</groupId>
@@ -76,7 +76,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
