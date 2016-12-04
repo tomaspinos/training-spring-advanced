@@ -1,6 +1,4 @@
-package cz.profinit.training.springadvanced.integration;
-
-import java.util.stream.Collectors;
+package cz.profinit.training.springadvanced.integration.basictelegram;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +9,8 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.stream.CharacterStreamWritingMessageHandler;
+
+import java.util.stream.Collectors;
 
 /**
  * Flow accepts a sentence ({@link String}, splits it to words, capitalizes them and joins them with " - ".

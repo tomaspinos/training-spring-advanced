@@ -79,7 +79,7 @@ public class ChatControllerTest {
 
     @Test
     public void refreshReturnsNotFoundStatusForNonexistingSessionId() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("chat/conversation/XXXERRRORXXX"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/chat/conversation/XXXERRRORXXX"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }

@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.integration;
+package cz.profinit.training.springadvanced.integration.helloworld;
 
 import cz.profinit.training.springadvanced.integration.support.DefaultLocalDateTimeProvider;
 import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
