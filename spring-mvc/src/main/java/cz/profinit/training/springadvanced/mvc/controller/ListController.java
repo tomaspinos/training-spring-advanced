@@ -1,5 +1,10 @@
 package cz.profinit.training.springadvanced.mvc.controller;
 
+import cz.profinit.training.springadvanced.domain.Item;
+import cz.profinit.training.springadvanced.domain.MagnificentList;
+import cz.profinit.training.springadvanced.mvc.model.ItemDetailForm;
+import cz.profinit.training.springadvanced.mvc.model.ListDetailForm;
+import cz.profinit.training.springadvanced.service.MagnificentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cz.profinit.training.springadvanced.domain.Item;
-import cz.profinit.training.springadvanced.domain.MagnificentList;
-import cz.profinit.training.springadvanced.mvc.model.ItemDetailForm;
-import cz.profinit.training.springadvanced.mvc.model.ListDetailForm;
-import cz.profinit.training.springadvanced.service.MagnificentListService;
+import java.util.List;
 
 @Controller
 @RequestMapping("/list")
@@ -49,23 +50,23 @@ public class ListController {
         return "redirect:/list";
     }
 
-    @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
-    public ModelAndView getListItems(@PathVariable final Integer listId) {
-        return new ModelAndView("listdetailview").
-                addObject("items", listService.getListItems(listId)).
-                addObject("mlist", listService.getList(listId));
+    // TODO /{listId}
+    public ModelAndView getListItems(final Integer listId) {
+        List<Item> items = listService.getListItems(listId);
+        MagnificentList mlist = listService.getList(listId);
+        return new ModelAndView("listdetailview");
     }
 
-    @RequestMapping(value = "/{listId}/addItem", method = RequestMethod.GET)
-    public ModelAndView addItem(@PathVariable final Integer listId) {
-        return new ModelAndView("edititemview").
-                addObject("command", new Item(null, listId, "", "", null));
+    // TODO /{listId}/addItem
+    public ModelAndView addItem(final Integer listId) {
+        Item command = new Item(null, listId, "", "", null);
+        return new ModelAndView("edititemview");
     }
 
-    @RequestMapping("/{listId}/editItem/{itemId}")
-    public ModelAndView editItem(@PathVariable final Integer itemId) {
-        return new ModelAndView("edititemview").
-                addObject("command", listService.getItem(itemId));
+    // TODO /{listId}/editItem/{itemId}
+    public ModelAndView editItem(final Integer itemId) {
+        Item command = listService.getItem(itemId);
+        return new ModelAndView("edititemview");
     }
 
     @RequestMapping(value = "/{listId}/saveItem", method = RequestMethod.POST)
