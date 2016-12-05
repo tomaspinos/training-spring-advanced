@@ -3,12 +3,6 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="sessionRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"
-          scope="session"/>
-
-    <bean id="singletonRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"/>
-
-    <bean id="prototypeRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"
-          scope="prototype"/>
+    <!--TODO-->
 
 </beans>
