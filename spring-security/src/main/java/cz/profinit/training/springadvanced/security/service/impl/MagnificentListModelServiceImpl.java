@@ -1,22 +1,20 @@
 package cz.profinit.training.springadvanced.security.service.impl;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
-
 import cz.profinit.training.springadvanced.domain.Item;
 import cz.profinit.training.springadvanced.domain.MagnificentList;
 import cz.profinit.training.springadvanced.security.model.ItemModel;
 import cz.profinit.training.springadvanced.security.model.MagnificentListModel;
 import cz.profinit.training.springadvanced.security.service.MagnificentListModelService;
 import cz.profinit.training.springadvanced.service.MagnificentListService;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+// TODO Add security annotations
 public class MagnificentListModelServiceImpl implements MagnificentListModelService {
 
     private final MagnificentListService magnificentListService;
@@ -27,7 +25,7 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
 
     @Override
     @Transactional(readOnly = true)
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
+    // TODO Allowed for both roles
     public List<MagnificentListModel> getLists() {
         return magnificentListService.getLists().stream()
                 .map(ml -> domainToModel(ml, Collections.emptyList()))
@@ -36,14 +34,15 @@ public class MagnificentListModelServiceImpl implements MagnificentListModelServ
 
     @Override
     @Transactional(readOnly = true)
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
+    // TODO Allowed for both roles
     public MagnificentListModel getModel(final int listId) {
         return domainToModel(magnificentListService.getList(listId), magnificentListService.getListItems(listId));
     }
 
     @Override
     @Transactional
-    @PreAuthorize("hasRole('ROLE_ADMIN') or principal.username.equals(#model.principal)")
+    // TODO Phase1: Allowed for ADMIN
+    // TODO Phase2: Allowed for ADMIN and the user who created the list
     public void saveModel(final MagnificentListModel model) {
         final Map<Integer, Item> dbItemsMap = getDbItemsMap(model);
 
