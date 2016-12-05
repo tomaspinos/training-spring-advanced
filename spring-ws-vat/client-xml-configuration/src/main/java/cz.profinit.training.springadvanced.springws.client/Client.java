@@ -1,17 +1,8 @@
 package cz.profinit.training.springadvanced.springws.client;
 
-import java.io.StringReader;
-
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.ws.client.core.WebServiceTemplate;
 
-/**
- * Hello world!
- */
 public class Client {
 
     private static final String MESSAGE =
@@ -25,11 +16,5 @@ public class Client {
 
         // TODO Obtain the WebServiceTemplate from the application context
         // TODO Implement the service call
-
-        final WebServiceTemplate template = context.getBean(WebServiceTemplate.class);
-
-        final StreamSource source = new StreamSource(new StringReader(MESSAGE));
-        final StreamResult result = new StreamResult(System.out);
-        template.sendSourceAndReceiveToResult(source, result);
     }
 }
