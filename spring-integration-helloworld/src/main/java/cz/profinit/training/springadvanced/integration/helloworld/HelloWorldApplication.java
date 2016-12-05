@@ -1,16 +1,11 @@
 package cz.profinit.training.springadvanced.integration.helloworld;
 
-import cz.profinit.training.springadvanced.integration.support.DefaultLocalDateTimeProvider;
-import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.stream.ByteStreamWritingMessageHandler;
 
 import java.io.OutputStream;
 
@@ -34,16 +29,9 @@ public class HelloWorldApplication {
      * "helloWorldFlow.input" = the input channel
      */
     @Bean
-    public IntegrationFlow helloWorldFlow(final LocalDateTimeProvider localDateTimeProvider, final OutputStream outputStream) {
-        return f -> f
-                .transform(String.class, s -> localDateTimeProvider.get() + " Hello " + s + "\n")
-                .<String, String>transform(String::toUpperCase)
-                .handle(new ByteStreamWritingMessageHandler(outputStream));
-    }
-
-    @Bean
-    public LocalDateTimeProvider localDateTimeProvider() {
-        return new DefaultLocalDateTimeProvider();
+    public IntegrationFlow helloWorldFlow(final OutputStream outputStream) {
+        // TODO return f -> f...
+        return null;
     }
 
     @Bean
@@ -51,10 +39,11 @@ public class HelloWorldApplication {
         return System.out;
     }
 
-    @MessagingGateway
+    /**
+     * TODO Annotate gateway class and method.
+     */
     public interface HelloWorldGateway {
 
-        @Gateway(requestChannel = "helloWorldFlow.input")
         void place(String input);
     }
 }

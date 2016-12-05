@@ -4,9 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
 
 import java.util.Arrays;
@@ -28,16 +26,16 @@ public class ListToUpperCaseApplication {
 
     @Bean
     public IntegrationFlow upcase() {
-        return f -> f
-                .split()
-                .<String, String>transform(String::toUpperCase)
-                .aggregate();
+        // TODO return f -> f...
+        // TODO use split() and aggregate()
+        return null;
     }
 
-    @MessagingGateway
+    /**
+     * TODO Annotate gateway class and method.
+     */
     public interface UpcaseGateway {
 
-        @Gateway(requestChannel = "upcase.input")
         Collection<String> upcase(Collection<String> strings);
     }
 }

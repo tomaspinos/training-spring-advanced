@@ -1,11 +1,6 @@
 package cz.profinit.training.springadvanced.integration.txtAndXml;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Collectors;
-
+import cz.profinit.training.springadvanced.integration.CountingChannelInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +12,14 @@ import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.splitter.DefaultMessageSplitter;
-import org.springframework.integration.xml.splitter.XPathMessageSplitter;
-import org.springframework.integration.xml.transformer.XPathTransformer;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.ChannelInterceptor;
 
-import cz.profinit.training.springadvanced.integration.CountingChannelInterceptor;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @IntegrationComponentScan
@@ -41,9 +38,7 @@ public class TelegramTxtAndXmlLambdaProcess {
                                 .patternFilter("*.txt")
                                 .preventDuplicates(),
                         e -> e.poller(Pollers.fixedDelay(configuration.getPollerDelay())))
-                .transform(Transformers.fileToString())
-                .split(txtSplitter())
-                .channel("telegramFlow.input")
+                // TODO
                 .get();
     }
 
@@ -54,10 +49,7 @@ public class TelegramTxtAndXmlLambdaProcess {
                                 .patternFilter("*.xml")
                                 .preventDuplicates(),
                         e -> e.poller(Pollers.fixedDelay(configuration.getPollerDelay())))
-                .transform(Transformers.fileToString())
-                .split(new XPathMessageSplitter("/telegrams/telegram"))
-                .transform(new XPathTransformer("/telegram/text()"))
-                .channel("telegramFlow.input")
+                // TODO
                 .get();
     }
 
@@ -69,8 +61,6 @@ public class TelegramTxtAndXmlLambdaProcess {
                         Arrays.stream(payload.split(" "))
                                 .map(String::toUpperCase)
                                 .collect(Collectors.joining(" - "))))
-                .channel(ch -> ch.direct().interceptor(countingInterceptor()))
-                .wireTap(sf -> sf.handle(loggingHandler()))
                 // Function<Adapters, MessageHandlerSpec<?, H>> adapters
                 // Adapters a
                 .handleWithAdapter(a -> a.file(new File(configuration.getOutputFolder()))

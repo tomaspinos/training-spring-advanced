@@ -14,29 +14,6 @@
         <int:poller fixed-delay="1000"/>
     </file:inbound-channel-adapter>
 
-    <int:channel id="inputFiles"/>
-
-    <file:file-to-string-transformer input-channel="inputFiles" output-channel="inputFilesAsStrings"/>
-
-    <int:channel id="inputFilesAsStrings"/>
-
-    <int:splitter input-channel="inputFilesAsStrings" output-channel="inputStrings">
-        <bean class="org.springframework.integration.splitter.DefaultMessageSplitter">
-            <property name="delimiters" value="&#13;&#10;"/>
-        </bean>
-    </int:splitter>
-
-    <int:transformer input-channel="inputStrings" output-channel="telegrams">
-        <bean class="cz.profinit.training.springadvanced.integration.TelegramTransformer"/>
-    </int:transformer>
-
-    <int:channel id="telegrams"/>
-
-    <file:outbound-channel-adapter channel="telegrams"
-                                   directory="c:/temp/telegram-output"
-                                   delete-source-files="true"
-                                   filename-generator-expression=
-                                           "new java.text.SimpleDateFormat('yyyyMMddHHmmssSSS').format(new java.util.Date())
-                                           + '.' + headers['id'] + '.txt'"/>
+    // TODO
 
 </beans>

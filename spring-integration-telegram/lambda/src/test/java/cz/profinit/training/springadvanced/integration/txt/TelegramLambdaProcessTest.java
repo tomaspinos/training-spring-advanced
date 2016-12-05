@@ -1,14 +1,5 @@
 package cz.profinit.training.springadvanced.integration.txt;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -44,7 +44,7 @@ public class TelegramLambdaProcessTest {
     public void testCompleteFlow() throws Exception {
         final List<String> lines = copyInputFilesAndReadAllLines();
 
-        TelegramLambdaProcess.main(new String[]{"--input=" + INPUT_FOLDER, "--output=" + OUTPUT_FOLDER});
+        // TODO run telegram process
 
         Thread.sleep(2000);
 

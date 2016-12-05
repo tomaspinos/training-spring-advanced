@@ -1,11 +1,6 @@
 package cz.profinit.training.springadvanced.integration.txt;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Collectors;
-
+import cz.profinit.training.springadvanced.integration.CountingChannelInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,13 +9,11 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
-import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.splitter.DefaultMessageSplitter;
-import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.ChannelInterceptor;
 
-import cz.profinit.training.springadvanced.integration.CountingChannelInterceptor;
+import java.io.File;
 
 @SpringBootApplication
 @IntegrationComponentScan
@@ -39,22 +32,7 @@ public class TelegramLambdaProcess {
                                 .patternFilter("*.txt")
                                 .preventDuplicates(),
                         e -> e.poller(Pollers.fixedDelay(configuration.getPollerDelay())))
-                .transform(Transformers.fileToString())
-                .split(txtSplitter())
-                .<String>filter(s -> s.trim().length() > 0)
-                .transform(Transformers.<String, String>converter(payload ->
-                        Arrays.stream(payload.split(" "))
-                                .map(String::toUpperCase)
-                                .collect(Collectors.joining(" - "))))
-                .channel(ch -> ch.direct().interceptor(countingInterceptor()))
-                .wireTap(sf -> sf.handle(loggingHandler()))
-                // Function<Adapters, MessageHandlerSpec<?, H>> adapters
-                // Adapters a
-                .handleWithAdapter(a -> a.file(new File(configuration.getOutputFolder()))
-                        .deleteSourceFiles(true)
-                        .fileNameGenerator(m ->
-                                new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())
-                                        + "." + m.getHeaders().get(MessageHeaders.ID) + ".txt"))
+                // TODO
                 .get();
     }
 
