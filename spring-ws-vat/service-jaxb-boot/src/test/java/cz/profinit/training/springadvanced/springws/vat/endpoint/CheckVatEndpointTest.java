@@ -1,8 +1,6 @@
 package cz.profinit.training.springadvanced.springws.vat.endpoint;
 
-import java.util.Collections;
-import java.util.Map;
-
+import cz.profinit.training.springadvanced.springws.vat.WebServiceConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ws.test.server.MockWebServiceClient;
-import org.springframework.ws.test.server.RequestCreators;
-import org.springframework.ws.test.server.ResponseMatchers;
 import org.springframework.xml.transform.StringSource;
 
-import cz.profinit.training.springadvanced.springws.vat.WebServiceConfig;
+import java.util.Collections;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebServiceConfig.class)
@@ -48,8 +45,7 @@ public class CheckVatEndpointTest {
                         "   <address>Tychonova 2, 160 00 Praha 6</address>\n" +
                         "</checkVatResponse>\n");
 
-        mockClient.sendRequest(RequestCreators.withPayload(requestPayload))
-                .andExpect(ResponseMatchers.payload(responsePayload));
+        // TODO
     }
 
     @Test
@@ -62,14 +58,5 @@ public class CheckVatEndpointTest {
 
         final Map<String, String> nsMap = Collections.singletonMap("ns", "urn:ec.europa.eu:taxud:vies:services:checkVat:types");
 
-        mockClient.sendRequest(RequestCreators.withPayload(requestPayload))
-                .andExpect(ResponseMatchers.noFault())
-                .andExpect(ResponseMatchers.xpath("/ns:checkVatResponse", nsMap).exists())
-                .andExpect(ResponseMatchers.xpath("//ns:countryCode", nsMap).evaluatesTo("CZ"))
-                .andExpect(ResponseMatchers.xpath("//ns:vatNumber", nsMap).evaluatesTo("CZ25650203"))
-                .andExpect(ResponseMatchers.xpath("//ns:valid", nsMap).evaluatesTo(true))
-                .andExpect(ResponseMatchers.xpath("//ns:name", nsMap).evaluatesTo("Profinit, s.r.o."))
-                .andExpect(ResponseMatchers.xpath("//ns:address", nsMap).evaluatesTo("Tychonova 2, 160 00 Praha 6"))
-                .andExpect(ResponseMatchers.xpath("//ns:requestDate", nsMap).doesNotExist());
     }
 }
