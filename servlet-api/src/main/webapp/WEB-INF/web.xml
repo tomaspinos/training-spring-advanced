@@ -6,10 +6,6 @@
 
     <display-name>Servlet API Lab</display-name>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/request-counter-context.xml</param-value>
-    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -18,12 +14,12 @@
     </listener>
 
     <servlet>
-        <servlet-name>RqCounter</servlet-name>
+        <servlet-name>rqcounter</servlet-name>
         <servlet-class>cz.profinit.training.springadvanced.servletapi.RequestCounterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RqCounter</servlet-name>
-        <url-pattern>/RqCounter</url-pattern>
+        <servlet-name>rqcounter</servlet-name>
+        <url-pattern>/rqcounter</url-pattern>
     </servlet-mapping>
 
 </web-app>

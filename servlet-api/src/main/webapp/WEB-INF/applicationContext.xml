@@ -6,8 +6,7 @@
     <bean id="sessionRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"
           scope="session"/>
 
-    <bean id="singletonRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"
-          scope="singleton"/>
+    <bean id="singletonRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"/>
 
     <bean id="prototypeRqCounter" class="cz.profinit.training.springadvanced.servletapi.RequestCounterBean"
           scope="prototype"/>

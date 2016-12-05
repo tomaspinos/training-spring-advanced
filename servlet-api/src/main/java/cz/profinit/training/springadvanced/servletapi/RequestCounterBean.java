@@ -1,11 +1,13 @@
 package cz.profinit.training.springadvanced.servletapi;
 
-public class RequestCounterBean {
+import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 
-    int counter = 0;
+public class RequestCounterBean implements Serializable {
 
-    public synchronized int inc() {
-        return counter++;
+    private final AtomicInteger counter = new AtomicInteger(0);
+
+    public int inc() {
+        return counter.incrementAndGet();
     }
-
 }
