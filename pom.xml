@@ -15,9 +15,12 @@
         <module>listman-service-layer</module>
         <module>servlet-api</module>
         <module>spring-warmup</module>
+        <module>spring-ws-vat</module>
+        <module>spring-rest-chat</module>
+        <module>spring-integration-helloworld</module>
+        <module>spring-integration-telegram</module>
         <module>spring-mvc</module>
         <module>spring-swf</module>
-        <module>spring-security</module>
     </modules>
 
     <build>

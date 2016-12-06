@@ -28,7 +28,7 @@
 
         <security:session-management session-authentication-strategy-ref="sessionStrategy"/>
 
-        <security:intercept-url pattern="/**" access="ROLE_USER"/>
+        <security:intercept-url pattern="/cz/profinit/training/springadvanced" access="ROLE_USER"/>
     </security:http>
 
     <!-- Session Authentication Strategy -->
