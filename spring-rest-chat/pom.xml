@@ -21,6 +21,7 @@
     <modules>
         <module>model</module>
         <module>service</module>
+        <module>service-secured</module>
         <module>client</module>
     </modules>
 
