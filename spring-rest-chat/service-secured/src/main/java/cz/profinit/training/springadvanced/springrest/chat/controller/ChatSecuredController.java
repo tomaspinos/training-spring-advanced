@@ -1,9 +1,5 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
-import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatSecuredLifecycle;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatSecuredLifecycle;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 
 @RestController
 @RequestMapping("/chat")
@@ -41,19 +42,19 @@ public class ChatSecuredController {
     }
 
     @PostMapping("/conversation/{sessionId}/message")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ChatUpdate send(@PathVariable final String sessionId, @RequestParam final String text) {
         return lifecycle.sendMessage(sessionId, text);
     }
 
     @PutMapping("/conversation/{sessionId}/message/{messageId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public ChatUpdate modify(@PathVariable final String sessionId, @PathVariable final String messageId, @RequestParam final String text) {
         return lifecycle.modifyMessage(sessionId, messageId, text);
     }
 
     @DeleteMapping("/conversation/{sessionId}/message/{messageId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public ChatUpdate delete(@PathVariable final String sessionId, @PathVariable final String messageId) {
         return lifecycle.deleteMessage(sessionId, messageId);
     }
@@ -71,7 +72,7 @@ public class ChatSecuredController {
     }
 
     @PostMapping("/conversation/{sessionId}/rating")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ChatRatingResponse rating(@PathVariable final String sessionId, @RequestBody final ChatRating rating) {
         return lifecycle.rating(sessionId, rating);
     }

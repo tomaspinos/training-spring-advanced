@@ -20,7 +20,6 @@
         <module>spring-integration-helloworld</module>
         <module>spring-integration-telegram</module>
         <module>spring-mvc</module>
-        <module>spring-swf</module>
     </modules>
 
     <build>

@@ -66,22 +66,19 @@ public class TelegramLambdaProcess {
                 environment.getProperty("delay", Integer.class, 1000));
     }
 
-    @Bean
-    public DefaultMessageSplitter txtSplitter() {
+    private DefaultMessageSplitter txtSplitter() {
         final DefaultMessageSplitter splitter = new DefaultMessageSplitter();
         splitter.setDelimiters("\r\n");
         return splitter;
     }
 
-    @Bean
-    public LoggingHandler loggingHandler() {
+    private LoggingHandler loggingHandler() {
         final LoggingHandler loggingHandler =  new LoggingHandler(LoggingHandler.Level.INFO.name());
         loggingHandler.setLoggerName("Telegrams");
         return loggingHandler;
     }
 
-    @Bean
-    public ChannelInterceptor countingInterceptor() {
+    private ChannelInterceptor countingInterceptor() {
         return new CountingChannelInterceptor();
     }
 

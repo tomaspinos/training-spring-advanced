@@ -12,20 +12,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER").and()
                 .withUser("admin").password("password").roles("USER", "ADMIN");
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/chat/conversation/**").hasRole("USER")
                 .antMatchers(HttpMethod.PUT, "/chat/conversation/*/message/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/chat/conversation/*/message/*").hasRole("ADMIN")
+                .antMatchers("/chat/conversation/**").hasRole("USER")
                 .and()
                 .csrf().disable();
     }

@@ -20,9 +20,12 @@ import cz.profinit.training.springadvanced.service.MagnificentListService;
 @RequestMapping("/list")
 public class ListController {
 
+    private final MagnificentListService listService;
+
     @Autowired
-    @Qualifier(value = "listService")
-    private MagnificentListService listService;
+    public ListController(final @Qualifier(value = "listService") MagnificentListService listService) {
+        this.listService = listService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getLists() {
