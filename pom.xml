@@ -11,16 +11,20 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-advanced-parent</module>
         <module>listman-service-layer</module>
         <module>servlet-api</module>
-        <module>spring-warmup</module>
-        <module>spring-ws-vat</module>
-        <module>spring-rest-chat</module>
+        <module>spring-advanced-parent</module>
         <module>spring-integration-helloworld</module>
         <module>spring-integration-telegram</module>
         <module>spring-mvc</module>
+        <module>spring-rest-chat</module>
+        <module>spring-warmup</module>
+        <module>spring-ws-vat</module>
     </modules>
+
+    <properties>
+        <spring.version>5.0.0.RC3</spring.version>
+    </properties>
 
     <build>
         <plugins>
