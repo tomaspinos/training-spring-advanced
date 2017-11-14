@@ -1,25 +1,22 @@
 package cz.profinit.training.springadvanced.springrest.chat.lifecycle;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatMessage;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatMessage;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.INCOMING;
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.OUTGOING;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.AVAILABLE;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.FINISHED;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.RUNNING;
+import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.*;
 import static java.util.Collections.singletonList;
 
 @Component
@@ -60,36 +57,42 @@ public class ChatLifecycle {
 
     public ChatUpdate start() {
         logger.info("start");
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, createSession(), singletonList(new ChatMessage(INCOMING, randomWelcomeMessage())));
     }
 
     public ChatUpdate sendMessage(final String sessionId, final String text) {
         logger.info("send");
         verifySessionIsRunning(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, text)), randomMessageId());
     }
 
     public ChatUpdate getMessage(final String sessionId, final String messageId) {
         logger.info("getMessage");
         verifySessionIsRunning(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, "Censored")), messageId);
     }
 
     public ChatUpdate modifyMessage(final String sessionId, final String messageId, final String text) {
         logger.info("modify");
         verifySessionIsRunning(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(OUTGOING, text)), messageId);
     }
 
     public ChatUpdate deleteMessage(final String sessionId, final String messageId) {
         logger.info("delete");
         verifySessionIsRunning(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, sessionId, Collections.emptyList(), messageId);
     }
 
     public ChatUpdate refresh(final String sessionId) {
         logger.info("refresh");
         verifySessionIsRunning(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(RUNNING, sessionId, singletonList(new ChatMessage(INCOMING, randomIncomingMessage())));
     }
 
@@ -97,12 +100,14 @@ public class ChatLifecycle {
         logger.info("finish");
         verifySessionIsRunning(sessionId);
         deleteSession(sessionId);
+        sleepForAWhile();
         return new ChatUpdate(FINISHED, sessionId, singletonList(new ChatMessage(INCOMING, randomGoodbyeMessage())));
     }
 
     public ChatRatingResponse rating(final String sessionId, final ChatRating rating) {
         logger.info("rating");
         verifySessionIsRunningOrDeleted(sessionId);
+        sleepForAWhile();
         return new ChatRatingResponse(sessionId, rating, randomGoodbyeMessage());
     }
 
@@ -147,5 +152,13 @@ public class ChatLifecycle {
 
     private String randomGoodbyeMessage() {
         return GOODBYE_MESSAGES[random.nextInt(GOODBYE_MESSAGES.length)];
+    }
+
+    private void sleepForAWhile() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            logger.warn("Interrupted", e);
+        }
     }
 }
