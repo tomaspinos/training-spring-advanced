@@ -16,7 +16,9 @@ import java.util.Set;
 
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.INCOMING;
 import static cz.profinit.training.springadvanced.springrest.chat.model.ChatMessageDirectionType.OUTGOING;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.*;
+import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.AVAILABLE;
+import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.FINISHED;
+import static cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType.RUNNING;
 import static java.util.Collections.singletonList;
 
 @Component
@@ -156,7 +158,7 @@ public class ChatLifecycle {
 
     private void sleepForAWhile() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             logger.warn("Interrupted", e);
         }

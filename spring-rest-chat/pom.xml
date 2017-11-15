@@ -22,8 +22,10 @@
 
     <modules>
         <module>model</module>
+        <module>engine</module>
         <module>service</module>
         <module>service-secured</module>
+        <module>service-reactive</module>
         <module>client</module>
         <module>client-reactive</module>
     </modules>

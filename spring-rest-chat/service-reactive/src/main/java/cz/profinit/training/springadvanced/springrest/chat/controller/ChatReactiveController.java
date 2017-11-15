@@ -9,68 +9,57 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/chat")
-public class ChatController {
+public class ChatReactiveController {
 
     private final ChatLifecycle lifecycle;
 
-    public ChatController(final ChatLifecycle lifecycle) {
+    public ChatReactiveController(final ChatLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 
     @GetMapping("/status")
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate status() {
-        return lifecycle.status();
+    public Mono<ChatUpdate> status() {
+        return Mono.just(lifecycle.status());
     }
 
     @PostMapping("/conversation")
     @ResponseStatus(HttpStatus.CREATED)
-    public ChatUpdate start() {
-        return lifecycle.start();
+    public Mono<ChatUpdate> start() {
+        return Mono.just(lifecycle.start());
     }
 
     @PostMapping("/conversation/{sessionId}/message")
     @ResponseStatus(HttpStatus.CREATED)
-    public ChatUpdate send(@PathVariable final String sessionId, @RequestParam final String text) {
-        return lifecycle.sendMessage(sessionId, text);
-    }
-
-    @PutMapping("/conversation/{sessionId}/message/{messageId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate modify(@PathVariable final String sessionId, @PathVariable final String messageId, @RequestParam final String text) {
-        return lifecycle.modifyMessage(sessionId, messageId, text);
-    }
-
-    @DeleteMapping("/conversation/{sessionId}/message/{messageId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate delete(@PathVariable final String sessionId, @PathVariable final String messageId) {
-        return lifecycle.deleteMessage(sessionId, messageId);
+    public Mono<ChatUpdate> send(@PathVariable final String sessionId, @RequestParam final String text) {
+        return Mono.just(lifecycle.sendMessage(sessionId, text));
     }
 
     @GetMapping("/conversation/{sessionId}")
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate refresh(@PathVariable final String sessionId) {
-        return lifecycle.refresh(sessionId);
+    public Flux<ChatUpdate> refresh(@PathVariable final String sessionId) {
+        return Flux.just(lifecycle.refresh(sessionId));
     }
 
     @DeleteMapping("/conversation/{sessionId}")
     @ResponseStatus(HttpStatus.OK)
-    public ChatUpdate finish(@PathVariable final String sessionId) {
-        return lifecycle.finish(sessionId);
+    public Mono<ChatUpdate> finish(@PathVariable final String sessionId) {
+        return Mono.just(lifecycle.finish(sessionId));
     }
 
     @PostMapping("/conversation/{sessionId}/rating")
     @ResponseStatus(HttpStatus.CREATED)
-    public ChatRatingResponse rating(@PathVariable final String sessionId, @RequestBody final ChatRating rating) {
-        return lifecycle.rating(sessionId, rating);
+    public Mono<ChatRatingResponse> rating(@PathVariable final String sessionId, @RequestBody final ChatRating rating) {
+        return Mono.just(lifecycle.rating(sessionId, rating));
     }
 }
