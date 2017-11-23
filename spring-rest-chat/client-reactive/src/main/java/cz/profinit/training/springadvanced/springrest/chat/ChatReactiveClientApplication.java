@@ -43,6 +43,7 @@ public class ChatReactiveClientApplication {
             System.out.println("Refresh " + i + ": " + update);
         }
 
+        // curl http://localhost:8080/chat/conversation/stream/VSKVDJVQT0GS -i -H "Accept: application/stream+json"
         webClient.get()
                 .uri("/conversation/stream/{sessionId}", start.getSessionId())
                 .accept(MediaType.APPLICATION_STREAM_JSON)
