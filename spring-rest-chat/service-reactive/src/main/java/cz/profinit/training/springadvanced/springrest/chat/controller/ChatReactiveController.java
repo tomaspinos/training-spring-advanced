@@ -4,7 +4,10 @@ import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatLifecyc
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 @RestController
-@RequestMapping("/chat")
+@RequestMapping(value = "/chat", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_STREAM_JSON_VALUE})
 public class ChatReactiveController {
 
     private final ChatLifecycle lifecycle;
+
+    private static final Logger logger = LoggerFactory.getLogger(ChatReactiveController.class);
 
     public ChatReactiveController(final ChatLifecycle lifecycle) {
         this.lifecycle = lifecycle;
@@ -47,8 +55,17 @@ public class ChatReactiveController {
 
     @GetMapping("/conversation/{sessionId}")
     @ResponseStatus(HttpStatus.OK)
-    public Flux<ChatUpdate> refresh(@PathVariable final String sessionId) {
-        return Flux.just(lifecycle.refresh(sessionId));
+    public Mono<ChatUpdate> refresh(@PathVariable final String sessionId) {
+        logger.info("refresh({})", sessionId);
+        return Mono.just(lifecycle.refresh(sessionId));
+    }
+
+    @GetMapping(value = "/conversation/stream/{sessionId}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<ChatUpdate> updateStream(@PathVariable final String sessionId) {
+        logger.info("updateStream({})", sessionId);
+        return Flux.interval(Duration.of(2, ChronoUnit.SECONDS))
+                .map(l -> lifecycle.refresh(sessionId));
     }
 
     @DeleteMapping("/conversation/{sessionId}")

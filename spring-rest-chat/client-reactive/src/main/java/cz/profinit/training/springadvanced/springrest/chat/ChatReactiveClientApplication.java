@@ -1,9 +1,7 @@
 package cz.profinit.training.springadvanced.springrest.chat;
 
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
-import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class ChatReactiveClientApplication {
@@ -39,22 +37,30 @@ public class ChatReactiveClientApplication {
             ChatUpdate update = webClient.get()
                     .uri("/conversation/{sessionId}", start.getSessionId())
                     .exchange()
-                    .flatMap(response -> response.bodyToMono(ChatUpdate.class))
-                    .block();
+                    .flatMapMany(response -> response.bodyToMono(ChatUpdate.class))
+                    .blockLast();
 
-            System.out.println("Refresh: " + update);
+            System.out.println("Refresh " + i + ": " + update);
         }
 
-        System.out.println("Finish");
-        webClient.delete().uri("/conversation/{sessionId}", start.getSessionId()).exchange().block();
-
-        ChatRatingResponse rating = webClient.post()
-                .uri("/conversation/{sessionId}/rating", start.getSessionId())
-                .body(BodyInserters.fromObject(new ChatRating(10, "scott", "Rather good")))
+        webClient.get()
+                .uri("/conversation/stream/{sessionId}", start.getSessionId())
+                .accept(MediaType.APPLICATION_STREAM_JSON)
                 .exchange()
-                .flatMap(response -> response.bodyToMono(ChatRatingResponse.class))
-                .block();
+                .subscribe(response -> System.out.println("Refresh from stream: " + response.bodyToMono(ChatUpdate.class).block()));
 
-        System.out.println("Rating: " + rating);
+        Thread.sleep(10000);
+//        System.out.println("Finish");
+//        webClient.delete().uri("/conversation/{sessionId}", start.getSessionId()).exchange().block();
+//
+//        ChatRatingResponse rating = webClient.post()
+//                .uri("/conversation/{sessionId}/rating", start.getSessionId())
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(BodyInserters.fromObject(new ChatRating(10, "scott", "Rather good")))
+//                .exchange()
+//                .flatMap(response -> response.bodyToMono(ChatRatingResponse.class))
+//                .block();
+//
+//        System.out.println("Rating: " + rating);
     }
 }
