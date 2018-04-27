@@ -20,6 +20,7 @@
         <module>spring-rest-chat</module>
         <module>spring-warmup</module>
         <module>spring-ws-vat</module>
+        <module>reactive-twitter-top-words</module>
     </modules>
 
     <properties>
