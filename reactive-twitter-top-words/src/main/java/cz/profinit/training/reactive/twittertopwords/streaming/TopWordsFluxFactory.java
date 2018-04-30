@@ -37,6 +37,7 @@ public class TopWordsFluxFactory {
 
         TopicProcessor<Tweet> processor = TopicProcessor.<Tweet>builder()
                 .share(true)
+                .autoCancel(false)
                 .build();
 
         Flux.create(twitterListener::start)

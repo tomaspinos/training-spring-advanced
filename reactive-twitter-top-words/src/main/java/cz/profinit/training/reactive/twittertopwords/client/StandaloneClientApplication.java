@@ -16,13 +16,13 @@ public class StandaloneClientApplication {
                 .retrieve()
                 .bodyToFlux(TopWords.class);
 
-        Disposable topWordsSubscription = topWordsFlux.subscribe(System.out::println);
+        Disposable subscription = topWordsFlux.subscribe(System.out::println);
 
         System.out.println("Starting streaming");
 
         Thread.sleep(10000);
 
-        topWordsSubscription.dispose();
+        subscription.dispose();
 
         System.out.println("Streaming finished");
     }
