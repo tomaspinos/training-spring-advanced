@@ -18,6 +18,7 @@
         <module>spring-mvc</module>
         <module>spring-swf</module>
         <module>spring-security</module>
+        <module>reactive-twitter-top-words</module>
     </modules>
 
     <build>
