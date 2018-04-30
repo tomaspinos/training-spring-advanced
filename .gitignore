@@ -1,18 +1,25 @@
+# Compiled class file
 target
 *.class
 
-.log
+# Log file
+*.log
 
 # Package Files #
 *.jar
 *.war
 *.ear
+*.zip
+*.tar.gz
+*.rar
 
 # Eclipse ide files #
 *.prefs
 *.project
 *.classpath
 
+### IntelliJ IDEA ###
 .idea
+*.iws
 *.iml
-atlassian-ide-plugin.xml
+*.ipr
