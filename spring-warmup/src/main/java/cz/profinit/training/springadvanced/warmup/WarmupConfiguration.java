@@ -1,21 +1,20 @@
 package cz.profinit.training.springadvanced.warmup;
 
+import cz.profinit.training.springadvanced.warmup.support.Clock;
+import cz.profinit.training.springadvanced.warmup.support.DefaultClock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import cz.profinit.training.springadvanced.warmup.support.DefaultLocalDateTimeProvider;
-import cz.profinit.training.springadvanced.warmup.support.LocalDateTimeProvider;
 
 @Configuration
 public class WarmupConfiguration {
 
     @Bean
-    public WarmupService warmupService(final LocalDateTimeProvider localDateTimeProvider) {
+    public WarmupService warmupService(final Clock localDateTimeProvider) {
         return new WarmupService(localDateTimeProvider);
     }
 
     @Bean
-    public LocalDateTimeProvider localDateTimeProvider() {
-        return new DefaultLocalDateTimeProvider();
+    public Clock localDateTimeProvider() {
+        return new DefaultClock();
     }
 }

@@ -2,7 +2,7 @@ package cz.profinit.training.springadvanced.warmup.support;
 
 import java.time.LocalDateTime;
 
-public class DefaultLocalDateTimeProvider implements LocalDateTimeProvider {
+public class DefaultClock implements Clock {
 
     @Override
     public LocalDateTime get() {

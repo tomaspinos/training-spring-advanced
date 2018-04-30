@@ -1,12 +1,12 @@
 package cz.profinit.training.springadvanced.warmup;
 
-import cz.profinit.training.springadvanced.warmup.support.LocalDateTimeProvider;
+import cz.profinit.training.springadvanced.warmup.support.Clock;
 
 public class WarmupService {
 
-    private final LocalDateTimeProvider localDateTimeProvider;
+    private final Clock localDateTimeProvider;
 
-    public WarmupService(final LocalDateTimeProvider localDateTimeProvider) {
+    public WarmupService(final Clock localDateTimeProvider) {
         this.localDateTimeProvider = localDateTimeProvider;
     }
 
