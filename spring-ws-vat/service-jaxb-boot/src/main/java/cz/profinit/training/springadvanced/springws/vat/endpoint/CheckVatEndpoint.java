@@ -5,7 +5,6 @@ import cz.profinit.training.springadvanced.springws.vat.repository.VatRegistryRe
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
 import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 import eu.europa.ec.taxud.vies.services.checkvat.types.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -19,7 +18,6 @@ public class CheckVatEndpoint {
 
     private final CheckVatRepository repository;
 
-    @Autowired
     public CheckVatEndpoint(final CheckVatRepository repository) {
         this.repository = repository;
     }

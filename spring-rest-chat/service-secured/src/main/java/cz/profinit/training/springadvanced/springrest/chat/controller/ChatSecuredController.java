@@ -1,6 +1,9 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatSecuredLifecycle;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatSecuredLifecycle;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
-
 @RestController
 @RequestMapping("/chat")
 public class ChatSecuredController {
 
     private final ChatSecuredLifecycle lifecycle;
 
-    @Autowired
     public ChatSecuredController(final ChatSecuredLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }

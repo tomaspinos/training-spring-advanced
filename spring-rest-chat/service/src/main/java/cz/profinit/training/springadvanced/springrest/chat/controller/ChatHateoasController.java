@@ -1,8 +1,9 @@
 package cz.profinit.training.springadvanced.springrest.chat.controller;
 
-import java.net.URI;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatLifecycle;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatLifecycle;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/chat-hateoas")
@@ -28,7 +26,6 @@ public class ChatHateoasController {
 
     private final ChatLifecycle lifecycle;
 
-    @Autowired
     public ChatHateoasController(final ChatLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
