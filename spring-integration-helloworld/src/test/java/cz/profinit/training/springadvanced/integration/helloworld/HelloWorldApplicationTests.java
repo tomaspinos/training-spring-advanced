@@ -1,6 +1,6 @@
 package cz.profinit.training.springadvanced.integration.helloworld;
 
-import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
+import cz.profinit.training.springadvanced.integration.support.Clock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class HelloWorldApplicationTests {
     public static class TestConfiguration {
 
         @Bean
-        public LocalDateTimeProvider localDateTimeProvider() {
+        public Clock clock() {
             return () -> LocalDateTime.of(2011, Month.DECEMBER, 8, 12, 30);
         }
 

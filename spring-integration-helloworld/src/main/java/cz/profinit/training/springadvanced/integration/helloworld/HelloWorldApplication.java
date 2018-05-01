@@ -1,7 +1,7 @@
 package cz.profinit.training.springadvanced.integration.helloworld;
 
-import cz.profinit.training.springadvanced.integration.support.DefaultLocalDateTimeProvider;
-import cz.profinit.training.springadvanced.integration.support.LocalDateTimeProvider;
+import cz.profinit.training.springadvanced.integration.support.Clock;
+import cz.profinit.training.springadvanced.integration.support.DefaultClock;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -34,16 +34,16 @@ public class HelloWorldApplication {
      * "helloWorldFlow.input" = the input channel
      */
     @Bean
-    public IntegrationFlow helloWorldFlow(final LocalDateTimeProvider localDateTimeProvider, final OutputStream outputStream) {
+    public IntegrationFlow helloWorldFlow(final Clock clock, final OutputStream outputStream) {
         return f -> f
-                .transform(String.class, s -> localDateTimeProvider.get() + " Hello " + s + "\n")
+                .transform(String.class, s -> clock.get() + " Hello " + s + "\n")
                 .<String, String>transform(String::toUpperCase)
                 .handle(new ByteStreamWritingMessageHandler(outputStream));
     }
 
     @Bean
-    public LocalDateTimeProvider localDateTimeProvider() {
-        return new DefaultLocalDateTimeProvider();
+    public Clock clock() {
+        return new DefaultClock();
     }
 
     @Bean
