@@ -4,7 +4,6 @@ import cz.profinit.training.springadvanced.springrest.chat.lifecycle.ChatLifecyc
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRating;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatRatingResponse;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * TODO Annotate class and methods
@@ -13,7 +12,6 @@ public class ChatController {
 
     private final ChatLifecycle lifecycle;
 
-    @Autowired
     public ChatController(final ChatLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
