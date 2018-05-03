@@ -19,6 +19,7 @@
         <module>spring-mvc</module>
         <module>spring-rest-chat</module>
         <module>spring-warmup</module>
+        <module>spring-proxies</module>
         <module>spring-ws-vat</module>
         <module>parallel-samples</module>
         <module>reactive-twitter-top-words</module>
