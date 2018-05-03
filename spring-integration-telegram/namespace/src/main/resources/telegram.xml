@@ -16,15 +16,9 @@
 
     <int:channel id="inputFiles"/>
 
-    <file:file-to-string-transformer input-channel="inputFiles" output-channel="inputFilesAsStrings"/>
+    <file:splitter input-channel="inputFiles" output-channel="inputStrings"/>
 
-    <int:channel id="inputFilesAsStrings"/>
-
-    <int:splitter input-channel="inputFilesAsStrings" output-channel="inputStrings">
-        <bean class="org.springframework.integration.splitter.DefaultMessageSplitter">
-            <property name="delimiters" value="&#13;&#10;"/>
-        </bean>
-    </int:splitter>
+    <int:channel id="inputStrings"/>
 
     <int:transformer input-channel="inputStrings" output-channel="telegrams">
         <bean class="cz.profinit.training.springadvanced.integration.TelegramTransformer"/>
