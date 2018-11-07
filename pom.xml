@@ -12,7 +12,6 @@
 
     <modules>
         <module>servlet-api</module>
-        <module>spring-advanced-parent</module>
         <module>spring-rest-chat</module>
         <module>spring-warmup</module>
         <module>spring-proxies</module>
