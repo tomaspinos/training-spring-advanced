@@ -35,7 +35,7 @@ public class ChatSecuredControllerTest {
     private WebApplicationContext applicationContext;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(applicationContext).build();
     }
 
