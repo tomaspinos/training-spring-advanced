@@ -19,11 +19,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>spring-advanced</groupId>
-                <artifactId>listman-service-layer</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
                 <version>2.0.8.RELEASE</version>

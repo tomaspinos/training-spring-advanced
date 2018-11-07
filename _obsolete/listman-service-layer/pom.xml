@@ -8,7 +8,7 @@
         <groupId>spring-advanced</groupId>
         <artifactId>spring-advanced-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../spring-advanced-parent</relativePath>
+        <relativePath>../../spring-advanced-parent</relativePath>
     </parent>
 
     <artifactId>listman-service-layer</artifactId>
