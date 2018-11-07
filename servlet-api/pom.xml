@@ -5,13 +5,25 @@
 
     <parent>
         <groupId>spring-advanced</groupId>
-        <artifactId>spring-advanced-parent</artifactId>
+        <artifactId>spring-advanced</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../spring-advanced-parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>servlet-api</artifactId>
     <packaging>war</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>2.0.8.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
