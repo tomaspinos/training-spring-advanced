@@ -14,8 +14,6 @@
         <module>listman-service-layer</module>
         <module>servlet-api</module>
         <module>spring-advanced-parent</module>
-        <module>spring-integration-helloworld</module>
-        <module>spring-integration-telegram</module>
         <module>spring-mvc</module>
         <module>spring-rest-chat</module>
         <module>spring-warmup</module>
