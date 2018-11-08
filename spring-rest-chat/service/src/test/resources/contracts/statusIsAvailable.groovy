@@ -1,4 +1,6 @@
+import cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType
 import org.springframework.cloud.contract.spec.Contract
+import org.springframework.http.HttpStatus
 
 Contract.make {
     description("Should get available status")
@@ -12,12 +14,12 @@ Contract.make {
     }
 
     response {
-        status(200)
+        status(HttpStatus.OK.value())
         headers {
             contentType(applicationJson())
         }
         body(
-                status: "AVAILABLE"
+                status: ChatStatusType.AVAILABLE
         )
     }
 }

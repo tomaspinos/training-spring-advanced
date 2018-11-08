@@ -5,10 +5,10 @@ import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 
 Contract.make {
-    description("Should start a new conversation")
+    description("Should send a message")
 
     request {
-        url("/chat/conversation")
+        url("/chat/conversation/${ConsumerDrivenContractTestConstants.SESSION_ID}/message?text=${ConsumerDrivenContractTestConstants.OUTGOING_MESSAGE}")
         method(POST())
         headers {
             accept(applicationJson())
@@ -20,14 +20,13 @@ Contract.make {
         headers {
             contentType(applicationJson())
         }
-        // TODO Verifier doesn't verify direction && incoming. Is it right? Shall I report a bug?
         body("""
 		{
             "status": "${ChatStatusType.RUNNING}",
             "sessionId": "${ConsumerDrivenContractTestConstants.SESSION_ID}",
             "messages":
             [
-                    {"direction": "${ChatMessageDirectionType.INCOMING}", "text": "${ConsumerDrivenContractTestConstants.WELCOME_MESSAGE}"}
+                    {"direction": "${ChatMessageDirectionType.OUTGOING}", "text": "${ConsumerDrivenContractTestConstants.OUTGOING_MESSAGE}"}
             ]
         }
         """)
