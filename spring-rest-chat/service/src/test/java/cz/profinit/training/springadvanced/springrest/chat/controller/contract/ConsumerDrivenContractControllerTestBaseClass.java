@@ -29,7 +29,7 @@ import static cz.profinit.training.springadvanced.springrest.chat.model.Consumer
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ChatServiceApplication.class)
-public abstract class ContractTestBaseClass {
+public abstract class ConsumerDrivenContractControllerTestBaseClass {
 
     @Autowired
     private ChatController controller;

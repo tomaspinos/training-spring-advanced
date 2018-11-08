@@ -12,23 +12,6 @@
     <artifactId>spring-rest-chat-service</artifactId>
     <packaging>jar</packaging>
 
-    <properties>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
-        <spring-cloud-contract.version>2.0.2.RELEASE</spring-cloud-contract.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>spring-advanced</groupId>
@@ -101,7 +84,7 @@
                 <version>${spring-cloud-contract.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <baseClassForTests>cz.profinit.training.springadvanced.springrest.chat.controller.contract.ContractTestBaseClass</baseClassForTests>
+                    <baseClassForTests>cz.profinit.training.springadvanced.springrest.chat.controller.contract.ConsumerDrivenContractControllerTestBaseClass</baseClassForTests>
                 </configuration>
                 <dependencies>
                     <dependency>
