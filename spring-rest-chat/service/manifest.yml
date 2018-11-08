@@ -1,0 +1,8 @@
+---
+applications:
+- name: spring-rest-chat-service
+  memory: 1024M
+  random-route: true
+  path: target/spring-rest-chat-service-cf.jar
+  env:
+  services:
