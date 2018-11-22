@@ -1,4 +1,3 @@
-import cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 
@@ -22,10 +21,10 @@ Contract.make {
         body("""
 		{
             "status": "RUNNING",
-            "sessionId": "${ContractTestConstants.SESSION_ID}",
+            "sessionId": "AJDK23RNJ234",
             "messages":
             [
-                    {"direction": "INCOMING", "text": "${ContractTestConstants.WELCOME_MESSAGE}"}
+                    {"direction": "INCOMING", "text": "Hello world!"}
             ]
         }
         """)

@@ -22,11 +22,6 @@ import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder;
 
 import java.util.Collections;
 
-import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.NON_EXISTING_SESSION_ID;
-import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.OUTGOING_MESSAGE;
-import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.SESSION_ID;
-import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.WELCOME_MESSAGE;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ChatServiceApplication.class)
 public abstract class ContractTestBaseClass {
@@ -52,14 +47,14 @@ public abstract class ContractTestBaseClass {
                 .thenReturn(new ChatUpdate(ChatStatusType.AVAILABLE));
 
         Mockito.when(lifecycle.start())
-                .thenReturn(new ChatUpdate(ChatStatusType.RUNNING, SESSION_ID,
-                        Collections.singletonList(new ChatMessage(ChatMessageDirectionType.INCOMING, WELCOME_MESSAGE))));
+                .thenReturn(new ChatUpdate(ChatStatusType.RUNNING, "AJDK23RNJ234",
+                        Collections.singletonList(new ChatMessage(ChatMessageDirectionType.INCOMING, "Hello world!"))));
 
-        Mockito.when(lifecycle.sendMessage(SESSION_ID, OUTGOING_MESSAGE))
-                .thenReturn(new ChatUpdate(ChatStatusType.RUNNING, SESSION_ID,
-                        Collections.singletonList(new ChatMessage(ChatMessageDirectionType.OUTGOING, OUTGOING_MESSAGE))));
+        Mockito.when(lifecycle.sendMessage("AJDK23RNJ234", "GotAProblem"))
+                .thenReturn(new ChatUpdate(ChatStatusType.RUNNING, "AJDK23RNJ234",
+                        Collections.singletonList(new ChatMessage(ChatMessageDirectionType.OUTGOING, "GotAProblem"))));
 
-        Mockito.when(lifecycle.refresh(NON_EXISTING_SESSION_ID))
-                .thenThrow(new ChatSessionNotFoundException(NON_EXISTING_SESSION_ID));
+        Mockito.when(lifecycle.refresh("XXXERRRORXXX"))
+                .thenThrow(new ChatSessionNotFoundException("XXXERRRORXXX"));
     }
 }

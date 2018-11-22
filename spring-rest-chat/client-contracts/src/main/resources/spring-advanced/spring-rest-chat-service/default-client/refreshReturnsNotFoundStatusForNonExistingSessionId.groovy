@@ -1,4 +1,3 @@
-import cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 
@@ -6,7 +5,7 @@ Contract.make {
     description("Refresh should return not found status for non-existing session id")
 
     request {
-        url("/chat/conversation/${ContractTestConstants.NON_EXISTING_SESSION_ID}")
+        url("/chat/conversation/XXXERRRORXXX")
         method(GET())
         headers {
             accept(applicationJson())
@@ -21,7 +20,7 @@ Contract.make {
         body("""
 		{
             "status": "ERROR",
-            "sessionId": "${ContractTestConstants.NON_EXISTING_SESSION_ID}"
+            "sessionId": "XXXERRRORXXX"
         }
         """)
     }

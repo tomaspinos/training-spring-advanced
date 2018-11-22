@@ -1,4 +1,3 @@
-import cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 
@@ -6,7 +5,7 @@ Contract.make {
     description("Should send a message")
 
     request {
-        url("/chat/conversation/${ContractTestConstants.SESSION_ID}/message?text=${ContractTestConstants.OUTGOING_MESSAGE}")
+        url("/chat/conversation/AJDK23RNJ234/message?text=GotAProblem")
         method(POST())
         headers {
             accept(applicationJson())
@@ -21,10 +20,10 @@ Contract.make {
         body("""
 		{
             "status": "RUNNING",
-            "sessionId": "${ContractTestConstants.SESSION_ID}",
+            "sessionId": "AJDK23RNJ234",
             "messages":
             [
-                    {"direction": "OUTGOING", "text": "${ContractTestConstants.OUTGOING_MESSAGE}"}
+                    {"direction": "OUTGOING", "text": "GotAProblem"}
             ]
         }
         """)
