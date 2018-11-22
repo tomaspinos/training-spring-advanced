@@ -1,4 +1,3 @@
-import cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 
@@ -19,7 +18,7 @@ Contract.make {
             contentType(applicationJson())
         }
         body(
-                status: ChatStatusType.AVAILABLE
+                status: "AVAILABLE"
         )
     }
 }

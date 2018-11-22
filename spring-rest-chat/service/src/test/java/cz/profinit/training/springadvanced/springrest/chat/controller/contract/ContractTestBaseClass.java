@@ -22,14 +22,14 @@ import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder;
 
 import java.util.Collections;
 
-import static cz.profinit.training.springadvanced.springrest.chat.model.ConsumerDrivenContractTestConstants.NON_EXISTING_SESSION_ID;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ConsumerDrivenContractTestConstants.OUTGOING_MESSAGE;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ConsumerDrivenContractTestConstants.SESSION_ID;
-import static cz.profinit.training.springadvanced.springrest.chat.model.ConsumerDrivenContractTestConstants.WELCOME_MESSAGE;
+import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.NON_EXISTING_SESSION_ID;
+import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.OUTGOING_MESSAGE;
+import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.SESSION_ID;
+import static cz.profinit.training.springadvanced.springrest.chat.ContractTestConstants.WELCOME_MESSAGE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ChatServiceApplication.class)
-public abstract class ConsumerDrivenContractControllerTestBaseClass {
+public abstract class ContractTestBaseClass {
 
     @Autowired
     private ChatController controller;

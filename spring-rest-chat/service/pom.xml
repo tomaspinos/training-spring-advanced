@@ -16,7 +16,15 @@
         <dependency>
             <groupId>spring-advanced</groupId>
             <artifactId>spring-rest-chat-engine</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>spring-advanced</groupId>
+            <artifactId>spring-rest-chat-client-contracts</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>spring-advanced</groupId>
+            <artifactId>spring-rest-chat-contract-constants</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,29 +76,38 @@
                     <finalName>${project.name}-cf</finalName>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/cloud/*.java</exclude>
-                        <exclude>**/cloud/config/*.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<excludes>-->
+                        <!--<exclude>**/cloud/*.java</exclude>-->
+                        <!--<exclude>**/cloud/config/*.java</exclude>-->
+                    <!--</excludes>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-contract-maven-plugin</artifactId>
                 <version>${spring-cloud-contract.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <baseClassForTests>cz.profinit.training.springadvanced.springrest.chat.controller.contract.ConsumerDrivenContractControllerTestBaseClass</baseClassForTests>
+                    <baseClassForTests>cz.profinit.training.springadvanced.springrest.chat.controller.contract.ContractTestBaseClass</baseClassForTests>
+                    <!-- We want to use the JAR with contracts with the following coordinates -->
+                    <contractDependency>
+                        <groupId>spring-advanced</groupId>
+                        <artifactId>spring-rest-chat-client-contracts</artifactId>
+                    </contractDependency>
+                    <!-- The JAR with contracts should be taken from Maven local -->
+                    <contractsMode>LOCAL</contractsMode>
+                    <!-- Base package for generated tests -->
+                    <basePackageForTests>cz.profinit.training.springadvanced.springrest.chat.controller.contract</basePackageForTests>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>spring-advanced</groupId>
-                        <artifactId>spring-rest-chat-model</artifactId>
-                        <version>${project.version}</version>
+                        <artifactId>spring-rest-chat-contract-constants</artifactId>
+                        <version>1.0.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
             </plugin>

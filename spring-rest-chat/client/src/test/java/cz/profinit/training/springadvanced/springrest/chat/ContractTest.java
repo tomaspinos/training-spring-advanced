@@ -19,11 +19,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
-public class ConsumerDrivenContractTest {
+public class ContractTest {
 
     @Rule
     public StubRunnerRule stubRunnerRule = new StubRunnerRule()
-            .downloadStub("spring-advanced", "spring-rest-chat-service", "1.0.0-SNAPSHOT", "stubs")
+            .downloadStub("spring-advanced", "spring-rest-chat-client-contracts", "1.0.0-SNAPSHOT", "stubs")
             .withPort(8100)
             .stubsMode(StubRunnerProperties.StubsMode.LOCAL);
 

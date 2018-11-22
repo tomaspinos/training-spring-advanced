@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>spring-advanced</groupId>
+        <artifactId>spring-rest-chat</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>spring-rest-chat-client-contracts</artifactId>
+
+    <properties>
+        <!-- We don't want to run tests -->
+        <!-- When true, producer tests would be generated -->
+        <skipTests>true</skipTests>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>spring-advanced</groupId>
+            <artifactId>spring-rest-chat-model</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- By default it would search under src/test/resources/ -->
+                    <contractsDirectory>${project.basedir}/src/main/resources</contractsDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>spring-advanced</groupId>
+                        <artifactId>spring-rest-chat-contract-constants</artifactId>
+                        <version>1.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -13,6 +13,7 @@
     <modules>
         <module>servlet-api</module>
         <module>spring-rest-chat</module>
+        <module>spring-rest-chat-contract-constants</module>
         <module>spring-warmup</module>
         <module>spring-proxies</module>
         <module>spring-ws-vat</module>
