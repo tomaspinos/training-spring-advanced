@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Entity(name = "t_user")
 @Data
 @EqualsAndHashCode(of = "id")
+@Builder
 public class User implements Serializable {
 
     @Id
@@ -27,6 +29,7 @@ public class User implements Serializable {
     private String username;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @Builder.Default
     private List<UserBalance> balances = new ArrayList<>();
 
     public void addBalance(UserBalance balance) {

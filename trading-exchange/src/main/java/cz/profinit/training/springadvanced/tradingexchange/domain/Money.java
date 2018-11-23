@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Entity(name = "t_money")
 @Data
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Money implements Serializable {
 
     @Id

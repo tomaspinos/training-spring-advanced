@@ -4,9 +4,9 @@ import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
 
 public interface OrderService {
 
-    void createBuyOrder();
+    OrderStatusTo createBuyOrder(BuyOrderRequestTo request);
 
-    void createSellOrder();
+    OrderStatusTo createSellOrder(SellOrderRequestTo request);
 
-    void getOrder(OrderId id);
+    OrderStatusTo getOrderStatus(OrderId id);
 }

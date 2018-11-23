@@ -1,11 +1,15 @@
 package cz.profinit.training.springadvanced.tradingexchange.api;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
+import cz.profinit.training.springadvanced.tradingexchange.service.BuyOrderRequestTo;
 import cz.profinit.training.springadvanced.tradingexchange.service.OrderService;
+import cz.profinit.training.springadvanced.tradingexchange.service.OrderStatusTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.SellOrderRequestTo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,17 +21,17 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/buy")
-    public void buy() {
-        orderService.createBuyOrder();
-    }
-
-    @GetMapping("/status/{orderId}")
-    public void order(@PathVariable("orderId") long orderId) {
-        orderService.getOrder(OrderId.of(orderId));
+    public OrderStatusTo buy(@RequestBody BuyOrderRequestTo request) {
+        return orderService.createBuyOrder(request);
     }
 
     @PostMapping("/sell")
-    public void sell() {
-        orderService.createSellOrder();
+    public OrderStatusTo sell(@RequestBody SellOrderRequestTo request) {
+        return orderService.createSellOrder(request);
+    }
+
+    @GetMapping("/status/{orderId}")
+    public OrderStatusTo status(@PathVariable("orderId") long orderId) {
+        return orderService.getOrderStatus(OrderId.of(orderId));
     }
 }

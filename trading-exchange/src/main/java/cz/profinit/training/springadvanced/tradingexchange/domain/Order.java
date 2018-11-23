@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Entity(name = "t_order")
 @Data
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Order implements Serializable {
 
     @Id
@@ -26,25 +28,25 @@ public class Order implements Serializable {
     @NotNull
     private OrderType type;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private OrderSettlementState settlementState;
+
     @ManyToOne
     @NotNull
     private CurrencyPair currencyPair;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
-    private Money amount;
+    private Money requestedAmount;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
-    private Money actualAmount;
+    private Money remainingAmount;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
     private Money priceLimit;
-
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private OrderSettlementState settlementState;
 
     @ManyToOne
     @NotNull
