@@ -3,10 +3,9 @@ package cz.profinit.training.springadvanced.springrest.chat;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatStatusType;
 import cz.profinit.training.springadvanced.springrest.chat.model.ChatUpdate;
 import org.assertj.core.api.BDDAssertions;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.cloud.contract.stubrunner.junit.StubRunnerRule;
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,14 +17,20 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
+/**
+ * Alternative way to run the stub:
+ * <pre>{@code
+ *     @Rule
+ *     public StubRunnerRule stubRunnerRule =
+ *             new StubRunnerRule()
+ *                     .downloadStub("spring-advanced:spring-rest-chat-client-contracts:+:stubs:8100")
+ *                     .withPort(8100)
+ *                     .stubsMode(StubRunnerProperties.StubsMode.LOCAL);
+ * }</pre>
+ */
 @RunWith(SpringRunner.class)
+@AutoConfigureStubRunner(ids = {"spring-advanced:spring-rest-chat-client-contracts:+:stubs:8100"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 public class ContractTest {
-
-    @Rule
-    public StubRunnerRule stubRunnerRule = new StubRunnerRule()
-            .downloadStub("spring-advanced", "spring-rest-chat-client-contracts", "1.0.0-SNAPSHOT", "stubs")
-            .withPort(8100)
-            .stubsMode(StubRunnerProperties.StubsMode.LOCAL);
 
     @Test
     public void shouldBeAvailable() {
@@ -34,7 +39,6 @@ public class ContractTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-
 
         // when:
         ResponseEntity<ChatUpdate> responseEntity = restTemplate
