@@ -14,8 +14,9 @@ public class OrderStatusTo implements Serializable {
     private final OrderId id;
     private final OrderType type;
     private final OrderSettlementState settlementState;
-    private final CurrencyPairTo currencyPair;
-    private final MoneyTo requestedAmount;
+    private final CurrencyTo requestedCurrency;
+    private final CurrencyTo offeredCurrency;
+    private final MoneyTo orderAmount;
     private final MoneyTo remainingAmount;
     private final MoneyTo priceLimit;
     private final UserTo whoPosted;
@@ -25,8 +26,9 @@ public class OrderStatusTo implements Serializable {
                 order.getId(),
                 order.getType(),
                 order.getSettlementState(),
-                CurrencyPairTo.fromEntity(order.getCurrencyPair()),
-                MoneyTo.fromEntity(order.getRequestedAmount()),
+                CurrencyTo.fromEntity(order.getRequestedCurrency()),
+                CurrencyTo.fromEntity(order.getOfferedCurrency()),
+                MoneyTo.fromEntity(order.getOrderAmount()),
                 MoneyTo.fromEntity(order.getRemainingAmount()),
                 MoneyTo.fromEntity(order.getPriceLimit()),
                 UserTo.fromEntity(order.getWhoPosted()));

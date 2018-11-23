@@ -8,8 +8,9 @@ import java.io.Serializable;
 @Value
 public class BuyOrderRequestTo implements Serializable {
 
-    private final CurrencyPairTo currencyPair;
-    private final MoneyTo requestedAmount;
+    private final CurrencyTo requestedCurrency;
+    private final CurrencyTo offeredCurrency;
+    private final MoneyTo orderAmount;
     private final MoneyTo priceLimit;
     private final UserId whoPosted;
 }

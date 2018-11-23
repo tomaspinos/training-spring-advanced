@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Entity(name = "c_currency")
 @Data
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Currency implements Serializable {
 
     @Id
