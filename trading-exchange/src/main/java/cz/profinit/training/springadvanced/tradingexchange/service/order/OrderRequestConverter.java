@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.tradingexchange.service;
+package cz.profinit.training.springadvanced.tradingexchange.service.order;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.Currency;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Money;
@@ -6,9 +6,10 @@ import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderSettlementState;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderType;
 import cz.profinit.training.springadvanced.tradingexchange.domain.User;
-import cz.profinit.training.springadvanced.tradingexchange.domain.UserId;
+import cz.profinit.training.springadvanced.tradingexchange.domain.Username;
 import cz.profinit.training.springadvanced.tradingexchange.repository.CurrencyRepository;
 import cz.profinit.training.springadvanced.tradingexchange.repository.UserRepository;
+import cz.profinit.training.springadvanced.tradingexchange.service.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +77,8 @@ class OrderRequestConverter {
                 .build();
     }
 
-    private User toUser(UserId id) {
-        return userRepository.getOne(id.getId());
+    private User toUser(Username username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException(User.class, username.getUsername()));
     }
 }

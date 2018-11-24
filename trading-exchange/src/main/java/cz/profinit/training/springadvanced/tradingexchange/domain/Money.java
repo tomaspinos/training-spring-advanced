@@ -1,8 +1,11 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +18,10 @@ import java.util.Objects;
 
 @Entity(name = "t_money")
 @Data
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id")
 public class Money implements Serializable {
 
     @Id
@@ -43,5 +48,28 @@ public class Money implements Serializable {
 
     public boolean matches(Money money) {
         return Objects.equals(currency, money.currency) && Objects.equals(amount, money.amount);
+    }
+
+    public boolean isGreaterThanZero() {
+        return amount.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public boolean isZero() {
+        return amount.equals(BigDecimal.ZERO);
+    }
+
+    public Money min(Money other) {
+        Assert.isTrue(Objects.equals(currency, other.currency), "Cannot compare different currencies");
+        return amount.compareTo(other.amount) <= 0 ?
+                Money.of(currency, amount) :
+                Money.of(currency, other.amount);
+    }
+
+    /**
+     * this - other.
+     */
+    public void minus(Money other) {
+        Assert.isTrue(Objects.equals(currency, other.currency), "Cannot calculate with different currencies");
+        amount = amount.subtract(other.amount);
     }
 }

@@ -1,8 +1,10 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +14,10 @@ import java.io.Serializable;
 
 @Entity(name = "c_currency")
 @Data
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id")
 public class Currency implements Serializable {
 
     @Id

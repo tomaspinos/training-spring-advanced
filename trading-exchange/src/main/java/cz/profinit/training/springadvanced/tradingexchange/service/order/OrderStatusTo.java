@@ -1,9 +1,12 @@
-package cz.profinit.training.springadvanced.tradingexchange.service;
+package cz.profinit.training.springadvanced.tradingexchange.service.order;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderSettlementState;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderType;
+import cz.profinit.training.springadvanced.tradingexchange.service.CurrencyTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.MoneyTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.user.UserTo;
 import lombok.Value;
 
 import java.io.Serializable;

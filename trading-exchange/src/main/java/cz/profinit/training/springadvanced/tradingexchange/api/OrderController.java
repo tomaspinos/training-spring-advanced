@@ -1,11 +1,12 @@
 package cz.profinit.training.springadvanced.tradingexchange.api;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
-import cz.profinit.training.springadvanced.tradingexchange.service.BuyOrderRequestTo;
-import cz.profinit.training.springadvanced.tradingexchange.service.OrderService;
-import cz.profinit.training.springadvanced.tradingexchange.service.OrderStatusTo;
-import cz.profinit.training.springadvanced.tradingexchange.service.SellOrderRequestTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.order.BuyOrderRequestTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.order.OrderService;
+import cz.profinit.training.springadvanced.tradingexchange.service.order.OrderStatusTo;
+import cz.profinit.training.springadvanced.tradingexchange.service.order.SellOrderRequestTo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,9 @@ public class OrderController {
     }
 
     @GetMapping("/status/{orderId}")
-    public OrderStatusTo status(@PathVariable("orderId") long orderId) {
-        return orderService.getOrderStatus(OrderId.of(orderId));
+    public ResponseEntity<OrderStatusTo> status(@PathVariable("orderId") long orderId) {
+        return orderService.getOrderStatus(OrderId.of(orderId))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

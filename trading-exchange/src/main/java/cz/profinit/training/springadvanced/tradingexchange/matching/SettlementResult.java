@@ -13,8 +13,10 @@ import java.util.List;
 public class SettlementResult {
 
     private final Order order;
+
     @Singular
     private final List<Order> matchedOrders;
+
     @Singular
     private final List<Trade> trades;
 }

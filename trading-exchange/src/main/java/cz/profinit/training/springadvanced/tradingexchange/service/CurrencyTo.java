@@ -3,7 +3,7 @@ package cz.profinit.training.springadvanced.tradingexchange.service;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Currency;
 import lombok.Value;
 
-@Value
+@Value(staticConstructor = "of")
 public class CurrencyTo {
 
     private final String code;

@@ -23,16 +23,16 @@ class MatchingEngineImpl implements MatchingEngine {
         Iterator<Order> candidateSellOrders = orderQueries.getCandidateSellOrders(order.getRequestedCurrency(), order.getOfferedCurrency(), order.getPriceLimit())
                 .iterator();
 
-        while (MoneyMath.isGreaterThanZero(order.getRemainingAmount()) && candidateSellOrders.hasNext()) {
+        while (order.getRemainingAmount().isGreaterThanZero() && candidateSellOrders.hasNext()) {
             Order matchedOrder = candidateSellOrders.next();
 
-            Money minAmount = MoneyMath.min(order.getRemainingAmount(), matchedOrder.getRemainingAmount());
+            Money minAmount = order.getRemainingAmount().min(matchedOrder.getRemainingAmount());
 
-            MoneyMath.minus(order.getRemainingAmount(), minAmount);
+            order.getRemainingAmount().minus(minAmount);
             order.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
 
-            MoneyMath.minus(matchedOrder.getRemainingAmount(), minAmount);
-            if (MoneyMath.isZero(matchedOrder.getRemainingAmount())) {
+            matchedOrder.getRemainingAmount().minus(minAmount);
+            if (matchedOrder.getRemainingAmount().isZero()) {
                 matchedOrder.setSettlementState(OrderSettlementState.SETTLED);
             } else {
                 matchedOrder.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
@@ -48,7 +48,7 @@ class MatchingEngineImpl implements MatchingEngine {
             settlementResultBuilder.matchedOrder(matchedOrder).trade(trade);
         }
 
-        if (MoneyMath.isZero(order.getRemainingAmount())) {
+        if (order.getRemainingAmount().isZero()) {
             order.setSettlementState(OrderSettlementState.SETTLED);
         }
 
@@ -63,16 +63,16 @@ class MatchingEngineImpl implements MatchingEngine {
         Iterator<Order> candidateBuyOrders = orderQueries.getCandidateBuyOrders(order.getRequestedCurrency(), order.getOfferedCurrency(), order.getPriceLimit())
                 .iterator();
 
-        while (MoneyMath.isGreaterThanZero(order.getRemainingAmount()) && candidateBuyOrders.hasNext()) {
+        while (order.getRemainingAmount().isGreaterThanZero() && candidateBuyOrders.hasNext()) {
             Order matchedOrder = candidateBuyOrders.next();
 
-            Money minAmount = MoneyMath.min(order.getRemainingAmount(), matchedOrder.getRemainingAmount());
+            Money minAmount = order.getRemainingAmount().min(matchedOrder.getRemainingAmount());
 
-            MoneyMath.minus(order.getRemainingAmount(), minAmount);
+            order.getRemainingAmount().minus(minAmount);
             order.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
 
-            MoneyMath.minus(matchedOrder.getRemainingAmount(), minAmount);
-            if (MoneyMath.isZero(matchedOrder.getRemainingAmount())) {
+            matchedOrder.getRemainingAmount().minus(minAmount);
+            if (matchedOrder.getRemainingAmount().isZero()) {
                 matchedOrder.setSettlementState(OrderSettlementState.SETTLED);
             } else {
                 matchedOrder.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
@@ -88,7 +88,7 @@ class MatchingEngineImpl implements MatchingEngine {
             settlementResultBuilder.matchedOrder(matchedOrder).trade(trade);
         }
 
-        if (MoneyMath.isZero(order.getRemainingAmount())) {
+        if (order.getRemainingAmount().isZero()) {
             order.setSettlementState(OrderSettlementState.SETTLED);
         }
 

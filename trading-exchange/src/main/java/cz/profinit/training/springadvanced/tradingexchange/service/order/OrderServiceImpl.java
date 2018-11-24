@@ -1,4 +1,4 @@
-package cz.profinit.training.springadvanced.tradingexchange.service;
+package cz.profinit.training.springadvanced.tradingexchange.service.order;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
@@ -9,6 +9,8 @@ import cz.profinit.training.springadvanced.tradingexchange.repository.TradeRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +45,7 @@ class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     @Override
-    public OrderStatusTo getOrderStatus(OrderId id) {
-        Order order = orderRepository.getOne(id.getId());
-        return OrderStatusTo.fromEntity(order);
+    public Optional<OrderStatusTo> getOrderStatus(OrderId id) {
+        return orderRepository.findById(id.getId()).map(OrderStatusTo::fromEntity);
     }
 }

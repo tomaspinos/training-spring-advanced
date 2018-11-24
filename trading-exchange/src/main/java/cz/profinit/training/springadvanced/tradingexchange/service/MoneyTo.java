@@ -6,7 +6,7 @@ import lombok.Value;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Value
+@Value(staticConstructor = "of")
 public class MoneyTo implements Serializable {
 
     private final CurrencyTo currency;

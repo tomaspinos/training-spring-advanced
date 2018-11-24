@@ -1,8 +1,10 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,8 +17,10 @@ import java.util.Objects;
 
 @Entity(name = "t_trade")
 @Data
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id")
 public class Trade implements Serializable {
 
     @Id

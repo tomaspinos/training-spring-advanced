@@ -1,6 +1,8 @@
-package cz.profinit.training.springadvanced.tradingexchange.service;
+package cz.profinit.training.springadvanced.tradingexchange.service.order;
 
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderId;
+
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -8,5 +10,5 @@ public interface OrderService {
 
     OrderStatusTo createSellOrder(SellOrderRequestTo request);
 
-    OrderStatusTo getOrderStatus(OrderId id);
+    Optional<OrderStatusTo> getOrderStatus(OrderId id);
 }
