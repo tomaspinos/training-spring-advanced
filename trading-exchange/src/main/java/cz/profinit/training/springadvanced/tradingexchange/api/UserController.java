@@ -31,9 +31,9 @@ public class UserController {
     @PutMapping("/{username}/balance/{currencyCode}/{amount}")
     public ResponseEntity<UserTo> deposit(@PathVariable("username") String username,
                                           @PathVariable("currencyCode") String currencyCode,
-                                          @PathVariable("amount") String amount) {
+                                          @PathVariable("amount") BigDecimal amount) {
 
-        return userService.deposit(Username.of(username), MoneyTo.of(CurrencyTo.of(currencyCode), new BigDecimal(amount)))
+        return userService.deposit(Username.of(username), MoneyTo.of(CurrencyTo.of(currencyCode), amount))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
