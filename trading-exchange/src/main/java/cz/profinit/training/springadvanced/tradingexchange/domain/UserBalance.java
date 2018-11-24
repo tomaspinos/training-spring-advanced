@@ -36,7 +36,7 @@ public class UserBalance implements Serializable {
         return UserBalance.builder().total(total).build();
     }
 
-    public void modify(BigDecimal amount) {
+    public void add(BigDecimal amount) {
         total.setAmount(total.getAmount().add(amount));
     }
 

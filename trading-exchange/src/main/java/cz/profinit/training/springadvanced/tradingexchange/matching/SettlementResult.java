@@ -1,8 +1,12 @@
 package cz.profinit.training.springadvanced.tradingexchange.matching;
 
+import cz.profinit.training.springadvanced.tradingexchange.domain.Money;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Trade;
+import cz.profinit.training.springadvanced.tradingexchange.domain.User;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Singular;
 import lombok.Value;
 
@@ -19,4 +23,19 @@ public class SettlementResult {
 
     @Singular
     private final List<Trade> trades;
+
+    @Getter(AccessLevel.NONE)
+    private final UserBalanceChanges userBalanceChanges;
+
+    public List<UserAndMoney> getAllUserBalanceChanges() {
+        return userBalanceChanges.getAll();
+    }
+
+    public List<Money> getUserBalanceChanges(User user) {
+        return userBalanceChanges.get(user);
+    }
+
+    boolean hasUserBalanceChange(User user, Money money) {
+        return userBalanceChanges.has(user, money);
+    }
 }

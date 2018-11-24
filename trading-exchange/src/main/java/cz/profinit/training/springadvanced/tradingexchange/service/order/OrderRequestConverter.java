@@ -20,14 +20,9 @@ class OrderRequestConverter {
     private final UserRepository userRepository;
     private final CurrencyRepository currencyRepository;
 
-    private Currency toCurrency(String code) {
-        return currencyRepository.findByCode(code)
-                .orElseThrow(() -> new NotFoundException(Currency.class, code));
-    }
-
     Order toOrder(BuyOrderRequestTo request) {
-        Currency requestedCurrency = toCurrency(request.getRequestedCurrency().getCode());
-        Currency offeredCurrency = toCurrency(request.getOfferedCurrency().getCode());
+        Currency requestedCurrency = currencyRepository.getOrCreate(request.getRequestedCurrency().getCode());
+        Currency offeredCurrency = currencyRepository.getOrCreate(request.getOfferedCurrency().getCode());
 
         Money orderAmount = Money.builder()
                 .currency(requestedCurrency)
@@ -44,16 +39,18 @@ class OrderRequestConverter {
         return Order.builder()
                 .type(OrderType.BUY)
                 .settlementState(OrderSettlementState.OPEN)
+                .requestedCurrency(requestedCurrency)
+                .offeredCurrency(offeredCurrency)
                 .orderAmount(orderAmount)
-                .remainingAmount(orderAmount)
+                .remainingAmount(orderAmount.copy())
                 .priceLimit(priceLimit)
                 .whoPosted(whoPosted)
                 .build();
     }
 
     Order toOrder(SellOrderRequestTo request) {
-        Currency requestedCurrency = toCurrency(request.getRequestedCurrency().getCode());
-        Currency offeredCurrency = toCurrency(request.getOfferedCurrency().getCode());
+        Currency requestedCurrency = currencyRepository.getOrCreate(request.getRequestedCurrency().getCode());
+        Currency offeredCurrency = currencyRepository.getOrCreate(request.getOfferedCurrency().getCode());
 
         Money orderAmount = Money.builder()
                 .currency(offeredCurrency)
@@ -70,8 +67,10 @@ class OrderRequestConverter {
         return Order.builder()
                 .type(OrderType.SELL)
                 .settlementState(OrderSettlementState.OPEN)
+                .requestedCurrency(requestedCurrency)
+                .offeredCurrency(offeredCurrency)
                 .orderAmount(orderAmount)
-                .remainingAmount(orderAmount)
+                .remainingAmount(orderAmount.copy())
                 .priceLimit(priceLimit)
                 .whoPosted(whoPosted)
                 .build();

@@ -9,6 +9,7 @@ import cz.profinit.training.springadvanced.tradingexchange.repository.CurrencyRe
 import cz.profinit.training.springadvanced.tradingexchange.repository.UserRepository;
 import cz.profinit.training.springadvanced.tradingexchange.service.MoneyTo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -24,6 +26,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserTo createUser(Username username) {
+        log.info("Creating user: {}", username);
+
         User user = userRepository.save(User.builder().username(username).build());
         return UserTo.fromEntity(user);
     }
@@ -31,7 +35,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Optional<UserTo> deposit(Username username, MoneyTo money) {
-        Currency currency = getOrCreateCurrency(money.getCurrency().getCode());
+        log.info("Making deposit. User: {}, money: {}", username, money);
+
+        Currency currency = currencyRepository.getOrCreate(money.getCurrency().getCode());
 
         return userRepository.findByUsername(username)
                 .map(user -> {
@@ -39,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
                     if (maybeBalance.isPresent()) {
                         UserBalance balance = maybeBalance.get();
-                        balance.modify(money.getAmount());
+                        balance.add(money.getAmount());
                     } else {
                         user.addBalance(UserBalance.of(Money.of(currency, money.getAmount())));
                     }
@@ -51,11 +57,8 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     @Override
     public Optional<UserTo> getUser(Username username) {
-        return userRepository.findByUsername(username).map(UserTo::fromEntity);
-    }
+        log.info("Getting user: {}", username);
 
-    private Currency getOrCreateCurrency(String code) {
-        return currencyRepository.findByCode(code)
-                .orElseGet(() -> currencyRepository.save(Currency.builder().code(code).build()));
+        return userRepository.findByUsername(username).map(UserTo::fromEntity);
     }
 }

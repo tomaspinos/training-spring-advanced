@@ -47,4 +47,9 @@ public class User implements Serializable {
     public UserId getId() {
         return UserId.of(id);
     }
+
+    public void plusBalance(Money money) {
+        getBalance(money.getCurrency())
+                .ifPresent(balance -> balance.add(money.getAmount()));
+    }
 }

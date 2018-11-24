@@ -11,6 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static cz.profinit.training.springadvanced.tradingexchange.domain.SampleData.CZK;
 import static cz.profinit.training.springadvanced.tradingexchange.domain.SampleData.EUR;
+import static cz.profinit.training.springadvanced.tradingexchange.domain.SampleData.USER_A;
+import static cz.profinit.training.springadvanced.tradingexchange.domain.SampleData.USER_B;
+import static cz.profinit.training.springadvanced.tradingexchange.domain.SampleData.USER_C;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -30,12 +33,12 @@ public class MatchingEngineImplTest {
     @Test
     public void shouldSettleBuyOrderCompletelyWhenMatchingSellOrdersAvailable() {
         // buy 100 EUR for max 26 CZK
-        Order buyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 100, 26);
+        Order buyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 100, 26, USER_A);
 
         // sell 60 EUR for min 24 CZK
-        Order firstSellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 60, 24);
+        Order firstSellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 60, 24, USER_B);
         // sell 40 EUR for min 25 CZK
-        Order secondSellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 40, 25);
+        Order secondSellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 40, 25, USER_C);
 
         orderQueries.addCandidateSellOrders(firstSellOrder, secondSellOrder);
 
@@ -49,17 +52,24 @@ public class MatchingEngineImplTest {
 
         Trade secondTrade = settlementResult.getTrades().get(1);
         assertTrue(secondTrade.matches(buyOrder, secondSellOrder, Money.of(EUR, 40), Money.of(CZK, 25)));
+
+        settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, 100));
+        settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, -(60 * 24 + 40 * 25)));
+        settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, -60));
+        settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, 60 * 24));
+        settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, -40));
+        settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, 40 * 25));
     }
 
     @Test
     public void shouldSettleSellOrderCompletelyWhenMatchingBuyOrdersAvailable() {
         // sell 60 EUR for min 24 CZK
-        Order sellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 60, 24);
+        Order sellOrder = Order.sell(id.getAndIncrement(), CZK, EUR, 60, 24, USER_A);
 
         // buy 40 EUR for max 25 CZK
-        Order firstBuyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 40, 25);
+        Order firstBuyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 40, 25, USER_B);
         // buy 20 EUR for max 26 CZK
-        Order secondBuyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 20, 26);
+        Order secondBuyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 20, 26, USER_C);
 
         orderQueries.addCandidateBuyOrders(firstBuyOrder, secondBuyOrder);
 
@@ -73,5 +83,12 @@ public class MatchingEngineImplTest {
 
         Trade secondTrade = settlementResult.getTrades().get(1);
         assertTrue(secondTrade.matches(secondBuyOrder, sellOrder, Money.of(EUR, 20), Money.of(CZK, 26)));
+
+        settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, -60));
+        settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, 40 * 25 + 20 * 26));
+        settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, 40));
+        settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, -40 * 25));
+        settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, 20));
+        settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, -20 * 26));
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Builder
 public class Username implements Serializable {
 
+    @Column(unique = true)
     @NotBlank
     private String username;
 

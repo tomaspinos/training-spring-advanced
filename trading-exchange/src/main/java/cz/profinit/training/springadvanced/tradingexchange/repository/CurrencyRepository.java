@@ -8,4 +8,9 @@ import java.util.Optional;
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 
     Optional<Currency> findByCode(String code);
+
+    default Currency getOrCreate(String code) {
+        return findByCode(code)
+                .orElseGet(() -> save(Currency.builder().code(code).build()));
+    }
 }

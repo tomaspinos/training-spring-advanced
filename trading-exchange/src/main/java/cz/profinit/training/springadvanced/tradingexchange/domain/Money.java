@@ -46,8 +46,12 @@ public class Money implements Serializable {
                 .build();
     }
 
-    public boolean matches(Money money) {
-        return Objects.equals(currency, money.currency) && Objects.equals(amount, money.amount);
+    public Money copy() {
+        return of(currency, amount);
+    }
+
+    public Money getNegative() {
+        return of(currency, amount.negate());
     }
 
     public boolean isGreaterThanZero() {
@@ -55,11 +59,15 @@ public class Money implements Serializable {
     }
 
     public boolean isZero() {
-        return amount.equals(BigDecimal.ZERO);
+        return amount.compareTo(BigDecimal.ZERO) == 0;
+    }
+
+    public boolean matches(Money money) {
+        return Objects.equals(currency, money.currency) && Objects.equals(amount, money.amount);
     }
 
     public Money min(Money other) {
-        Assert.isTrue(Objects.equals(currency, other.currency), "Cannot compare different currencies");
+        Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
         return amount.compareTo(other.amount) <= 0 ?
                 Money.of(currency, amount) :
                 Money.of(currency, other.amount);
@@ -69,7 +77,15 @@ public class Money implements Serializable {
      * this - other.
      */
     public void minus(Money other) {
-        Assert.isTrue(Objects.equals(currency, other.currency), "Cannot calculate with different currencies");
+        Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
         amount = amount.subtract(other.amount);
+    }
+
+    /**
+     * this + other
+     */
+    public void plus(Money other) {
+        Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
+        amount = amount.add(other.amount);
     }
 }

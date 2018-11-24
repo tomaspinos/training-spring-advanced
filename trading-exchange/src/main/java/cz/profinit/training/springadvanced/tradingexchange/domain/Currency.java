@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +28,7 @@ public class Currency implements Serializable {
     /**
      * ISO 4217 currency code for this currency.
      */
+    @Column(unique = true)
     @NotNull
     private String code;
 
