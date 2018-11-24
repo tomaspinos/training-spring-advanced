@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "t_order")
@@ -60,6 +61,42 @@ public class Order implements Serializable {
 
     public OrderId getId() {
         return OrderId.of(id);
+    }
+
+    public static Order buy(long id, Currency requestedCurrency, Currency offeredCurrency, long requestedAmount, long maxPriceLimit) {
+        return buy(id, requestedCurrency, offeredCurrency, new BigDecimal(requestedAmount), new BigDecimal(maxPriceLimit));
+    }
+
+    public static Order buy(long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal requestedAmount, BigDecimal maxPriceLimit) {
+        Money orderAmount = Money.of(requestedCurrency, requestedAmount);
+        return Order.builder()
+                .id(id)
+                .type(OrderType.BUY)
+                .settlementState(OrderSettlementState.OPEN)
+                .requestedCurrency(requestedCurrency)
+                .offeredCurrency(offeredCurrency)
+                .orderAmount(orderAmount)
+                .remainingAmount(orderAmount)
+                .priceLimit(Money.of(offeredCurrency, maxPriceLimit))
+                .build();
+    }
+
+    public static Order sell(long id, Currency requestedCurrency, Currency offeredCurrency, long offeredAmount, long minPriceLimit) {
+        return sell(id, requestedCurrency, offeredCurrency, new BigDecimal(offeredAmount), new BigDecimal(minPriceLimit));
+    }
+
+    public static Order sell(long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal offeredAmount, BigDecimal minPriceLimit) {
+        Money orderAmount = Money.of(offeredCurrency, offeredAmount);
+        return Order.builder()
+                .id(id)
+                .type(OrderType.SELL)
+                .settlementState(OrderSettlementState.OPEN)
+                .requestedCurrency(requestedCurrency)
+                .offeredCurrency(offeredCurrency)
+                .orderAmount(orderAmount)
+                .remainingAmount(orderAmount)
+                .priceLimit(Money.of(requestedCurrency, minPriceLimit))
+                .build();
     }
 
     @Valid

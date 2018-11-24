@@ -24,32 +24,32 @@ class MatchingEngineImpl implements MatchingEngine {
                 .iterator();
 
         while (MoneyMath.isGreaterThanZero(order.getRemainingAmount()) && candidateSellOrders.hasNext()) {
-            Order sellOrder = candidateSellOrders.next();
+            Order matchedOrder = candidateSellOrders.next();
 
-            Money minAmount = MoneyMath.min(order.getRemainingAmount(), sellOrder.getRemainingAmount());
+            Money minAmount = MoneyMath.min(order.getRemainingAmount(), matchedOrder.getRemainingAmount());
 
             MoneyMath.minus(order.getRemainingAmount(), minAmount);
-            order.setSettlementState(OrderSettlementState.PARTIALLY_FILLED);
+            order.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
 
-            MoneyMath.minus(sellOrder.getRemainingAmount(), minAmount);
-            if (MoneyMath.isZero(sellOrder.getRemainingAmount())) {
-                sellOrder.setSettlementState(OrderSettlementState.FILLED);
+            MoneyMath.minus(matchedOrder.getRemainingAmount(), minAmount);
+            if (MoneyMath.isZero(matchedOrder.getRemainingAmount())) {
+                matchedOrder.setSettlementState(OrderSettlementState.SETTLED);
             } else {
-                sellOrder.setSettlementState(OrderSettlementState.PARTIALLY_FILLED);
+                matchedOrder.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
             }
 
             Trade trade = Trade.builder()
                     .buyOrder(order)
-                    .sellOrder(sellOrder)
+                    .sellOrder(matchedOrder)
                     .amount(minAmount)
-                    .price(sellOrder.getPriceLimit())
+                    .price(matchedOrder.getPriceLimit())
                     .build();
 
-            settlementResultBuilder.matchedOrder(sellOrder).trade(trade);
+            settlementResultBuilder.matchedOrder(matchedOrder).trade(trade);
         }
 
         if (MoneyMath.isZero(order.getRemainingAmount())) {
-            order.setSettlementState(OrderSettlementState.FILLED);
+            order.setSettlementState(OrderSettlementState.SETTLED);
         }
 
         return settlementResultBuilder.build();
@@ -64,32 +64,32 @@ class MatchingEngineImpl implements MatchingEngine {
                 .iterator();
 
         while (MoneyMath.isGreaterThanZero(order.getRemainingAmount()) && candidateBuyOrders.hasNext()) {
-            Order buyOrder = candidateBuyOrders.next();
+            Order matchedOrder = candidateBuyOrders.next();
 
-            Money minAmount = MoneyMath.min(order.getRemainingAmount(), buyOrder.getRemainingAmount());
+            Money minAmount = MoneyMath.min(order.getRemainingAmount(), matchedOrder.getRemainingAmount());
 
             MoneyMath.minus(order.getRemainingAmount(), minAmount);
-            order.setSettlementState(OrderSettlementState.PARTIALLY_FILLED);
+            order.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
 
-            MoneyMath.minus(buyOrder.getRemainingAmount(), minAmount);
-            if (MoneyMath.isZero(buyOrder.getRemainingAmount())) {
-                buyOrder.setSettlementState(OrderSettlementState.FILLED);
+            MoneyMath.minus(matchedOrder.getRemainingAmount(), minAmount);
+            if (MoneyMath.isZero(matchedOrder.getRemainingAmount())) {
+                matchedOrder.setSettlementState(OrderSettlementState.SETTLED);
             } else {
-                buyOrder.setSettlementState(OrderSettlementState.PARTIALLY_FILLED);
+                matchedOrder.setSettlementState(OrderSettlementState.PARTIALLY_SETTLED);
             }
 
             Trade trade = Trade.builder()
-                    .buyOrder(buyOrder)
+                    .buyOrder(matchedOrder)
                     .sellOrder(order)
                     .amount(minAmount)
-                    .price(buyOrder.getPriceLimit())
+                    .price(matchedOrder.getPriceLimit())
                     .build();
 
-            settlementResultBuilder.matchedOrder(buyOrder).trade(trade);
+            settlementResultBuilder.matchedOrder(matchedOrder).trade(trade);
         }
 
         if (MoneyMath.isZero(order.getRemainingAmount())) {
-            order.setSettlementState(OrderSettlementState.FILLED);
+            order.setSettlementState(OrderSettlementState.SETTLED);
         }
 
         return settlementResultBuilder.build();

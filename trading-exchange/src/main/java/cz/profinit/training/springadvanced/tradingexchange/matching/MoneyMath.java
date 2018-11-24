@@ -21,7 +21,9 @@ final class MoneyMath {
 
     static Money min(Money a, Money b) {
         Assert.isTrue(Objects.equals(a.getCurrency(), b.getCurrency()), "Cannot compare different currencies");
-        return a.getAmount().compareTo(b.getAmount()) <= 0 ? a : b;
+        return a.getAmount().compareTo(b.getAmount()) <= 0 ?
+                Money.of(a.getCurrency(), a.getAmount()) :
+                Money.of(b.getCurrency(), b.getAmount());
     }
 
     /**

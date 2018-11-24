@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity(name = "t_trade")
 @Data
@@ -40,5 +41,12 @@ public class Trade implements Serializable {
 
     public TradeId getId() {
         return TradeId.of(id);
+    }
+
+    public boolean matches(Order buyOrder, Order sellOrder, Money amount, Money price) {
+        return Objects.equals(this.buyOrder, buyOrder)
+                && Objects.equals(this.sellOrder, sellOrder)
+                && this.amount.matches(amount)
+                && this.price.matches(price);
     }
 }
