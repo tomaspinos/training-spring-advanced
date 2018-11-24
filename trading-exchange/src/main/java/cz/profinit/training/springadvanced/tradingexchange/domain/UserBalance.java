@@ -36,8 +36,16 @@ public class UserBalance implements Serializable {
         return UserBalance.builder().total(total).build();
     }
 
+    public static UserBalance zero(Currency currency) {
+        return UserBalance.builder().total(Money.of(currency, BigDecimal.ZERO)).build();
+    }
+
     public void add(BigDecimal amount) {
         total.setAmount(total.getAmount().add(amount));
+    }
+
+    public boolean isLessThan(Money money) {
+        return total.isLessThan(money);
     }
 
     public boolean matches(Currency currency) {

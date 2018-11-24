@@ -4,6 +4,7 @@ import cz.profinit.training.springadvanced.tradingexchange.domain.Money;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderSettlementState;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Trade;
+import cz.profinit.training.springadvanced.tradingexchange.domain.UserBalance;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,9 +25,14 @@ class MatchingEngineImpl implements MatchingEngine {
         SettlementResult.SettlementResultBuilder settlementResultBuilder = SettlementResult.builder()
                 .order(order);
 
+        if (!validateBuyerBalance(order)) {
+            order.setSettlementState(OrderSettlementState.REJECTED);
+            return settlementResultBuilder.build();
+        }
+
         UserBalanceChanges userBalanceChanges = new UserBalanceChanges();
 
-        Iterator<Order> candidateSellOrders = orderQueries.getCandidateSellOrders(order.getRequestedCurrency(), order.getOfferedCurrency(), order.getPriceLimit())
+        Iterator<Order> candidateSellOrders = orderQueries.getCandidateSellOrders(order.getOfferedCurrency(), order.getRequestedCurrency(), order.getPriceLimit())
                 .iterator();
 
         while (order.getRemainingAmount().isGreaterThanZero() && candidateSellOrders.hasNext()) {
@@ -119,5 +125,14 @@ class MatchingEngineImpl implements MatchingEngine {
         }
 
         return settlementResultBuilder.userBalanceChanges(userBalanceChanges).build();
+    }
+
+    private boolean validateBuyerBalance(Order order) {
+        UserBalance balance = order.getWhoPosted().getBalance(order.getPriceLimit().getCurrency())
+                .orElse(UserBalance.zero(order.getPriceLimit().getCurrency()));
+
+        Money maxTotalPrice = Money.of(order.getPriceLimit().getCurrency(), order.getPriceLimit().getAmount().multiply(order.getOrderAmount().getAmount()));
+
+        return !balance.isLessThan(maxTotalPrice);
     }
 }
