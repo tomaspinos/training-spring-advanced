@@ -4,6 +4,7 @@ import cz.profinit.training.springadvanced.tradingexchange.domain.Money;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderSettlementState;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Trade;
+import cz.profinit.training.springadvanced.tradingexchange.domain.UserBalance;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,6 +33,8 @@ public class MatchingEngineImplTest {
 
     @Test
     public void shouldSettleBuyOrderCompletelyWhenMatchingSellOrdersAvailable() {
+        USER_A.addBalance(UserBalance.of(Money.of(CZK, 100 * 26)));
+
         // buy 100 EUR for max 26 CZK
         Order buyOrder = Order.buy(id.getAndIncrement(), EUR, CZK, 100, 26, USER_A);
 
@@ -53,12 +56,12 @@ public class MatchingEngineImplTest {
         Trade secondTrade = settlementResult.getTrades().get(1);
         assertTrue(secondTrade.matches(buyOrder, secondSellOrder, Money.of(EUR, 40), Money.of(CZK, 25)));
 
-        settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, 100));
-        settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, -(60 * 24 + 40 * 25)));
-        settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, -60));
-        settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, 60 * 24));
-        settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, -40));
-        settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, 40 * 25));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, 100)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, -(60 * 24 + 40 * 25))));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, -60)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, 60 * 24)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, -40)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, 40 * 25)));
     }
 
     @Test
@@ -84,11 +87,11 @@ public class MatchingEngineImplTest {
         Trade secondTrade = settlementResult.getTrades().get(1);
         assertTrue(secondTrade.matches(secondBuyOrder, sellOrder, Money.of(EUR, 20), Money.of(CZK, 26)));
 
-        settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, -60));
-        settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, 40 * 25 + 20 * 26));
-        settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, 40));
-        settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, -40 * 25));
-        settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, 20));
-        settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, -20 * 26));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_A, Money.of(EUR, -60)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_A, Money.of(CZK, 40 * 25 + 20 * 26)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_B, Money.of(EUR, 40)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_B, Money.of(CZK, -40 * 25)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_C, Money.of(EUR, 20)));
+        assertTrue(settlementResult.hasUserBalanceChange(USER_C, Money.of(CZK, -20 * 26)));
     }
 }
