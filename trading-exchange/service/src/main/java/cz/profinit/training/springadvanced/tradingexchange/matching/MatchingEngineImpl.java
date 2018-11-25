@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 @Component
@@ -57,6 +58,7 @@ class MatchingEngineImpl implements MatchingEngine {
                     .sellOrder(matchedOrder)
                     .amount(boughtAmount)
                     .price(matchedOrder.getPriceLimit())
+                    .whenCreated(LocalDateTime.now())
                     .build();
 
             settlementResultBuilder.matchedOrder(matchedOrder).trade(trade);

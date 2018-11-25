@@ -22,7 +22,7 @@ class OrderQueriesImpl implements OrderQueries {
     @Transactional(readOnly = true)
     @Override
     public List<Order> getCandidateBuyOrders(Currency requestedCurrency, Currency offeredCurrency, Money priceLimit) {
-        return orderRepository.findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountGreaterThanEqual(
+        return orderRepository.findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountGreaterThanEqualOrderByPriceLimitAmountAsc(
                 OrderType.BUY, Arrays.asList(OrderSettlementState.OPEN, OrderSettlementState.PARTIALLY_SETTLED),
                 requestedCurrency, offeredCurrency, priceLimit.getAmount());
     }
@@ -30,7 +30,7 @@ class OrderQueriesImpl implements OrderQueries {
     @Transactional(readOnly = true)
     @Override
     public List<Order> getCandidateSellOrders(Currency requestedCurrency, Currency offeredCurrency, Money priceLimit) {
-        return orderRepository.findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountLessThanEqual(
+        return orderRepository.findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountLessThanEqualOrderByPriceLimitAmountDesc(
                 OrderType.SELL, Arrays.asList(OrderSettlementState.OPEN, OrderSettlementState.PARTIALLY_SETTLED),
                 requestedCurrency, offeredCurrency, priceLimit.getAmount());
     }

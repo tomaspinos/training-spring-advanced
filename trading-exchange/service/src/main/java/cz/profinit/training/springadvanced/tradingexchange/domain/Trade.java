@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(name = "t_trade")
@@ -42,6 +43,9 @@ public class Trade implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
     private Money price;
+
+    @NotNull
+    private LocalDateTime whenCreated;
 
     public TradeId getId() {
         return TradeId.of(id);

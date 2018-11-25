@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    List<Order> findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountGreaterThanEqual(
+    List<Order> findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountGreaterThanEqualOrderByPriceLimitAmountAsc(
             OrderType type, List<OrderSettlementState> settlementStates,
             Currency requestedCurrency, Currency offeredCurrency, BigDecimal minPrice);
 
-    List<Order> findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountLessThanEqual(
+    List<Order> findByTypeAndSettlementStateInAndRequestedCurrencyAndOfferedCurrencyAndPriceLimitAmountLessThanEqualOrderByPriceLimitAmountDesc(
             OrderType type, List<OrderSettlementState> settlementStates,
             Currency requestedCurrency, Currency offeredCurrency, BigDecimal maxPrice);
 }

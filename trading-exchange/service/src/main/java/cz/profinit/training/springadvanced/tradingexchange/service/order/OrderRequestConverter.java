@@ -13,6 +13,8 @@ import cz.profinit.training.springadvanced.tradingexchange.service.NotFoundExcep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @RequiredArgsConstructor
 class OrderRequestConverter {
@@ -45,6 +47,7 @@ class OrderRequestConverter {
                 .remainingAmount(orderAmount.copy())
                 .priceLimit(priceLimit)
                 .whoPosted(whoPosted)
+                .whenCreated(LocalDateTime.now())
                 .build();
     }
 
@@ -73,6 +76,7 @@ class OrderRequestConverter {
                 .remainingAmount(orderAmount.copy())
                 .priceLimit(priceLimit)
                 .whoPosted(whoPosted)
+                .whenCreated(LocalDateTime.now())
                 .build();
     }
 

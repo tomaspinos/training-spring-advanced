@@ -10,6 +10,7 @@ import cz.profinit.training.springadvanced.tradingexchange.service.user.UserTo;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Value
 public class OrderStatusTo implements Serializable {
@@ -23,6 +24,7 @@ public class OrderStatusTo implements Serializable {
     private final MoneyTo remainingAmount;
     private final MoneyTo priceLimit;
     private final UserTo whoPosted;
+    private final LocalDateTime whenCreated;
 
     public static OrderStatusTo fromEntity(Order order) {
         return new OrderStatusTo(
@@ -34,6 +36,7 @@ public class OrderStatusTo implements Serializable {
                 MoneyTo.fromEntity(order.getOrderAmount()),
                 MoneyTo.fromEntity(order.getRemainingAmount()),
                 MoneyTo.fromEntity(order.getPriceLimit()),
-                UserTo.fromEntity(order.getWhoPosted()));
+                UserTo.fromEntity(order.getWhoPosted()),
+                order.getWhenCreated());
     }
 }

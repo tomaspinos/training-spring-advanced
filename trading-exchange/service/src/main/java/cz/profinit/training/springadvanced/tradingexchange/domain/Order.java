@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(name = "t_order")
@@ -63,6 +64,9 @@ public class Order implements Serializable {
     @NotNull
     private User whoPosted;
 
+    @NotNull
+    private LocalDateTime whenCreated;
+
     public OrderId getId() {
         return OrderId.of(id);
     }
@@ -83,6 +87,7 @@ public class Order implements Serializable {
                 .remainingAmount(orderAmount)
                 .priceLimit(Money.of(offeredCurrency, maxPriceLimit))
                 .whoPosted(whoPosted)
+                .whenCreated(LocalDateTime.now())
                 .build();
     }
 
@@ -102,6 +107,7 @@ public class Order implements Serializable {
                 .remainingAmount(orderAmount)
                 .priceLimit(Money.of(requestedCurrency, minPriceLimit))
                 .whoPosted(whoPosted)
+                .whenCreated(LocalDateTime.now())
                 .build();
     }
 
