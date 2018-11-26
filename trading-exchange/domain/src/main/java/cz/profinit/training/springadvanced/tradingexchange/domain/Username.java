@@ -10,6 +10,10 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+/**
+ * Wrapper type for username.
+ * Usernames are better treated as concrete types, not just {@link String}s.
+ */
 @Embeddable
 @Data
 @NoArgsConstructor

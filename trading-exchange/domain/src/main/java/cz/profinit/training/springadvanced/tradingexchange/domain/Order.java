@@ -20,6 +20,31 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Buy or sell order.
+ * <p>
+ * Examples:
+ * <ul>
+ * <li>Buy 100 EUR for max 26 CZK
+ * <ul>
+ * <li>{@link #type} = {@link OrderType#BUY}</li>
+ * <li>{@link #requestedCurrency} = EUR</li>
+ * <li>{@link #offeredCurrency} = CZK</li>
+ * <li>{@link #orderAmount} = 100 EUR</li>
+ * <li>{@link #priceLimit} = 26 CZK</li>
+ * </ul>
+ * </li>
+ * <li>Sell 100 EUR for min 25 CZK
+ * <ul>
+ * <li>{@link #type} = {@link OrderType#SELL}</li>
+ * <li>{@link #requestedCurrency} = CZK</li>
+ * <li>{@link #offeredCurrency} = EUR</li>
+ * <li>{@link #orderAmount} = 100 EUR</li>
+ * <li>{@link #priceLimit} = 25 CZK</li>
+ * </ul>
+ * </li>
+ * </ul>
+ */
 @Entity(name = "t_order")
 @Data
 @NoArgsConstructor
@@ -111,19 +136,24 @@ public class Order implements Serializable {
                 .build();
     }
 
+    /**
+     * Cross validations - {@link Currency currencies} and {@link Money money} fields.
+     */
     @Valid
     public boolean isValid() {
         return !Objects.equals(requestedCurrency, offeredCurrency)
                 && Objects.equals(orderAmount.getCurrency(), remainingAmount.getCurrency())
-                && validateMatchingTypeAndPriceLimit();
+                && validateOrderTypeAndAmountAndPriceLimit();
     }
 
-    private boolean validateMatchingTypeAndPriceLimit() {
+    private boolean validateOrderTypeAndAmountAndPriceLimit() {
         switch (type) {
             case BUY:
-                return Objects.equals(offeredCurrency, priceLimit.getCurrency());
+                return Objects.equals(requestedCurrency, orderAmount.getCurrency())
+                        && Objects.equals(offeredCurrency, priceLimit.getCurrency());
             case SELL:
-                return Objects.equals(requestedCurrency, priceLimit.getCurrency());
+                return Objects.equals(offeredCurrency, orderAmount.getCurrency())
+                        && Objects.equals(requestedCurrency, priceLimit.getCurrency());
             default:
                 throw new IllegalStateException("Unknown type: " + type);
         }

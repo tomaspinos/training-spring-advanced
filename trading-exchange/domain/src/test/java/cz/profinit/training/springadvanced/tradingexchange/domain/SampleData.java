@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Sample data used during unit tests.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SampleData {
 

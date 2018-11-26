@@ -16,6 +16,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Trade means money was exchanged.
+ * Trade is a result of order settlement.
+ */
 @Entity(name = "t_trade")
 @Data
 @NoArgsConstructor

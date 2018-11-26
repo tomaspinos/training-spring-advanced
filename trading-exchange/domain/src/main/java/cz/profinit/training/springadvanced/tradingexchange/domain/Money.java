@@ -16,6 +16,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Any money value. Money value are always treated as a pair of {@link #currency} and {@link #amount}.
+ */
 @Entity(name = "t_money")
 @Data
 @NoArgsConstructor
