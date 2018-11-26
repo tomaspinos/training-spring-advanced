@@ -13,8 +13,14 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
             type = EntityGraph.EntityGraphType.LOAD,
             attributePaths = {
                     "buyOrder",
+                    "buyOrder.orderAmount",
+                    "buyOrder.remainingAmount",
+                    "buyOrder.priceLimit",
                     "buyOrder.whoPosted",
                     "sellOrder",
+                    "sellOrder.orderAmount",
+                    "sellOrder.remainingAmount",
+                    "sellOrder.priceLimit",
                     "sellOrder.whoPosted",
                     "amount",
                     "price"

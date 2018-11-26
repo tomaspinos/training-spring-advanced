@@ -71,11 +71,11 @@ public class Order implements Serializable {
         return OrderId.of(id);
     }
 
-    public static Order buy(long id, Currency requestedCurrency, Currency offeredCurrency, long requestedAmount, long maxPriceLimit, User whoPosted) {
+    public static Order buy(Long id, Currency requestedCurrency, Currency offeredCurrency, long requestedAmount, long maxPriceLimit, User whoPosted) {
         return buy(id, requestedCurrency, offeredCurrency, new BigDecimal(requestedAmount), new BigDecimal(maxPriceLimit), whoPosted);
     }
 
-    public static Order buy(long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal requestedAmount, BigDecimal maxPriceLimit, User whoPosted) {
+    public static Order buy(Long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal requestedAmount, BigDecimal maxPriceLimit, User whoPosted) {
         Money orderAmount = Money.of(requestedCurrency, requestedAmount);
         return Order.builder()
                 .id(id)
@@ -91,11 +91,11 @@ public class Order implements Serializable {
                 .build();
     }
 
-    public static Order sell(long id, Currency requestedCurrency, Currency offeredCurrency, long offeredAmount, long minPriceLimit, User whoPosted) {
+    public static Order sell(Long id, Currency requestedCurrency, Currency offeredCurrency, long offeredAmount, long minPriceLimit, User whoPosted) {
         return sell(id, requestedCurrency, offeredCurrency, new BigDecimal(offeredAmount), new BigDecimal(minPriceLimit), whoPosted);
     }
 
-    public static Order sell(long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal offeredAmount, BigDecimal minPriceLimit, User whoPosted) {
+    public static Order sell(Long id, Currency requestedCurrency, Currency offeredCurrency, BigDecimal offeredAmount, BigDecimal minPriceLimit, User whoPosted) {
         Money orderAmount = Money.of(offeredCurrency, offeredAmount);
         return Order.builder()
                 .id(id)

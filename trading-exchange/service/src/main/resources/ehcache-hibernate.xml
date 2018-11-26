@@ -1,0 +1,10 @@
+<!--
+Ehcache configuration of cache manager managing Hibernate 2nd level caches.
+-->
+<ehcache name="hibernate" updateCheck="false" monitoring="ON">
+
+    <defaultCache maxEntriesLocalHeap="200" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600">
+        <persistence strategy="none"/>
+    </defaultCache>
+
+</ehcache>

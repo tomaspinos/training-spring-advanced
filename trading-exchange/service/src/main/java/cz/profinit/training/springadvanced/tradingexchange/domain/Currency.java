@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity(name = "c_currency")
+@Cacheable
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
