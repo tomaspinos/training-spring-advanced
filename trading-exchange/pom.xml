@@ -9,6 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>domain</module>
+        <module>matching-engine</module>
         <module>client</module>
         <module>service</module>
     </modules>

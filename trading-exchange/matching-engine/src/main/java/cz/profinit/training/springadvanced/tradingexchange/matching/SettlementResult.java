@@ -31,10 +31,6 @@ public class SettlementResult {
         return userBalanceChanges.getAll();
     }
 
-    public List<Money> getUserBalanceChanges(User user) {
-        return userBalanceChanges.get(user);
-    }
-
     boolean hasUserBalanceChange(User user, Money money) {
         return userBalanceChanges.has(user, money);
     }
