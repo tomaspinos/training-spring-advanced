@@ -4,5 +4,5 @@ import reactor.core.publisher.Flux;
 
 public interface StreamingTradeService {
 
-    Flux<TradeTo> getTrades();
+    Flux<TradeSummaryTo> getTrades();
 }

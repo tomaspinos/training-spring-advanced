@@ -15,7 +15,7 @@ class StreamingTradeServiceImpl implements StreamingTradeService {
     private final TradeService tradeService;
 
     @Override
-    public Flux<TradeTo> getTrades() {
+    public Flux<TradeSummaryTo> getTrades() {
         return Flux.interval(Duration.ofSeconds(1))
                 .map(l -> LocalDateTime.now())
                 .scan(Range.of(LocalDateTime.now(), LocalDateTime.now()), (range, date) -> Range.of(range.getTo(), date))

@@ -11,7 +11,14 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
 
     @EntityGraph(
             type = EntityGraph.EntityGraphType.LOAD,
-            attributePaths = {"buyOrder", "sellOrder", "amount", "price"}
+            attributePaths = {
+                    "buyOrder",
+                    "buyOrder.whoPosted",
+                    "sellOrder",
+                    "sellOrder.whoPosted",
+                    "amount",
+                    "price"
+            }
     )
     List<Trade> findByWhenCreatedBetweenOrderByWhenCreatedAsc(LocalDateTime whenCreatedFrom, LocalDateTime whenCreatedTo);
 }
