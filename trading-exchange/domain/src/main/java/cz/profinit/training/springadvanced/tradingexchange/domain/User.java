@@ -51,7 +51,7 @@ public class User implements Serializable {
         if (maybeBalance.isPresent()) {
             maybeBalance.get().add(money.getAmount());
         } else {
-            Assert.isTrue(money.isGreaterOrEqualToZero(), "Invalid balance: " + money);
+            Assert.isTrue(money.isGreaterThanOrEqualToZero(), "Invalid balance: " + money);
             balances.add(UserBalance.of(money));
         }
     }

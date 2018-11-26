@@ -44,8 +44,8 @@ public class UserBalance implements Serializable {
         total.setAmount(total.getAmount().add(amount));
     }
 
-    public boolean isLessThan(Money money) {
-        return total.isLessThan(money);
+    public boolean isGreaterThanOrEqualTo(Money money) {
+        return total.isGreaterThanOrEqualTo(money);
     }
 
     public boolean matches(Currency currency) {

@@ -58,13 +58,23 @@ public class Money implements Serializable {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }
 
-    public boolean isGreaterOrEqualToZero() {
+    public boolean isGreaterThanOrEqualTo(Money other) {
+        Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
+        return amount.compareTo(other.amount) >= 0;
+    }
+
+    public boolean isGreaterThanOrEqualToZero() {
         return amount.compareTo(BigDecimal.ZERO) >= 0;
     }
 
     public boolean isLessThan(Money other) {
         Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
         return amount.compareTo(other.amount) < 0;
+    }
+
+    public boolean isLessThanOrEqualTo(Money other) {
+        Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
+        return amount.compareTo(other.amount) <= 0;
     }
 
     public boolean isZero() {

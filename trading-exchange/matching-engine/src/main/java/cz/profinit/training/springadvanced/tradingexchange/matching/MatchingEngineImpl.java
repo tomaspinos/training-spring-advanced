@@ -3,11 +3,13 @@ package cz.profinit.training.springadvanced.tradingexchange.matching;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Money;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Order;
 import cz.profinit.training.springadvanced.tradingexchange.domain.OrderSettlementState;
+import cz.profinit.training.springadvanced.tradingexchange.domain.OrderType;
 import cz.profinit.training.springadvanced.tradingexchange.domain.Trade;
 import cz.profinit.training.springadvanced.tradingexchange.domain.UserBalance;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -21,6 +23,8 @@ class MatchingEngineImpl implements MatchingEngine {
 
     @Override
     public SettlementResult settleBuyOrder(Order order) {
+        Assert.isTrue(order.getType() == OrderType.BUY, "Buy order expected");
+
         log.debug("Starting buy order settlement: {}", order);
 
         SettlementResult.SettlementResultBuilder settlementResultBuilder = SettlementResult.builder()
@@ -39,6 +43,9 @@ class MatchingEngineImpl implements MatchingEngine {
         while (order.getRemainingAmount().isGreaterThanZero() && candidateSellOrders.hasNext()) {
             Order matchedOrder = candidateSellOrders.next();
             log.debug("Matched order: {}", matchedOrder);
+
+            Assert.isTrue(matchedOrder.getType() == OrderType.SELL, "Cannot match with buy order");
+            Assert.isTrue(matchedOrder.getPriceLimit().isLessThanOrEqualTo(order.getPriceLimit()), "Cannot match with sell order that has price above limit");
 
             Money boughtAmount = order.getRemainingAmount().min(matchedOrder.getRemainingAmount());
             Money paidAmount = Money.of(order.getOfferedCurrency(), matchedOrder.getPriceLimit().getAmount().multiply(boughtAmount.getAmount()));
@@ -78,6 +85,8 @@ class MatchingEngineImpl implements MatchingEngine {
 
     @Override
     public SettlementResult settleSellOrder(Order order) {
+        Assert.isTrue(order.getType() == OrderType.SELL, "Sell order expected");
+
         log.debug("Starting sell order settlement: {}", order);
 
         SettlementResult.SettlementResultBuilder settlementResultBuilder = SettlementResult.builder()
@@ -93,6 +102,9 @@ class MatchingEngineImpl implements MatchingEngine {
         while (order.getRemainingAmount().isGreaterThanZero() && candidateBuyOrders.hasNext()) {
             Order matchedOrder = candidateBuyOrders.next();
             log.debug("Matched order: {}", matchedOrder);
+
+            Assert.isTrue(matchedOrder.getType() == OrderType.BUY, "Cannot match with sell order");
+            Assert.isTrue(matchedOrder.getPriceLimit().isGreaterThanOrEqualTo(order.getPriceLimit()), "Cannot match with buy order that has price under limit");
 
             Money soldAmount = order.getRemainingAmount().min(matchedOrder.getRemainingAmount());
             Money receivedAmount = Money.of(order.getRequestedCurrency(), matchedOrder.getPriceLimit().getAmount().multiply(soldAmount.getAmount()));
@@ -135,6 +147,6 @@ class MatchingEngineImpl implements MatchingEngine {
 
         Money maxTotalPrice = Money.of(order.getPriceLimit().getCurrency(), order.getPriceLimit().getAmount().multiply(order.getOrderAmount().getAmount()));
 
-        return !balance.isLessThan(maxTotalPrice);
+        return balance.isGreaterThanOrEqualTo(maxTotalPrice);
     }
 }
