@@ -1,0 +1,8 @@
+@startuml
+
+class Customer
+class Account
+
+Account "*" -up-> "1" Customer
+
+@enduml

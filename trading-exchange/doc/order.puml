@@ -1,0 +1,18 @@
+@startuml
+
+class Order {
+  id
+  requestedCurrency : Currency
+  offeredCurrency : Currency
+  orderAmount : Money
+  priceLimit : Money
+  whenCreated
+}
+enum OrderType {
+  BUY
+  SELL
+}
+
+Order -up-> OrderType : type
+
+@enduml
