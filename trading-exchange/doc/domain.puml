@@ -1,0 +1,45 @@
+@startuml
+
+class User {
+  id
+  username
+}
+class UserBalance {
+  id
+  total : Money
+}
+class Order {
+  id
+  requestedCurrency : Currency
+  offeredCurrency : Currency
+  orderAmount : Money
+  priceLimit : Money
+  whenCreated
+}
+class Trade {
+  id
+  amount : Money
+  price : Money
+  whenCreated
+}
+enum OrderType {
+  BUY
+  SELL
+}
+enum OrderSettlementState {
+  REJECTED
+  OPEN
+  PARTIALLY_SETTLED
+  SETTLED
+}
+
+User -right-> UserBalance
+
+Order -up-> OrderType : type
+Order -up-> OrderSettlementState : settlementState
+Order --> User : whoPosted
+
+Trade -left-> Order : buyOrder
+Trade -left-> Order : sellOrder
+
+@enduml
