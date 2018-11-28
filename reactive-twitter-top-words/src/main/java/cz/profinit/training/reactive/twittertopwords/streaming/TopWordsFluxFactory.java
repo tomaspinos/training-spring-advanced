@@ -7,10 +7,8 @@ import cz.profinit.training.reactive.twittertopwords.processing.TweetToStatsConv
 import cz.profinit.training.reactive.twittertopwords.processing.WordCountAggregator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.TopicProcessor;
 
 @Component
 public class TopWordsFluxFactory {
@@ -35,21 +33,36 @@ public class TopWordsFluxFactory {
     public Flux<TopWords> createTopWordsFlux() {
         log.info("Creating top word stream");
 
-        TopicProcessor<Tweet> processor = TopicProcessor.<Tweet>builder()
-                .share(true)
-                .autoCancel(false)
-                .build();
-
-        Flux.create(twitterListener::start)
-                .log("test.tweets")
-                .subscribe(processor);
-
         return Flux.just(wordCountAggregator)
                 .repeat()
-                .zipWith(processor.map(tweetToStats::toStats)
+                .zipWith(Flux.create(twitterListener::start)
+                                .log("test.tweets").map(tweetToStats::toStats)
                                 .window(properties.getTweetStatsCountToTriggerTopWordsUpdate())
                                 .flatMap(flux -> flux.reduce(TweetStats.EMPTY, TweetStats::merge)),
                         WordCountAggregator::aggregateTweetStats)
+                .share()
                 .log("test.wordCounts");
     }
+
+    // Using TopicProcessor...
+//    public Flux<TopWords> createTopWordsFlux() {
+//        log.info("Creating top word stream");
+//
+//        TopicProcessor<Tweet> processor = TopicProcessor.<Tweet>builder()
+//                .share(true)
+//                .autoCancel(false)
+//                .build();
+//
+//        Flux.create(twitterListener::start)
+//                .log("test.tweets")
+//                .subscribe(processor);
+//
+//        return Flux.just(wordCountAggregator)
+//                .repeat()
+//                .zipWith(processor.map(tweetToStats::toStats)
+//                                .window(properties.getTweetStatsCountToTriggerTopWordsUpdate())
+//                                .flatMap(flux -> flux.reduce(TweetStats.EMPTY, TweetStats::merge)),
+//                        WordCountAggregator::aggregateTweetStats)
+//                .log("test.wordCounts");
+//    }
 }
