@@ -18,10 +18,9 @@ public class ReactorComputation {
 
         List<PrimeCandidate> primes = withStopWatch(() ->
                 Flux.range(1, 100)
-                        .flatMap(i -> {
-                            return Mono.fromCallable(() -> ParallelUtils.isPrime(i)).map(p -> new PrimeCandidate(i, p))
-                                    .subscribeOn(scheduler);
-                        })
+                        .flatMap(i ->
+                                Mono.fromCallable(() -> ParallelUtils.isPrime(i)).map(p -> new PrimeCandidate(i, p))
+                                .subscribeOn(scheduler))
                         .filter(PrimeCandidate::isPrime)
                         .collectList()
                         .block());
