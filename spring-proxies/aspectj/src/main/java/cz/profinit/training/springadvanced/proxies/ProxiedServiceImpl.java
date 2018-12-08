@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProxiedServiceImpl implements ProxiedService {
 
     @Override
-    @Transactional
     public String a() {
         return "a" + b();
     }
