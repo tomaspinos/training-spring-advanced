@@ -36,8 +36,8 @@ public class CheckVatEndpoint {
         response.setCountryCode(record.getCountryCode());
         response.setVatNumber(record.getVatNumber());
         response.setValid(true);
-        response.setName(objectFactory.createCheckVatResponseName(record.getName()));
-        response.setAddress(objectFactory.createCheckVatResponseAddress(record.getAddress()));
+        response.setName(record.getName());
+        response.setAddress(record.getAddress());
 
         return response;
     }

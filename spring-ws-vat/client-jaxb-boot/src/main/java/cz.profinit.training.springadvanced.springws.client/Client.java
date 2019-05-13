@@ -1,10 +1,9 @@
 package cz.profinit.training.springadvanced.springws.client;
 
+import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatRequest;
+import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-
-import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVat;
-import eu.europa.ec.taxud.vies.services.checkvat.types.CheckVatResponse;
 
 @Component
 public class Client extends WebServiceGatewaySupport {
@@ -13,13 +12,13 @@ public class Client extends WebServiceGatewaySupport {
         // TODO Get WebServiceTemplate from the parent class
         // TODO Implement the service call
 
-        final CheckVat request = new CheckVat();
+        final CheckVatRequest request = new CheckVatRequest();
         request.setCountryCode("CZ");
         request.setVatNumber(vat);
 
         final CheckVatResponse response = (CheckVatResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 
-        System.out.println("Name: " + response.getName().getValue());
-        System.out.println("Address: " + response.getAddress().getValue());
+        System.out.println("Name: " + response.getName());
+        System.out.println("Address: " + response.getAddress());
     }
 }
