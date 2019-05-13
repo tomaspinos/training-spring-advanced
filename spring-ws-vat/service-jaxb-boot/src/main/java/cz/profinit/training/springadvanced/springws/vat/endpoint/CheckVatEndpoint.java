@@ -10,9 +10,6 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-/**
- * TODO Annotate the class and methods properly
- */
 @Endpoint
 public class CheckVatEndpoint {
 
@@ -32,8 +29,6 @@ public class CheckVatEndpoint {
         VatValidations.validateVatNmber(vatNumber);
 
         final VatRegistryRecord record = repository.checkVat(countryCode, vatNumber);
-
-        // TODO Construct the response
 
         final ObjectFactory objectFactory = new ObjectFactory();
 
