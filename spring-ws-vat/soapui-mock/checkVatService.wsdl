@@ -40,7 +40,7 @@
   
   <wsdl:types>
     <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:ec.europa.eu:taxud:vies:services:checkVat:types" xmlns="urn:ec.europa.eu:taxud:vies:services:checkVat:types">
-			<xsd:element name="checkVat">
+			<xsd:element name="checkVatRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="countryCode" type="xsd:string"/>
@@ -60,7 +60,7 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="checkVatApprox">
+			<xsd:element name="checkVatApproxRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="countryCode" type="xsd:string"/>
@@ -124,7 +124,7 @@
 		</xsd:schema>
   </wsdl:types>
   <wsdl:message name="checkVatRequest">
-    <wsdl:part name="parameters" element="tns1:checkVat">
+    <wsdl:part name="parameters" element="tns1:checkVatRequest">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkVatApproxResponse">
@@ -132,7 +132,7 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkVatApproxRequest">
-    <wsdl:part name="parameters" element="tns1:checkVatApprox">
+    <wsdl:part name="parameters" element="tns1:checkVatApproxRequest">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkVatResponse">
