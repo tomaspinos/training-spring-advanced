@@ -31,10 +31,10 @@ public class CheckVatEndpointTest {
     @Test
     public void checkVat1() {
         final StringSource requestPayload = new StringSource(
-                "<checkVat xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
+                "<checkVatRequest xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
                         "   <countryCode>CZ</countryCode>\n" +
                         "   <vatNumber>CZ25650203</vatNumber>\n" +
-                        "</checkVat>\n");
+                        "</checkVatRequest>\n");
 
         final StringSource responsePayload = new StringSource(
                 "<checkVatResponse xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
@@ -51,10 +51,10 @@ public class CheckVatEndpointTest {
     @Test
     public void checkVat2() {
         final StringSource requestPayload = new StringSource(
-                "<checkVat xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
+                "<checkVatRequest xmlns=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">\n" +
                         "   <countryCode>CZ</countryCode>\n" +
                         "   <vatNumber>CZ25650203</vatNumber>\n" +
-                        "</checkVat>\n");
+                        "</checkVatRequest>\n");
 
         final Map<String, String> nsMap = Collections.singletonMap("ns", "urn:ec.europa.eu:taxud:vies:services:checkVat:types");
 
