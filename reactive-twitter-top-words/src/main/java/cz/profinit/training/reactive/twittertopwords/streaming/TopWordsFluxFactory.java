@@ -43,26 +43,4 @@ public class TopWordsFluxFactory {
                 .share()
                 .log("test.wordCounts");
     }
-
-    // Using TopicProcessor...
-//    public Flux<TopWords> createTopWordsFlux() {
-//        log.info("Creating top word stream");
-//
-//        TopicProcessor<Tweet> processor = TopicProcessor.<Tweet>builder()
-//                .share(true)
-//                .autoCancel(false)
-//                .build();
-//
-//        Flux.create(twitterListener::start)
-//                .log("test.tweets")
-//                .subscribe(processor);
-//
-//        return Flux.just(wordCountAggregator)
-//                .repeat()
-//                .zipWith(processor.map(tweetToStats::toStats)
-//                                .window(properties.getTweetStatsCountToTriggerTopWordsUpdate())
-//                                .flatMap(flux -> flux.reduce(TweetStats.EMPTY, TweetStats::merge)),
-//                        WordCountAggregator::aggregateTweetStats)
-//                .log("test.wordCounts");
-//    }
 }
