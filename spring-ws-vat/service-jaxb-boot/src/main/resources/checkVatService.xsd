@@ -15,8 +15,8 @@
                 <xsd:element name="vatNumber" type="xsd:string"/>
                 <xsd:element name="requestDate" type="xsd:date"/>
                 <xsd:element name="valid" type="xsd:boolean"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="address" nillable="true" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="address" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -42,8 +42,8 @@
                 <xsd:element name="vatNumber" type="xsd:string"/>
                 <xsd:element name="requestDate" type="xsd:date"/>
                 <xsd:element name="valid" type="xsd:boolean"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="traderName" nillable="true" type="xsd:string"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" nillable="true" type="companyTypeCode"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="traderName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" type="companyTypeCode"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderAddress" type="xsd:string"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderStreet" type="xsd:string"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderPostcode" type="xsd:string"/>

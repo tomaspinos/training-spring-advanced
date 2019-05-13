@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:ec.europa.eu:taxud:vies:services:checkVat:types" xmlns="urn:ec.europa.eu:taxud:vies:services:checkVat:types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:element name="checkVat">
+    <xsd:element name="checkVatRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="countryCode" type="xsd:string"/>
@@ -15,12 +15,12 @@
                 <xsd:element name="vatNumber" type="xsd:string"/>
                 <xsd:element name="requestDate" type="xsd:date"/>
                 <xsd:element name="valid" type="xsd:boolean"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="address" nillable="true" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="address" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="checkVatApprox">
+    <xsd:element name="checkVatApproxRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="countryCode" type="xsd:string"/>
@@ -42,8 +42,8 @@
                 <xsd:element name="vatNumber" type="xsd:string"/>
                 <xsd:element name="requestDate" type="xsd:date"/>
                 <xsd:element name="valid" type="xsd:boolean"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="traderName" nillable="true" type="xsd:string"/>
-                <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" nillable="true" type="companyTypeCode"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="traderName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="traderCompanyType" type="companyTypeCode"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderAddress" type="xsd:string"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderStreet" type="xsd:string"/>
                 <xsd:element maxOccurs="1" minOccurs="0" name="traderPostcode" type="xsd:string"/>
