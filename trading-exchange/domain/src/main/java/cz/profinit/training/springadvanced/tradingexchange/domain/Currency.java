@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Currency implements Serializable {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     /**

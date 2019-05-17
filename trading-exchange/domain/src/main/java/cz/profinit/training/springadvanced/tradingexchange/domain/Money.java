@@ -1,5 +1,6 @@
 package cz.profinit.training.springadvanced.tradingexchange.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class Money implements Serializable {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     @ManyToOne
@@ -53,19 +55,23 @@ public class Money implements Serializable {
         return of(currency, amount);
     }
 
+    @JsonIgnore
     public Money getNegative() {
         return of(currency, amount.negate());
     }
 
+    @JsonIgnore
     public boolean isGreaterThanZero() {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }
 
+    @JsonIgnore
     public boolean isGreaterThanOrEqualTo(Money other) {
         Assert.isTrue(Objects.equals(currency, other.currency), "Same currency expected");
         return amount.compareTo(other.amount) >= 0;
     }
 
+    @JsonIgnore
     public boolean isGreaterThanOrEqualToZero() {
         return amount.compareTo(BigDecimal.ZERO) >= 0;
     }
@@ -80,6 +86,7 @@ public class Money implements Serializable {
         return amount.compareTo(other.amount) <= 0;
     }
 
+    @JsonIgnore
     public boolean isZero() {
         return amount.compareTo(BigDecimal.ZERO) == 0;
     }
